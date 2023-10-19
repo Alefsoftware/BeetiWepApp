@@ -61,9 +61,9 @@
                     {{-- <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                         <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
                     </button> --}}
-        <a href='{{route("products.create")}}' class="btn btn-primary shadow-md mr-2">{{__('Add New Product')}}</a>
+                    <a href='{{route("products.create")}}' class="btn btn-primary shadow-md mr-2">{{__('Add New Product')}}</a>
 
-                    <div class="dropdown-menu w-40">
+                    {{-- <div class="dropdown-menu w-40">
                         <ul class="dropdown-content">
                             <li>
                                 <a href="" class="dropdown-item"> <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Print </a>
@@ -75,16 +75,59 @@
                                 <a href="" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export to PDF </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
-                <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of 150 entries</div>
+                {{-- <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of 150 entries</div> --}}
                 <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                     <div class="w-56 relative text-slate-500">
                         <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
                         <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
                     </div>
                 </div>
+
+
             </div>
+
+            <div class="intro-y col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-12">
+            <form method="get" action="{{url('admin/products')}}">
+                @csrf
+
+                <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
+                    <div class="flex w-full sm:w-auto">
+
+                <div class="form-group col-md-2">
+                  <label for="status-filter">{{__('Provider')}}:</label>
+                  <select name='provider' class="form-select mr-3" id="status-filter">
+                    <option value="">{{__('All')}}</option>
+                    @foreach($providers as $s)
+                    <option value="{{$s->id}}">{{$s->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="status-filter">{{__('Status')}}:</label>
+                    <select name='approvement' class="form-select mr-3" id="status-filter">
+                      <option value="">{{__('All')}}</option>
+                      <option value="1">{{__("Approvemed")}}</option>
+                      <option value="0">{{__(" Not Approvemed")}}</option>
+                    </select>
+                  </div>
+
+
+
+                <div class="form-group col-md-4 mt-5">
+                <button type='submit' class="btn btn-primary  add-todo-item ml-1">{{__('search')}}</button>
+                </div>
+
+
+                    </div>
+                    </div>
+
+              </form>
+
+
+            </div>
+
             <!-- BEGIN: Users Layout -->
             @foreach( $products as $product)
             <div class="intro-y col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
@@ -187,7 +230,7 @@
                         place-content: center !important;
                     }
                     </style>
-                        {{ $products->links('pagination::bootstrap-4') }}
+                        {{ $products->appends(request()->query())->links('pagination::bootstrap-4') }}
                         </nav>
                     </div>
                 </div>

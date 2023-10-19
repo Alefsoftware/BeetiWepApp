@@ -75,6 +75,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 	    //         )
 	    // );
 	    $fields = json_encode($fields);
+        // dd($fields);
 	    $headers = array(
 	        'Authorization: key=' . "AAAAuzFVxTU:APA91bGNbcuiwMz7m-xk5rrcrhgxxCmszL6ODpqAZ0JA-fjhP5M--HCFZ-DpIyw31tRf-AF-lD7Fae5acPqns1YJD4JuUKhg_LVQfpIEy7NtHnUjfBuocTon_Z3IkAFi4qYR9bTmYzgo",
 	        'Content-Type: application/json'

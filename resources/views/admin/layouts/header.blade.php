@@ -1073,6 +1073,12 @@
 {{--                    </ul>--}}
                 </li>
                 <li>
+                    <a href="{{url('admin/customers')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="users"></i></div>
+                        <div class="side-menu__title"> {{__('Customers')}} </div>
+                    </a>
+                </li>
+                <li>
                     <a href="{{url('admin/providers')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="briefcase"></i> </div>
                         <div class="side-menu__title"> {{__('Total Productive Families')}} </div>

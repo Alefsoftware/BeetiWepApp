@@ -72,10 +72,12 @@ class Products extends Controller
         $pending_product =Product::where('approved_by_admin','0')->whereHas('provider', function ($q) {
             $q->where('country', '=', session()->get('country')->id);
             })->paginate(9);
-            $providers = Provider::where('published','1')->get();
+            // $providers = Provider::where('published','1')->get();
+            $providers = Provider::where('country', session()->get('country')->id)->get();
+
         //    dd($pending_product->total());
         // dd($products);
-       return view('admin.products.products')->with(["totalcount"=>$totalcount,"products"=>$products,'pendings'=>$pending_product,'providers'=>$providers,]);
+       return view('admin.products.products')->with(["totalcount"=>$totalcount,"products"=>$products,'pendings'=>$pending_product,'providers'=>$providers]);
 
     }
 

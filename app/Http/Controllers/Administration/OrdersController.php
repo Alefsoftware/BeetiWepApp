@@ -97,8 +97,8 @@ public $currency;
         // dd($request->all());
         // authorize('view-' . $this->module);
             $rows = Order::with("provider","provider.images","status","driver","driver.zoneObj");
-$all_zones =  \App\Models\Zones::where([["status",'1'],['country_id', session()->get('country')->id]])->get();
-$all_gov =  \App\Models\Gov::where([["published",'1'],['country_id', session()->get('country')->id]])->get();
+            $all_zones =  \App\Models\Zones::where([["status",'1'],['country_id', session()->get('country')->id]])->get();
+            $all_gov =  \App\Models\Gov::where([["published",'1'],['country_id', session()->get('country')->id]])->get();
 
             if($request->gov){
                 $rows = $rows->when($request->gov, function ($query, $gov) {
@@ -149,7 +149,7 @@ $all_gov =  \App\Models\Gov::where([["published",'1'],['country_id', session()->
 
             $rows = $rows->latest()->paginate();
             // $rows->prepend($this->currency);
-            $providers = Provider::where('published','1')->get();
+            $providers = Provider::where('country', session()->get('country')->id)->get();
             $status = OrderStatus::all();
             // dd($status);
         return view('admin.orders.index',compact('rows','providers','status','all_gov','all_zones'));

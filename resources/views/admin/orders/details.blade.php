@@ -134,7 +134,7 @@
                                 {{__('Details')}}
                             </h2>
                             {{-- <div class="dropdown ml-auto sm:hidden">
-                                <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
+                                <a  aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
                                 <div class="dropdown-menu w-40">
                                     <ul class="dropdown-content">
                                         <li> <a href="javascript:;" class="dropdown-item">All Files</a> </li>
@@ -147,10 +147,10 @@
                             <div class="flex items-center">
                                 <div class="file"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="trello" data-lucide="trello" class="lucide lucide-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg> </div>
                                 <div class="ml-4">
-                                    <p><strong>{{ __('Preparnig Time') }}:</strong></p>
+                                    <p><strong>{{ __('Preparnig Start Time') }}:</strong></p>
                                 </div>
-                                <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ $row->preparing_start_time }}</div></a>
+                                <div class="dropdown ml-auto" >
+                                    <a  aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5" >{{Carbon\Carbon::parse($row->preparing_start_time)->format('h:i A')}}</div></a>
                                 </div>
                             </div>
                             <div class="flex items-center">
@@ -159,7 +159,7 @@
                                     <p><strong>{{ __('Pickup Time') }}:</strong></p>
                                 </div>
                                 <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ @$row->pickup_time }}</div></a>
+                                    <a  aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ @$row->pickup_time }}</div></a>
                                 </div>
                             </div>
 
@@ -169,7 +169,7 @@
                                     <p><strong>{{ __('Payment Method') }}:</strong></p>
                                 </div>
                                 <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ @$row->payment->title }}</div></a>
+                                    <a  aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ @$row->payment->title }}</div></a>
                                 </div>
                             </div>
 
@@ -190,7 +190,7 @@
                                     <p><strong>{{ __('Provider Fees') }} :</strong></p>
                                 </div>
                                 <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ $row->provider_fees}}</div></a>
+                                    <a  aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ $row->provider_fees}}</div></a>
                                 </div>
                             </div>
                             <div class="flex items-center mt-4">
@@ -199,7 +199,7 @@
                                     <p><strong>{{ __('Company Fees') }} :</strong></p>
                                 </div>
                                 <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ $row->company_fees}}</div></a>
+                                    <a  aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{ $row->company_fees}}</div></a>
                                 </div>
                             </div>
 

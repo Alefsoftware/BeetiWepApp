@@ -27,6 +27,15 @@
                                     <div class="flex w-full sm:w-auto">
 
                                 <div class="form-group col-md-2">
+                                  <label for="status-filter">{{__('Provider')}}:</label>
+                                  <select name='provider' class="form-select mr-3" id="status-filter">
+                                    <option value="">{{__('All')}}</option>
+                                    @foreach($providers as $s)
+                                    <option value="{{$s->id}}">{{$s->name}}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                                <div class="form-group col-md-2">
                                   <label for="status-filter">{{__('Status')}}:</label>
                                   <select name='status' class="form-select mr-3" id="status-filter">
                                     <option value="">{{__('All')}}</option>

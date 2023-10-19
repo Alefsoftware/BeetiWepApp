@@ -82,7 +82,7 @@ class NotificationsController extends Administrator
         $ids = \App\Models\Customer::whereNotNull("country_id")->where('country_id',session()->get('country')->id)->get()->pluck("id")->toArray();
         // dd($ids);
         for ($i = 0; $i < sizeof($ids); $i++) {
-            $device_ids = \App\Models\CustomerToken::where('customer_id', $ids[$i])->whereNotNull("device_id")->groupBy('mobile_id')->get()->pluck("device_id")->toArray();
+            $device_ids = \App\Models\CustomerToken::where('customer_id', $ids[$i])->whereNotNull("device_id")->groupBy('mobile_id','device_id')->select("device_id")->get()->toArray();
 //            $device_ids2 = array_unique($device_ids);
             //   dd($device_ids);
             try {
@@ -110,7 +110,7 @@ class NotificationsController extends Administrator
                 );
 
                 send_notification($fields);
-                session() -> flash('success', trans('Sent successfully'));
+                session() -> flash('Success', trans('Sent successfully'));
 
             } catch (\Exception $exception) {
                 $msgs = Lang::get('Error in Sending Notification, try again later');
@@ -151,7 +151,7 @@ class NotificationsController extends Administrator
 
         //  dd($ids);
         for ($i = 0; $i < sizeof($ids); $i++) {
-            $device_ids = \App\Models\ProviderToken::where('provider_id', $ids[$i])->select('device_id')->whereNotNull("device_id")->groupBy('mobile_id','device_id','provider_id')->get()->toArray();
+            $device_ids = \App\Models\ProviderToken::where('provider_id', $ids[$i])->whereNotNull("device_id")->groupBy('mobile_id','device_id')->select('device_id')->get()->toArray();
 //            $device_ids2 = array_unique($device_ids);
             try {
 
@@ -176,38 +176,38 @@ class NotificationsController extends Administrator
                         "link" => $request->link
                     )
                 );
-                // Functions::send_notification($fields);  // old
+                send_notification($fields);  // old
 
 // new
-                $url = 'https://fcm.googleapis.com/fcm/send';
-                // $fields = array (
-                //         'registration_ids' => array (
-                //                 $id
-                //         ),
-                //         'notification' => array (
-                //                 "title" => $message,
-                //                 "body"=>"body"
-                //         )
+                // $url = 'https://fcm.googleapis.com/fcm/send';
+                // // $fields = array (
+                // //         'registration_ids' => array (
+                // //                 $id
+                // //         ),
+                // //         'notification' => array (
+                // //                 "title" => $message,
+                // //                 "body"=>"body"
+                // //         )
+                // // );
+                // $fields = json_encode($fields);
+                // $headers = array(
+                //     'Authorization: key=' . "AAAAuzFVxTU:APA91bGNbcuiwMz7m-xk5rrcrhgxxCmszL6ODpqAZ0JA-fjhP5M--HCFZ-DpIyw31tRf-AF-lD7Fae5acPqns1YJD4JuUKhg_LVQfpIEy7NtHnUjfBuocTon_Z3IkAFi4qYR9bTmYzgo",
+                //     'Content-Type: application/json'
                 // );
-                $fields = json_encode($fields);
-                $headers = array(
-                    'Authorization: key=' . "AAAAuzFVxTU:APA91bGNbcuiwMz7m-xk5rrcrhgxxCmszL6ODpqAZ0JA-fjhP5M--HCFZ-DpIyw31tRf-AF-lD7Fae5acPqns1YJD4JuUKhg_LVQfpIEy7NtHnUjfBuocTon_Z3IkAFi4qYR9bTmYzgo",
-                    'Content-Type: application/json'
-                );
 
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_POST, true);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                // $ch = curl_init();
+                // curl_setopt($ch, CURLOPT_URL, $url);
+                // curl_setopt($ch, CURLOPT_POST, true);
+                // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                // curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
-                $result = curl_exec($ch);
-                // dd($result);
-                curl_close($ch);
+                // $result = curl_exec($ch);
+                // // dd($result);
+                // curl_close($ch);
 // end new
 
-                session() -> flash('success', trans('Sent successfully'));
+                session() -> flash('Success', trans('Sent successfully'));
             } catch (\Exception $exception) {
                 $msgs = Lang::get('Error in Sending Notification, try again later');
                 session() -> flash('Error', $msgs);
@@ -247,9 +247,9 @@ class NotificationsController extends Administrator
         }
         $fields = [];
         $ids = $request->customers_ids;
-
+// dd($ids);
         for ($i = 0; $i < sizeof($ids); $i++) {
-            $device_ids = \App\Models\CustomerToken::where('customer_id', $ids[$i])->whereNotNull("device_id")->groupBy('mobile_id')->get()->pluck("device_id")->toArray();
+            $device_ids = \App\Models\CustomerToken::where('customer_id', $ids[$i])->whereNotNull("device_id")->groupBy('mobile_id','device_id')->select("device_id")->get()->toArray();
 //            $device_ids2 = array_unique($device_ids);
             try {
 
@@ -276,7 +276,7 @@ class NotificationsController extends Administrator
                 );
 
                 send_notification($fields);
-                session() -> flash('success', trans('Sent successfully'));
+                session() -> flash('Success', trans('Sent successfully'));
             } catch (\Exception $exception) {
                 // dd($exception);
                 $msgs = Lang::get('Error in Sending Notification, try again later');
@@ -314,7 +314,7 @@ class NotificationsController extends Administrator
         $fields = [];
         $ids = $request->providers_ids;
         for ($i = 0; $i < sizeof($ids); $i++) {
-            $device_ids = \App\Models\ProviderToken::where('provider_id', $ids[$i])->whereNotNull("device_id")->groupBy('mobile_id')->get()->pluck("device_id")->toArray();
+            $device_ids = \App\Models\ProviderToken::where('provider_id', $ids[$i])->whereNotNull("device_id")->groupBy('mobile_id','device_id')->select("device_id")->get()->toArray();
 //            $device_ids2 = array_unique($device_ids);
             try {
 
@@ -341,7 +341,7 @@ class NotificationsController extends Administrator
                 );
 
                 send_notification($fields);
-                session() -> flash('success', trans('Sent successfully'));
+                session() -> flash('Success', trans('Sent successfully'));
             } catch (\Exception $exception) {
                 $msgs = Lang::get('Error in Sending Notification, try again later');
                 session() -> flash('Error', $msgs);

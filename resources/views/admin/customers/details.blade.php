@@ -15,7 +15,7 @@
      <div class="content">
         <div class="intro-y flex items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">
-                {{__("Provider Details")}}
+                {{ __('Customer Details') }}
             </h2>
         </div>
         <!-- BEGIN: Profile Info -->
@@ -23,7 +23,7 @@
             <div class="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
                 <div class="flex flex-1 px-5 items-center justify-center lg:justify-start">
                     <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                        <img alt="{{ $row->name }}" class="rounded-full" src="{{$row->profile_img}}">
+                        <img alt="{{ $row->name }}" class="rounded-full" src="{{$r->profile_img ?? url('default_user.jpg')}}">
                     </div>
                     <div class="ml-5">
                         <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{ $row->name }}</div>
@@ -42,20 +42,15 @@
                 </div>
                 <div class="mt-6 lg:mt-0 flex-1 flex items-center justify-center px-5 border-t lg:border-0 border-slate-200/60 dark:border-darkmode-400 pt-5 lg:pt-0">
                     <div class="text-center rounded-md w-20 py-3">
-                        <div class="font-medium text-primary text-xl">{{count($all)}}</div>
+                        <div class="font-medium text-primary text-xl">{{count($row->orders)}}</div>
                         <div class="text-slate-500">{{__('Orders')}}</div>
                     </div>
                     <div class="text-center rounded-md w-20 py-3">
                         <div class="font-medium text-primary text-xl"> {{$row->wallet }}</div>
                         <div class="text-slate-500">{{__("wallet")}}</div>
                     </div>
-                    <div class="text-center rounded-md w-20 py-3">
-                        <div class="font-medium text-primary text-xl">{{count($row->reviews)}}</div>
-                        <div class="text-slate-500">{{__("Reviews")}}</div>
-                    </div>
-                    <div class="ml-5">
-                        <a href="{{url('admin/products?provider='.$row->id)}}" class="btn btn-secondary block w-40 mx-auto mt-5">{{__('Provider Products')}}</a>
-                    </div>
+
+
                 </div>
             </div>
             {{-- <ul class="nav nav-link-tabs flex-col sm:flex-row justify-center lg:justify-start text-center" role="tablist" >
@@ -82,7 +77,7 @@
 
 
                     <!-- BEGIN: Latest Uploads -->
-                    <div class="intro-y box col-span-12 lg:col-span-6">
+                    <div class="intro-y box col-span-12 lg:col-span-12">
                         <div class="flex items-center px-5 py-5 sm:py-3 border-b border-slate-200/60 dark:border-darkmode-400">
                             <h2 class="font-medium text-base mr-auto">
                                 {{__('Wallet')}}
@@ -101,7 +96,7 @@
                             <div class="flex items-center">
                                 <div class="file"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="trello" data-lucide="trello" class="lucide lucide-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg> </div>
                                 <div class="ml-4">
-                                    <p><strong>{{__('Provider Wallet')}}:</strong></p>
+                                    <p><strong>{{__('Customer Wallet')}}:</strong></p>
                                 </div>
                                 <div class="dropdown ml-auto">
                                     <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{$row->wallet}}</div></a>
@@ -111,7 +106,7 @@
                             <div class="flex items-center mt-5">
                                 <div class="file"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="trello" data-lucide="trello" class="lucide lucide-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg> </div>
                                 <div class="ml-4">
-                                    <form action='{{url('admin/providerwallet/edit-balance/'.$row->id)}}' method='post'>
+                                    <form action='{{route('wallet.update',$row->id)}}' method='post'>
                                         @csrf
                                       <div class="input-group">
                                         <div class="input-group-prepend">
@@ -152,66 +147,7 @@
                         </div>
                     </div>
                     <!-- END: Latest Uploads -->
-                    <!-- BEGIN: Latest Uploads -->
-                    <div class="intro-y box col-span-12 lg:col-span-6">
-                        <div class="flex items-center px-5 py-5 sm:py-3 border-b border-slate-200/60 dark:border-darkmode-400">
-                            <h2 class="font-medium text-base mr-auto">
-                                {{__('Wallet Details')}}
-                            </h2>
-                            {{-- <div class="dropdown ml-auto sm:hidden">
-                                <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
-                                <div class="dropdown-menu w-40">
-                                    <ul class="dropdown-content">
-                                        <li> <a href="javascript:;" class="dropdown-item">All Files</a> </li>
-                                    </ul>
-                                </div>
-                            </div> --}}
-                            {{-- <button class="btn btn-outline-secondary hidden sm:flex">All Files</button> --}}
-                        </div>
-                        <div class="p-5">
-                            <div class="flex items-center mt-4">
-                                <div class="file"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="trello" data-lucide="trello" class="lucide lucide-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg> </div>
-                                <div class="ml-4">
-                                    <p><strong>{{__("Total Transaction")}} :</strong></p>
-                                </div>
-                                <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{$total_transaction}}</div></a>
-                                </div>
-                            </div>
-                            <div class="flex items-center mt-4">
-                                <div class="file"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="trello" data-lucide="trello" class="lucide lucide-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg> </div>
-                                <div class="ml-4">
-                                    <p><strong>{{__("total Deposits")}} :</strong></p>
-                                </div>
-                                <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{$total_deposits}}</div></a>
-                                </div>
-                            </div>
-                            <div class="flex items-center mt-4">
-                                <div class="file"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="trello" data-lucide="trello" class="lucide lucide-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg> </div>
-                                <div class="ml-4">
-                                    <p><strong>{{__('company Fees')}} :</strong></p>
-                                </div>
-                                <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{$total_fees}}</div></a>
-                                </div>
-                            </div>
-                            <hr class='mt-5'>
-                            <div class="flex items-center mt-5">
-                                <div class="file"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="trello" data-lucide="trello" class="lucide lucide-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg> </div>
-                                <div class="ml-4">
-                                    <p><strong>{{__("Provider Fees")}} :</strong></p>
-                                </div>
-                                <div class="dropdown ml-auto">
-                                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"><div class="text-slate-500 text-xs mt-0.5">{{$provider_fees}}</div></a>
-                                </div>
-                            </div>
 
-
-
-                        </div>
-                    </div>
-                    <!-- END: Latest Uploads -->
                                      <!-- BEGIN: New Products -->
                     <div class="intro-y box col-span-12">
                         <div class="flex items-center px-5 py-3 border-b border-slate-200/60 dark:border-darkmode-400">
@@ -226,27 +162,26 @@
                                     <table id="myProjectTable" class="table table-report -mt-2" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>{{__('Image')}}</th>
-                                                <th>{{__('Name')}}</th>
-                                                <th>{{__('Register Date')}}</th>
-                                                <th>{{__('Phone')}}</th>
-                                                <th>{{__('Country')}}</th>
-                                                <th>{{__('Status')}}</th>
-                                                <th>{{__('Total Order')}}</th>
-                                                <th>{{__('Actions')}}</th>
+                                                <th>#</th>
+                                                    <th>{{ __('provider') }}</th>
+                                                    <th>{{ __('Type') }}</th>
+                                                    <th>{{ __('phone') }}</th>
+                                                    <th>{{ __('Date') }}</th>
+                                                    <th>{{ __('Status') }}</th>
+                                                    <th>{{ __('Price') }}</th>
+                                                    <th>{{ __('Show') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($all as $index=> $r)
+                                            @foreach ($row->orders as $index=> $r)
                                             <tr>
-                                              <td>{{ $r->order_num}}</td>
-                                              <td>{{ @$r->provider_fees }}</td>
-                                              <td>{{ @$r->company_fees }}</td>
-                                              <td>{{ @$r->delivery_fees }}</td>
-                                              {{-- <td>{{@$r->created_at}}</td> --}}
-                                              <td>{{@$r->payment->title}}</td>
-                                              <td>{{@$r->total_amount}}</td>
-                                              <td>{{@$r->client_paid_amount}}</td>
+                                                <td>{{ $index+1}}</td>
+                                                <td>{{ @$r->provider->name }}</td>
+                                                <td>{{ @$r->provider->name }}</td>
+                                                <td>{{ @$r->provider->mobile }}</td>
+                                                <td>{{@$r->created_at}}</td>
+                                                <td>{{@$r->status->title}}</td>
+                                                <td>{{@$r->total_amount}}</td>
                                               <td>
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <a href="{{url('admin/orders/view',$r->id)}}" target="_blank"><i data-lucide="eye"></i></a>

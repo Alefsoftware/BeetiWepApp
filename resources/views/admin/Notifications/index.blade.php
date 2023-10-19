@@ -1,6 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('content')
+@include('admin.includes.messages')
     <h2 class="intro-y text-lg font-medium mt-10">
         Notifications
     </h2>

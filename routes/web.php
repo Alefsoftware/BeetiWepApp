@@ -148,7 +148,12 @@ Route::post('settings/versions/store','App\Http\Controllers\Administration\Setti
     Route::post('notifications/all-provider', 'App\Http\Controllers\Administration\NotificationsController@postAllProvider');
 // end notofifications
 
+// customers
+Route::get('customers', 'App\Http\Controllers\Administration\CustomersController@getIndex');
+Route::get('customers/view/{customer_id}', 'App\Http\Controllers\Administration\CustomersController@getView');
+Route::post('customer/edit-balance/{customer_id}', 'App\Http\Controllers\Administration\CustomersController@postEditBalance')->name('wallet.update');
 
+// end customers
 
 
 
