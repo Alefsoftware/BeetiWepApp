@@ -153,6 +153,7 @@ Route::get('customers', 'App\Http\Controllers\Administration\CustomersController
 Route::get('customers/view/{customer_id}', 'App\Http\Controllers\Administration\CustomersController@getView');
 Route::post('customer/edit-balance/{customer_id}', 'App\Http\Controllers\Administration\CustomersController@postEditBalance')->name('wallet.update');
 
+    
 // end customers
 
 
