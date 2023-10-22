@@ -16,6 +16,7 @@
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <a class="m-link" href="{{url('admin/providers')}}">
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
@@ -24,13 +25,15 @@
 {{--                                            <div class="report-box__indicator bg-success tooltip cursor-pointer" title="22% Higher than last month"> 22% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i> </div>--}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">{{$providerCount}}</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{$rows['providers']['data']}}</div>
                                     <div style="min-height: 50px;" class="text-base text-slate-500 mt-1">{{__('Total Productive Families')}}</div>
                                 </div>
                             </div>
+                        </a>
                         </div>
 
                         <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <a class="m-link" href="{{url('admin/products?approvement=0')}}">
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
@@ -39,12 +42,14 @@
 {{--                                            <div class="report-box__indicator bg-success tooltip cursor-pointer" title="33% Higher than last month"> 33% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i> </div>--}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">{{$orderCount}}</div>
-                                    <div style="min-height: 50px;" class="text-base text-slate-500 mt-1">{{__('Total Orders')}}</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{$rows['products_to_be_approved']['data']}}</div>
+                                    <div style="min-height: 50px;" class="text-base text-slate-500 mt-1">{{__("products To Be Approved")}}</div>
                                 </div>
                             </div>
+                        </a>
                         </div>
                         <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <a class="m-link" href="{{url('admin/providers?status=6')}}">
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
@@ -53,12 +58,14 @@
 {{--                                            <div class="report-box__indicator bg-danger tooltip cursor-pointer" title="2% Lower than last month"> 2% <i data-lucide="chevron-down" class="w-4 h-4 ml-0.5"></i> </div>--}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">{{$productNotApprovedCount}}</div>
-                                    <div style="min-height: 50px;" class="text-base text-slate-500 mt-1">{{__('products To Be Approved')}}</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{$rows['providers_to_be_approved']['data']}}</div>
+                                    <div style="min-height: 50px;" class="text-base text-slate-500 mt-1">{{__("providers To Be Approved")}}</div>
                                 </div>
                             </div>
+                        </a>
                         </div>
                         <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <a class="m-link" href="{{url('admin/orders')}}">
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
@@ -67,10 +74,11 @@
 {{--                                            <div class="report-box__indicator bg-success tooltip cursor-pointer" title="12% Higher than last month"> 12% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i> </div>--}}
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">{{$providerNotApprovedCount}}</div>
-                                    <div style="min-height: 50px;" class="text-base text-slate-500 mt-1">{{__('providers To Be Approved')}}</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{$rows['orders']['data']}}</div>
+                                    <div style="min-height: 50px;" class="text-base text-slate-500 mt-1">{{__('Total Orders')}}</div>
                                 </div>
                             </div>
+                        </a>
                         </div>
                     </div>
                 </div>
@@ -503,71 +511,36 @@
                     <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3 2xl:mt-8">
                         <div class="intro-x flex items-center h-10">
                             <h2 class="text-lg font-medium truncate mr-5">
-                                Transactions
+                                Activities
                             </h2>
                         </div>
                         <div class="mt-5">
+                            @foreach($rows['activities'] as $row)
+                            @if($row->subject_type == "App\Models\Product")
+                                @php ($color='info')
+                                <a class="m-link"  href="{{url('admin/products/edit',$row->subject_id)}}">
+                                @elseif($row->subject_type == "App\Models\Provider")
+                                @php ($color='warning')
+                                <a class="m-link"  href="{{url('admin/providers/edit',$row->subject_id)}}">
+                               @endif
                             <div class="intro-x">
                                 <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
                                     <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-7.jpg">
+                                        {{-- <img alt="" src="dist/images/profile-7.jpg"> --}}
+                                        <i data-lucide="bell"></i>
                                     </div>
                                     <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Al Pacino</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">4 May 2021</div>
+                                        <div class="font-medium">{{$row->description}}</div>
+                                        <div class="text-slate-500 text-xs mt-0.5">{{$row->created_at}}</div>
                                     </div>
-                                    <div class="text-success">+$32</div>
+                                    {{-- <div class="text-success">+$32</div> --}}
                                 </div>
                             </div>
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-4.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Denzel Washington</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">1 April 2021</div>
-                                    </div>
-                                    <div class="text-success">+$73</div>
-                                </div>
-                            </div>
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-9.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Robert De Niro</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">16 March 2022</div>
-                                    </div>
-                                    <div class="text-success">+$92</div>
-                                </div>
-                            </div>
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-8.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Kate Winslet</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">16 November 2020</div>
-                                    </div>
-                                    <div class="text-danger">-$41</div>
-                                </div>
-                            </div>
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-12.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Arnold Schwarzenegger</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">16 October 2021</div>
-                                    </div>
-                                    <div class="text-danger">-$67</div>
-                                </div>
-                            </div>
-                            <a href="" class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View More</a>
+
+                        </a>
+                      @endforeach
+                            <a href="{{url('admin/activity')}}"  class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View More</a>
+
                         </div>
                     </div>
                     <!-- END: Transactions -->

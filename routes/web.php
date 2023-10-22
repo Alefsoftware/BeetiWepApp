@@ -49,7 +49,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost')->middleware('country');
 
     Route::group(['middleware' => 'adminauth'], function () {
-    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('adminDashboard');
+
+
+    // Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('adminDashboard');
     Route::get('categories', [CategoryController::class, 'index'])->name('categories');
     Route::get('category', [CategoryController::class, 'create']);
     Route::post('category', [CategoryController::class, 'store'])->name('category.store');
@@ -57,9 +59,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('category/edit/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::put('/category/{id}', 'FormController@update')->name('form.update');
     Route::get('category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-    Route::get('dropdown1', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown1']);
-    Route::get('dropdown2/{id}', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown2']);
-    Route::get('dropdown3/{id}', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown3']);
+    // Route::get('dropdown1', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown1']);
+    // Route::get('dropdown2/{id}', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown2']);
+    // Route::get('dropdown3/{id}', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown3']);
     Route::get('/checkbox/update', [CategoryController::class,'updateCheckbox'])->name('checkbox.update');
     Route::get('advertising', [AdvertisingController::class, 'index'])->name('advertising');
     Route::get('advertising/create',    [AdvertisingController::class, 'create'])->name('advertising.create');
@@ -81,7 +83,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     // copy backend
-
+    Route::get('/', 'App\Http\Controllers\Administration\Home@getIndex');
     Route::get('providers', 'App\Http\Controllers\Administration\Providers@getIndex');
     Route::get('providers/edit/{provider_id}', 'App\Http\Controllers\Administration\Providers@getEdit');
     Route::put('providers/edit/{provider_id}', 'App\Http\Controllers\Administration\Providers@anyEdit');
@@ -154,10 +156,12 @@ Route::get('customers', 'App\Http\Controllers\Administration\CustomersController
 Route::get('customers/view/{customer_id}', 'App\Http\Controllers\Administration\CustomersController@getView');
 Route::post('customer/edit-balance/{customer_id}', 'App\Http\Controllers\Administration\CustomersController@postEditBalance')->name('wallet.update');
 
-    
+
 // end customers
 
-
+// activity
+  Route::get('/activity', 'App\Http\Controllers\Administration\Home@allActivities');
+// end activity
 
     Route::get('/testSession', function () {
         return session()->get('country');

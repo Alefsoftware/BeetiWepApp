@@ -310,8 +310,6 @@ if(c <= 4){
 {{-- end select 2 --}}
 {{-- end notifications --}}
 
-
-
 <!-- END: JS Assets-->
 </body>
 </html>

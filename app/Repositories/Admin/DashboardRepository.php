@@ -16,6 +16,7 @@ class DashboardRepository implements DashboardRepositoryInterface
 {
     public function getData(): array
     {
+        
         $providerCount = Provider::where('country',63)->count();
 
         $orderCount = Order::whereHas('provider', function ($query) {
@@ -27,7 +28,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         })->withCount('provider')->where('approved_by_admin',0)->count();
 
         $providerNotApprovedCount = Provider::where('country', 63)->where('status',6)->count();
-
+        $rows["activities"] = Activity::latest()->limit(50)->get();
         // $countries = Countries::all();
 
         return [$providerCount,$orderCount,$productNotApprovedCount,$providerNotApprovedCount];

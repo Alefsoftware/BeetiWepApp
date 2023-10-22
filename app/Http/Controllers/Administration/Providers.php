@@ -27,7 +27,7 @@ class Providers extends Controller
                 if($request->title){
                     $providers = $providers->where(function ($query) use ($request) {
                         $query->where('mobile', 'like', '%' . $request->title . '%');
-                        // $query->orWhere('title_ar', 'like', '%' . $request->title . '%');
+                        $query->orWhere('name', 'like', '%' . $request->title . '%');
                     });
                 }
 

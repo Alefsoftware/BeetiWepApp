@@ -23,7 +23,7 @@
                 <div class="preview">
                     <div class="modal-body flex-grow-1 pb-sm-0 pb-3">
                         <div class="action-tags">
-                            <div class="media mb-2">
+                            {{-- <div class="media mb-2">
                                 <img src="{{@$provider->images[0]->image_name}}" alt="{{__('users avatar')}}" class="user-avatar users-avatar-shadow rounded mr-2 my-25 cursor-pointer img-container img-thumbnail" height="90" width="200" />
                                 <div class="media-body mt-50">
                                     <div class="col-12 d-flex mt-1 px-0">
@@ -36,8 +36,8 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-
+                            </div> --}}
+{{--
                             @if($provider->images)
                             <div class="row">
                                 @foreach($provider->images as $key=>$value)
@@ -54,7 +54,7 @@
                                 @endphp
                                 @endforeach
                             </div>
-                            @endif
+                            @endif --}}
 
 
                             <div class="row d-flex align-items-end">
@@ -102,6 +102,56 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+                                            {{-- test --}}
+
+<div class="intro-y box p-5">
+    <div class="border border-slate-200/60 dark:border-darkmode-400 rounded-md p-5">
+        <div class="font-medium text-base flex items-center border-b border-slate-200/60 dark:border-darkmode-400 pb-5"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="chevron-down" data-lucide="chevron-down" class="lucide lucide-chevron-down w-4 h-4 mr-2"><polyline points="6 9 12 15 18 9"></polyline></svg> Upload Photos </div>
+        <div class="mt-5">
+            <div class="flex items-center text-slate-500">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="lightbulb" data-lucide="lightbulb" class="lucide lucide-lightbulb w-5 h-5 text-warning"><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14"></path></svg></span>
+                <div id="previewContainer" class="image-preview-container"></div>
+
+            </div>
+            <div class="form-inline items-start flex-col xl:flex-row mt-10">
+                <div class="form-label w-full xl:w-64 xl:!mr-10">
+                    <div class="text-left">
+                        <div class="flex items-center">
+                            <div class="font-medium">Provider Photos</div>
+                            <div class="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md">Required</div>
+                        </div>
+                        <div class="leading-relaxed text-slate-500 text-xs mt-3">
+                            <div>The image format is .jpg .jpeg .png and a minimum size of 300 x 300 pixels (For optimal images use a minimum size of 700 x 700 pixels).</div>
+                            <div class="mt-2">Select product photos or drag and drop up to 5 photos at once here. Include min. 3 attractive photos to make the product more attractive to buyers.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4">
+                    <div class="grid grid-cols-10 gap-5 pl-4 pr-5">
+                        @foreach($provider->images as $key=>$value)
+                        <div class="col-span-5 md:col-span-2 h-28 relative image-fit cursor-pointer zoom-in">
+                            <img class="rounded-md" alt="Midone - HTML Admin Template" src="{{$value->image_name}}">
+                            <a href="{{url("admin/products/delete-image",$value->id)}}"><div class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-danger right-0 top-0 -mr-2 -mt-2"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="x" data-lucide="x" class="lucide lucide-x w-4 h-4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> </div></a>
+                        </div>
+                        @endforeach
+
+                    </div>
+                    <div class="px-4 pb-4 mt-5 flex items-center justify-center cursor-pointer relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="image" data-lucide="image" class="lucide lucide-image w-4 h-4 mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg> <span class="text-primary mr-1">Upload a file</span> or drag and drop
+                        <input id="horizontal-form-1" type="file"    name="profile_img" multiple
+                         accept="image/png, image/jpeg, image/jpg"    class="w-full h-full top-0 left-0 absolute opacity-0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{-- end test --}}
 
 
                         </div>

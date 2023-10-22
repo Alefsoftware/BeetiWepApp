@@ -78,13 +78,14 @@
                     </div> --}}
                 </div>
                 {{-- <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of 150 entries</div> --}}
+                <form action="" method="get">
                 <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                     <div class="w-56 relative text-slate-500">
-                        <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                        <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                        <input type="text" name="title" class="form-control w-56 box pr-10" placeholder="Product Title">
+                        <button type="submit" class="input-group-text" > <i class="w-4 h-4 absolute mt-3 inset-y-0 mr-3 right-0" data-lucide="search"></i></button>
                     </div>
                 </div>
-
+            </form>
 
             </div>
 
@@ -108,8 +109,8 @@
                     <label for="status-filter">{{__('Status')}}:</label>
                     <select name='approvement' class="form-select mr-3" id="status-filter">
                       <option value="">{{__('All')}}</option>
-                      <option value="1">{{__("Approvemed")}}</option>
-                      <option value="0">{{__(" Not Approvemed")}}</option>
+                      <option value="1">{{__("Approved")}}</option>
+                      <option value="0">{{__(" Not Approved")}}</option>
                     </select>
                   </div>
 

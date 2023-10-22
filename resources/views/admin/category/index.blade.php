@@ -8,7 +8,7 @@
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <a href="{{route('category.store')}}" class="btn btn-primary shadow-md mr-2">{{__('Add New Category')}}</a>
-        <div class="dropdown">
+        {{-- <div class="dropdown">
             <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
             </button>
@@ -25,7 +25,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> --}}
         <div style="display:inherit!important;" class="hidden md:block mx-auto text-slate-500">
             <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y mr-5">
                 <div class="box p-5 zoom-in">
@@ -56,12 +56,12 @@
                 </div>
             </div>
         </div>
-        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+        {{-- <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
                 <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
                 <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- BEGIN: Data List -->
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">

@@ -1147,6 +1147,12 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{url('admin/activity')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="history"></i> </div>
+                        <div class="side-menu__title"> {{__('Activities')}} </div>
+                    </a>
+                </li>
 
             {{-- <li>
                 <ul class="">

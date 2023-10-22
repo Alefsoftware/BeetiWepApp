@@ -139,10 +139,17 @@ class Home extends Administrator {
 
         }
 
-        $rows["activities"] = Activity::latest()->limit(50)->get();
+        $rows["activities"] = Activity::latest()->limit(5)->get();
 // dd($rows);
 
-        return view('admin.dashboard.admin_dashboard',compact('rows'));
+        return view('admin.dashboard.index',compact('rows'));
     }
+
+
+    public function allActivities(){
+        $rows["activities"] = Activity::latest()->paginate('20');
+        return view('admin.dashboard.activity',compact('rows'));
+    }
+
 
 }
