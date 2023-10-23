@@ -21,6 +21,7 @@ class Home extends Administrator {
     }
 
     public function getIndex(Request $request) {
+            // dd(session()->get('country')->id);
         $request->country =  session()->get('country')->id;
 
         if ($request->zone) {

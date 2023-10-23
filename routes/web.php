@@ -47,6 +47,7 @@ Route::get('setCountry/{country}',function($c){
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost')->middleware('country');
+    Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
 
     Route::group(['middleware' => 'adminauth'], function () {
 
@@ -83,7 +84,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     // copy backend
-    Route::get('/', 'App\Http\Controllers\Administration\Home@getIndex');
+    Route::get('/', 'App\Http\Controllers\Administration\Home@getIndex')->name('adminDashboard')->middleware('country');
     Route::get('providers', 'App\Http\Controllers\Administration\Providers@getIndex');
     Route::get('providers/edit/{provider_id}', 'App\Http\Controllers\Administration\Providers@getEdit');
     Route::put('providers/edit/{provider_id}', 'App\Http\Controllers\Administration\Providers@anyEdit');

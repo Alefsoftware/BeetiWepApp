@@ -707,10 +707,10 @@
         <!-- END: Breadcrumb -->
         <!-- BEGIN: Search -->
         <div class="intro-x relative mr-3 sm:mr-6">
-            <div class="search hidden sm:block">
+            {{-- <div class="search hidden sm:block">
                 <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
                 <i data-lucide="search" class="search__icon dark:text-slate-500"></i>
-            </div>
+            </div> --}}
             <a class="notification notification--light sm:hidden" href=""> <i data-lucide="search" class="notification__icon dark:text-slate-500"></i> </a>
             <div class="search-result">
                 <div class="search-result__content">
@@ -735,7 +735,11 @@
                             <div class="w-8 h-8 image-fit">
                                 <img alt="Midone - HTML Admin Template" class="rounded-full" src="{{asset('admin/images/profile-1.jpg')}}">
                             </div>
-                            <div class="ml-3">Russell Crowe</div>
+                            @if(Auth::guard('admin')->check())
+                            <div class="ml-3">{{Auth::guard('admin')->user()->name}}</div>
+                            @elseif(Auth::guard('vendor')->check())
+                            <div class="ml-3"> {{Auth::guard('vendor')->user()->name}}</div>
+                            @endif
                             <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">russellcrowe@left4code.com</div>
                         </a>
                         <a href="" class="flex items-center mt-2">
@@ -871,13 +875,28 @@
         <!-- BEGIN: Account Menu -->
         <div class="intro-x dropdown w-8 h-8">
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110" role="button" aria-expanded="false" data-tw-toggle="dropdown">
-                <img alt="Midone - HTML Admin Template" src="{{asset('admin/images/profile-4.jpg')}}">
+                @if(Auth::guard('admin')->check())
+                <img alt="Midone - HTML Admin Template" src="{{Auth::guard('admin')->user()->profile_img}}">
+                @endif
             </div>
             <div class="dropdown-menu w-56">
                 <ul class="dropdown-content bg-primary/80 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white">
                     <li class="p-2">
-                        <div class="font-medium">Russell Crowe</div>
-                        <div class="text-xs text-white/60 mt-0.5 dark:text-slate-500">Software Engineer</div>
+
+
+                        @if(Auth::guard('admin')->check())
+                        <div class="font-medium">{{Auth::guard('admin')->user()->name}}</div>
+                        @elseif(Auth::guard('vendor')->check())
+                        <div class="font-medium"> {{Auth::guard('vendor')->user()->name}}</div>
+                        @endif
+
+
+                        @if(Auth::guard('admin')->check())
+                        <div class="text-xs text-white/60 mt-0.5 dark:text-slate-500">{{Auth::guard('admin')->user()->email}}</div>
+                        @else
+                        <div class="text-xs text-white/60 mt-0.5 dark:text-slate-500">{{Auth::guard('vendor')->user()->email}}</div>
+
+                        @endif
                     </li>
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
@@ -898,7 +917,7 @@
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
                     <li>
-                        <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Logout </a>
+                        <a href="{{route('adminLogout')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Logout </a>
                     </li>
                 </ul>
             </div>
