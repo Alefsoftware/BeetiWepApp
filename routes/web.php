@@ -83,7 +83,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     // copy backend
-    Route::get('/', 'App\Http\Controllers\Administration\Home@getIndex');
+    Route::get('/', 'App\Http\Controllers\Administration\Home@getIndex')->middleware('country');
     Route::get('providers', 'App\Http\Controllers\Administration\Providers@getIndex');
     Route::get('providers/edit/{provider_id}', 'App\Http\Controllers\Administration\Providers@getEdit');
     Route::put('providers/edit/{provider_id}', 'App\Http\Controllers\Administration\Providers@anyEdit');
