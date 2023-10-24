@@ -17,10 +17,28 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
+
         $guards = empty($guards) ? [null] : $guards;
 
+        // foreach ($guards as $guard) {
+        //     if (Auth::guard($guard)->check()) {
+        //         return redirect(RouteServiceProvider::HOME);
+        //     }
+        // }
+
         foreach ($guards as $guard) {
+            if ($guard == "admin" && Auth::guard($guard)->check()) {
+                // dd('admin');
+                return redirect('/admin/dashboard');
+            }
+            if ($guard == "vendor" && Auth::guard($guard)->check()) {
+                dd('vendor');
+                return redirect('/provider/dashboard');
+            }
+
+
             if (Auth::guard($guard)->check()) {
+                dd('here');
                 return redirect(RouteServiceProvider::HOME);
             }
         }

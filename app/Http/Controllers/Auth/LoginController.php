@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -35,6 +36,81 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        //dd("Current Url : " . url()->full());
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest:admin')->except('logout');
+        // $this->middleware('guest:provider')->except('logout');
     }
+
+
+
+    public function showAdminLoginForm()
+    {
+
+        return view('admin.auth.login', ['url' => route('admin.login-view'), 'title'=>'Admin']);
+    }
+
+
+
+    public function showProviderLoginForm()
+    {
+        return view('vendor.auth.login', ['url' => route('provider.login-view'), 'title'=>'Provider']);
+    }
+
+
+
+    public function adminLogin(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::guard('admin')->attempt($credentials)){
+            return redirect()->intended('/admin/dashboard');
+        }else{
+            session() -> flash('Error', trans('Invalid credintials'));
+        }
+
+        return back()->withInput($request->only('email', 'remember'));
+    }
+
+    public function providerLogin(Request $request)
+    {
+
+
+        $request->validate([
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+        $credentials = $request->only('email', 'password');
+        // dd(Auth::guard());
+        if (\Auth::guard('vendor')->attempt($credentials)){
+// dd('here');
+            return redirect()->intended('provider/dashboard');
+        }else{
+            session() -> flash('Error', trans('Invalid Credintials'));
+        }
+
+
+        return back()->withInput($request->only('email', 'remember'));
+    }
+
+
+    public function logout(Request $request) {
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+            return redirect('/admin');
+        } elseif (Auth::guard('vendor')->check()) {
+            Auth::guard('vendor')->logout();
+            return redirect('/provider');
+        }
+        // else{
+        //     Auth::guard('user')->logout();
+        // }
+        return redirect('/');
+      }
 }

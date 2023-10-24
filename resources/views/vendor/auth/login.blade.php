@@ -43,7 +43,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-                        <form class="auth-login-form mt-2" action="{{route('admin.login')}}" method="post">
+                        <form class="auth-login-form mt-2" action="{{route('provider.login')}}" method="post">
                         @csrf
                         <div class="intro-x mt-2 text-slate-400 xl:hidden text-center">A few more clicks to sign in to your account. Manage all your e-commerce accounts in one place</div>
                         <div class="intro-x mt-8">

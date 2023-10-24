@@ -6,9 +6,17 @@ use App\Http\Controllers\Admin\AdvertisingController;
 use App\Http\Controllers\Admin\ProductiveFamilyController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController;
+
+
+use App\Http\Controllers\Vendor\VendorAuthController;
+
+
+
 use App\Http\Controllers\Front\IndexController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,9 +53,9 @@ Route::get('setCountry/{country}',function($c){
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
-    Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost')->middleware('country');
-    Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
+    // Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
+    // Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost')->middleware('country');
+    // Route::get('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
 
     Route::group(['middleware' => 'adminauth'], function () {
 
@@ -80,11 +88,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     });
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' =>'auth:admin'], function() {
 
 
     // copy backend
-    Route::get('/', 'App\Http\Controllers\Administration\Home@getIndex')->name('adminDashboard')->middleware('country');
+    Route::get('/dashboard', 'App\Http\Controllers\Administration\Home@getIndex')->name('adminDashboard')->middleware('country');
     Route::get('providers', 'App\Http\Controllers\Administration\Providers@getIndex');
     Route::get('providers/edit/{provider_id}', 'App\Http\Controllers\Administration\Providers@getEdit');
     Route::put('providers/edit/{provider_id}', 'App\Http\Controllers\Administration\Providers@anyEdit');
@@ -172,6 +180,46 @@ Route::post('customer/edit-balance/{customer_id}', 'App\Http\Controllers\Adminis
 
 
 });
+
+
+Route::group(['prefix' => 'provider' ,'middleware' => 'auth:vendor'], function() {
+
+    // provider login
+    // Route::get('/login', [VendorAuthController::class, 'getLogin'])->name('vendorLogin');
+    // Route::post('/login', [VendorAuthController::class, 'postLogin'])->name('vendorLoginPost')->middleware('country');
+    // Route::get('/logout', [VendorAuthController::class, 'adminLogout'])->name('vendorLogout');
+
+    Route::get('/dashboard', 'App\Http\Controllers\Vendor\Home@getIndex')->name('VendorDashboard')->middleware('country');
+    // products
+Route::get('products', 'App\Http\Controllers\Vendor\Products@getIndex');
+Route::get('products/edit/{product_id}', 'App\Http\Controllers\Vendor\Products@getEdit');
+Route::put('products/edit/{product_id}', 'App\Http\Controllers\Vendor\Products@anyEdit')->name('vendor.products.update');
+Route::delete('products/delete/{product_id}', 'App\Http\Controllers\Vendor\Products@anyDelete');
+Route::get('products/delete-image/{image_id}', 'App\Http\Controllers\Vendor\Products@getDeleteImage');
+Route::get('products/create', 'App\Http\Controllers\Vendor\Products@getCreate')->name('vendor.products.create');
+Route::post('products/store', 'App\Http\Controllers\Vendor\Products@postCreate')->name('vendor.product.store');
+Route::post('updateStatus/{id}','App\Http\Controllers\Vendor\Products@updateStatus')->name('vendor.product.updateStatus');
+// end products
+
+// orders
+Route::get('orders', 'App\Http\Controllers\Vendor\OrdersController@getIndex');
+Route::get('orders/view/{order_id}', 'App\Http\Controllers\Vendor\OrdersController@getView');
+//end orders
+});
+
+// login and logout
+
+Route::get('/admin',[App\Http\Controllers\Auth\LoginController::class,'showAdminLoginForm'])->name('admin.login-view');
+Route::post('/admin',[App\Http\Controllers\Auth\LoginController::class,'adminLogin'])->name('admin.login')->middleware('country');
+
+Route::get('/provider',[App\Http\Controllers\Auth\LoginController::class,'showProviderLoginForm'])->name('provider.login-view');
+Route::post('/provider',[App\Http\Controllers\Auth\LoginController::class,'providerLogin'])->name('provider.login')->middleware('country');
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
+
+// end login and logout
+
 
 //   ajax requests
 Route::get('/get-subcategories/{id}', function($id) {
