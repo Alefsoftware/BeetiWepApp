@@ -39,7 +39,7 @@ class LoginController extends Controller
         //dd("Current Url : " . url()->full());
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
-        // $this->middleware('guest:provider')->except('logout');
+        $this->middleware('guest:vendor')->except('logout');
     }
 
 

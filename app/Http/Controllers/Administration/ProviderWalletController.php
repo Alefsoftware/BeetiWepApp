@@ -43,6 +43,11 @@ class ProviderWalletController extends Administrator
         authorize('view-' . $this->module);
         dd('vbhjkl');
     }
+
+
+
+
+    
     public function getWallet(Request $request,$id)
     {
         // authorize('view-' . $this->module);

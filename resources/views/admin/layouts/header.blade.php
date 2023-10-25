@@ -904,7 +904,7 @@
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
                     <li>
-                        <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Profile </a>
+                        <a href="{{route('vendor.profile')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Profile </a>
                     </li>
                     <li>
                         <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="edit" class="w-4 h-4 mr-2"></i> Add Account </a>
@@ -1054,10 +1054,20 @@
         <nav class="side-nav">
             <ul>
                 <li>
-                    <a href="{{url('provider/')}}" class="side-menu side-menu--active">
+                    <a href="{{url('provider/dashboard')}}" class="side-menu side-menu--active">
                         <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                         <div class="side-menu__title">
                             Dashboard
+                            <div class="side-menu__sub-icon transform rotate-180"> </div>
+                        </div>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="{{route('vendor.profile')}}" class="side-menu side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
+                        <div class="side-menu__title">
+                            Profile
                             <div class="side-menu__sub-icon transform rotate-180"> </div>
                         </div>
                     </a>

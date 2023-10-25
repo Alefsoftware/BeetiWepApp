@@ -74,8 +74,8 @@
                                         <thead>
                                             <tr>
                                                 <th>{{__('#')}}</th>
-                                                <th>{{__("Provider")}}</th>
-                                                {{-- <th>{{__('Order Number')}}</th> --}}
+                                                {{-- <th>{{__("Provider")}}</th> --}}
+                                                <th>{{__('Order Number')}}</th>
                                                 <th>{{__('Type')}}</th>
 
                                                 <th>{{__('phone')}}</th>
@@ -91,13 +91,14 @@
 
                                                 <td><strong>#{{$index+1}}</strong></td>
                                            <td>
-                                            <a href="{{url('provider/orders/view',$r->id)}}" target="_blank">  <img class="w120 rounded img-fluid" src="{{$r->provider->profile_img}}" alt=""> </a>
-                                                    <h6 class="mb-3 fw-bold">{{$r->provider->name}} <span class="text-muted small fw-light d-block">{{$r->order_num}}</span></h6>
+                                            <a href="{{url('provider/orders/view',$r->id)}}" target="_blank">
+                                                    <h6 class="mb-3 fw-bold"> <span class="text-muted small fw-light d-block">{{$r->order_num}}</span></h6>
+                                            </a>
 
                                                 </td>
                                                 <td>@if($r->order_type_id == 1)<span class="">{{__('Delivery')}}</span> @else<span class=""> {{__("Pickup")}}@endif</span></td>
 
-                                                <td>{{$r->provider->mobile}}</td>
+                                                <td>{{$r->customer->mobile}}</td>
                                                 <td>{{$r->created_at}} </td>
                                                 <td>{{$r->status->title}}</td>
                                                 <td>{{$r->total_amount}}</td>

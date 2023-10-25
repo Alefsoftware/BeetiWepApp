@@ -205,6 +205,14 @@ Route::post('updateStatus/{id}','App\Http\Controllers\Vendor\Products@updateStat
 Route::get('orders', 'App\Http\Controllers\Vendor\OrdersController@getIndex');
 Route::get('orders/view/{order_id}', 'App\Http\Controllers\Vendor\OrdersController@getView');
 //end orders
+
+// profile
+
+Route::get('profile', 'App\Http\Controllers\Vendor\Profile@profile')->name('vendor.profile');
+Route::get('profile/edit', 'App\Http\Controllers\Vendor\Profile@getEdit');
+Route::put('profile/edit', 'App\Http\Controllers\Vendor\Profile@anyEdit');
+
+// endprofile
 });
 
 // login and logout
@@ -216,7 +224,6 @@ Route::get('/provider',[App\Http\Controllers\Auth\LoginController::class,'showPr
 Route::post('/provider',[App\Http\Controllers\Auth\LoginController::class,'providerLogin'])->name('provider.login')->middleware('country');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
-
 
 // end login and logout
 

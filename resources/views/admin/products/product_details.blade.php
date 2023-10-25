@@ -1,9 +1,7 @@
 @extends('admin.layouts.master')
 @section('content')
-    @php
-    // dd($product);
-    @endphp
-<div class="card">
+
+                <div class="card">
                         <h5 class="card-header">View Product</h5>
                                 <div class="card-body">
                                     <nav aria-label="breadcrumb">
@@ -15,7 +13,7 @@
                                     </nav>
                                 </div>
                     </div>
-					
+
                 <section class="app-user-edit">
                     <div class="card">
                         <div class="card-body">

@@ -32,13 +32,13 @@ class RedirectIfAuthenticated
                 return redirect('/admin/dashboard');
             }
             if ($guard == "vendor" && Auth::guard($guard)->check()) {
-                dd('vendor');
+
                 return redirect('/provider/dashboard');
             }
 
 
             if (Auth::guard($guard)->check()) {
-                dd('here');
+
                 return redirect(RouteServiceProvider::HOME);
             }
         }
