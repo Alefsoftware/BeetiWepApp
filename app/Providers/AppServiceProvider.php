@@ -28,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
         View::share([
             'countries' =>  $countries,
         ]);
-        // \Illuminate\Support\Facades\URL::forceScheme('https');
+        \Illuminate\Support\Facades\URL::forceScheme('https');
     }
 }
