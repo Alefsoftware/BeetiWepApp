@@ -21,12 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $countries = Countries::where('is_active',1)->get();
+        // $countries = Countries::where('is_active',1)->get();
+        $countries = Countries::all();
         $country   = Countries::first();
         // Session::put('country', $country->id);
         View::share([
             'countries' =>  $countries,
         ]);
-        \Illuminate\Support\Facades\URL::forceScheme('https');
+        // \Illuminate\Support\Facades\URL::forceScheme('https');
     }
 }

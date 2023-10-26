@@ -8,10 +8,13 @@ use App\Libs\ACL;
 use App\Libs\Adminauth;
 use Config;
 use App\Models\Activity;
+use App\Models\Order;
+use DB;
 use Session;
 use Mail;
 use Hash;
 use App;
+use Carbon\Carbon;
 
 
 class Home extends Administrator {
@@ -140,10 +143,29 @@ class Home extends Administrator {
 
         }
 
+        // charts
+        $monthlyStats = Order::whereHas('provider', function ($q) {
+            $q->where('country', '=', session()->get('country')->id);
+        })
+        ->select(DB::raw("DATE_FORMAT(created_at, '%b %Y') as month, COUNT(*) as total_orders, SUM(total_amount) as total_amount"))
+        ->whereIn('status_id', [4, 8])
+        ->groupBy('month')
+        ->get();
+
+    $result = [];
+    foreach ($monthlyStats as $stat) {
+        $month = Carbon::createFromFormat('M Y', $stat->month)->format('M Y');
+        $result[$month] = $stat->total_amount;
+    }
+    // $row['sales_chart']= $result;
+
+    // return $result;
+    // end chart
+
         $rows["activities"] = Activity::latest()->limit(5)->get();
 // dd($rows);
 
-        return view('admin.dashboard.index',compact('rows'));
+        return view('admin.dashboard.index',compact('rows','result'));
     }
 
 

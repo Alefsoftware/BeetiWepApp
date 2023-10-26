@@ -517,23 +517,23 @@
                         <div class="mt-5">
                             @foreach($rows['activities'] as $row)
                             @if($row->subject_type == "App\Models\Product")
-                                @php ($color='info')
+
                                 <a class="m-link"  href="{{url('admin/products/edit',$row->subject_id)}}">
                                 @elseif($row->subject_type == "App\Models\Provider")
-                                @php ($color='warning')
+
                                 <a class="m-link"  href="{{url('admin/providers/edit',$row->subject_id)}}">
                                @endif
                             <div class="intro-x">
                                 <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
                                     <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        {{-- <img alt="" src="dist/images/profile-7.jpg"> --}}
+
                                         <i data-lucide="bell"></i>
                                     </div>
                                     <div class="ml-4 mr-auto">
                                         <div class="font-medium">{{$row->description}}</div>
                                         <div class="text-slate-500 text-xs mt-0.5">{{$row->created_at}}</div>
                                     </div>
-                                    {{-- <div class="text-success">+$32</div> --}}
+
                                 </div>
                             </div>
 
@@ -760,6 +760,12 @@
             </div>
         </div>
     </div>
+{{-- @dd($row['result']); --}}
+
+
+
+
+
 
 
 @endsection

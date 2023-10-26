@@ -226,14 +226,15 @@
                                     <table id="myProjectTable" class="table table-report -mt-2" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>{{__('Image')}}</th>
-                                                <th>{{__('Name')}}</th>
-                                                <th>{{__('Register Date')}}</th>
-                                                <th>{{__('Phone')}}</th>
-                                                <th>{{__('Country')}}</th>
-                                                <th>{{__('Status')}}</th>
-                                                <th>{{__('Total Order')}}</th>
-                                                <th>{{__('Actions')}}</th>
+                                                <th>#</th>
+                                                <th>{{__("profit")}}</th>
+                                                <th>{{__("company Fees")}}</th>
+                                                <th>{{__("Delivery Fees")}}</th>
+                                                {{-- <th>Date</th> --}}
+                                                <th>{{__("Payment type")}}</th>
+                                                <th>{{__("Total")}}</th>
+                                                <th>{{__("Client Paid Amount")}}</th>
+                                                <th>{{__("Show")}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

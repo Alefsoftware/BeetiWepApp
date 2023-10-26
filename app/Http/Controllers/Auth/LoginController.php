@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use Hash;
 class LoginController extends Controller
 {
     /*
@@ -38,8 +39,8 @@ class LoginController extends Controller
     {
         //dd("Current Url : " . url()->full());
         $this->middleware('guest')->except('logout');
-        $this->middleware('guest:admin')->except('logout');
-        $this->middleware('guest:vendor')->except('logout');
+        $this->middleware('guest:admin')->except('logout','showChangeForm','update');
+        $this->middleware('guest:vendor')->except('logout','showChangeForm','update');
     }
 
 
@@ -98,6 +99,48 @@ class LoginController extends Controller
 
         return back()->withInput($request->only('email', 'remember'));
     }
+
+
+// provider chnage password
+
+
+public function showChangeForm()
+{
+    return view('auth.change-password');
+}
+
+public function update(Request $request)
+{
+
+    $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:8|confirmed',
+    ]);
+if( Auth::guard('vendor')->check()){
+    $auth_user = Auth::guard('vendor')->user();
+    $url='provider/dashboard';
+
+}elseif(Auth::guard('admin')->check()){
+    $auth_user = Auth::guard('admin')->user();
+    $url='admin/dashboard';
+}
+
+    if (Hash::check($request->current_password, $auth_user->password)) {
+        // dd('yes');
+        $auth_user->password = $request->new_password;
+        $auth_user->save();
+        session() -> flash('Success', trans('Password changed successfully.'));
+        return redirect()->intended($url);
+    }
+    // dd('no');
+
+    return back()->withErrors(['current_password' => 'Incorrect current password.']);
+}
+
+
+// end provider change password
+
+
 
 
     public function logout(Request $request) {

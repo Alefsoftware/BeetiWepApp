@@ -98,16 +98,27 @@
                                             <tr>
 
                                                 <td><strong>#{{$index+1}}</strong></td>
-                                           <td>
+                                           {{-- <td>
                                             <a href="{{url('administration/orders/view',$r->id)}}" target="_blank">  <img class="w120 rounded img-fluid" src="{{$r->provider->profile_img}}" alt=""> </a>
                                                     <h6 class="mb-3 fw-bold">{{$r->provider->name}} <span class="text-muted small fw-light d-block">{{$r->order_num}}</span></h6>
 
+                                                </td> --}}
+
+                                                <td class="w-40">
+                                                    <div class="flex">
+                                                        <a href="{{url('admin/orders/view',$r->id)}}" target="_blank">  <div class="w-10 h-10 image-fit zoom-in">
+                                                            <img alt="{{@$r->provider->name}}" class="tooltip rounded-full" src="{{@$r->provider->profile_img}}">
+                                                        </div></a>
+
+                                                    </div>
                                                 </td>
+
+
                                                 <td>@if($r->order_type_id == 1)<span class="">{{__('Delivery')}}</span> @else<span class=""> {{__("Pickup")}}@endif</span></td>
 
-                                                <td>{{$r->provider->mobile}}</td>
+                                                <td>{{@$r->customer->mobile}}</td>
                                                 <td>{{$r->created_at}} </td>
-                                                <td>{{$r->status->title}}</td>
+                                                <td>{{@$r->status->title}}</td>
                                                 <td>{{$r->total_amount}}</td>
 
                                                 <td>

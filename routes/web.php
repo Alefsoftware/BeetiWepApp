@@ -223,6 +223,12 @@ Route::post('/admin',[App\Http\Controllers\Auth\LoginController::class,'adminLog
 Route::get('/provider',[App\Http\Controllers\Auth\LoginController::class,'showProviderLoginForm'])->name('provider.login-view');
 Route::post('/provider',[App\Http\Controllers\Auth\LoginController::class,'providerLogin'])->name('provider.login')->middleware('country');
 
+// Route::get('admin/password/change', [App\Http\Controllers\Auth\LoginController::class ,'showChangeForm'])->name('admin.password.change');
+// Route::post('admin/password/update', [App\Http\Controllers\Auth\LoginController::class ,'update'])->name('admin.password.update');
+
+Route::get('password/change', [App\Http\Controllers\Auth\LoginController::class ,'showChangeForm'])->name('dashboard.password.change');
+Route::post('password/update', [App\Http\Controllers\Auth\LoginController::class,'update'])->name('dashboard.password.update');
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 // end login and logout

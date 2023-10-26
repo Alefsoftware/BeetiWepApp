@@ -47,7 +47,7 @@ class ProviderWalletController extends Administrator
 
 
 
-    
+
     public function getWallet(Request $request,$id)
     {
         // authorize('view-' . $this->module);
@@ -119,6 +119,8 @@ public function postEditBalance(Request $request,$id)
     $row = Provider::where("id", $id)->first();
     if ($row) {
         $row->update($request->all());
+
+
         session() -> flash('Success', trans('Updated successfully'));
 
     } else {

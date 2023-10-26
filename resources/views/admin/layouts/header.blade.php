@@ -798,7 +798,7 @@
         </div>
         <!-- END: Search -->
         <!-- BEGIN: Notifications -->
-        <div class="intro-x dropdown mr-4 sm:mr-6">
+        {{-- <div class="intro-x dropdown mr-4 sm:mr-6">
             <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="bell" class="notification__icon dark:text-slate-500"></i> </div>
             <div class="notification-content pt-2 dropdown-menu">
                 <div class="notification-content__box dropdown-content">
@@ -870,7 +870,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- END: Notifications -->
         <!-- BEGIN: Account Menu -->
         <div class="intro-x dropdown w-8 h-8">
@@ -903,23 +903,25 @@
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
+                    @if(Auth::guard('vendor')->check())
                     <li>
-                        <a href="{{route('vendor.profile')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Profile </a>
+                        <a href="{{route('vendor.profile')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> {{__('Profile')}} </a>
                     </li>
-                    <li>
+                    @endif
+                    {{-- <li>
                         <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="edit" class="w-4 h-4 mr-2"></i> Add Account </a>
-                    </li>
+                    </li> --}}
                     <li>
-                        <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="lock" class="w-4 h-4 mr-2"></i> Reset Password </a>
+                        <a href="{{route('dashboard.password.change')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="lock" class="w-4 h-4 mr-2"></i> {{__('Change Password')}} </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> Help </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
                     <li>
-                        <a href="{{route('logout')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Logout </a>
+                        <a href="{{route('logout')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> {{__('Logout')}} </a>
                     </li>
                 </ul>
             </div>
