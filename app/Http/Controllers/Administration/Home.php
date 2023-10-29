@@ -157,6 +157,7 @@ class Home extends Administrator {
         $month = Carbon::createFromFormat('M Y', $stat->month)->format('M Y');
         $result[$month] = $stat->total_amount;
     }
+    // dd($result);
     // $row['sales_chart']= $result;
 
     // return $result;

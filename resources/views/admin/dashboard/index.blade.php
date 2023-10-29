@@ -1,6 +1,21 @@
 @extends('admin.layouts.main')
 
 @section('content')
+<?php
+$labels = array_keys($result);
+$data = array_values($result);
+$lastMonthLabel = Carbon\Carbon::now()->subMonth()->format('M Y');
+$thisMonthLabel = Carbon\Carbon::now()->format('M Y');
+$lastMonth=0;
+$thisMonth=0;
+if (in_array($lastMonthLabel, $labels)) {
+$lastMonth= $result[$lastMonthLabel];
+}
+if (in_array($lastMonthLabel, $labels)) {
+$thisMonth= $result[$thisMonthLabel];
+}
+
+?>
 
     <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 2xl:col-span-9">
@@ -84,30 +99,32 @@
                 </div>
                 <!-- END: General Report -->
                 <!-- BEGIN: Sales Report -->
-                <div class="col-span-12 lg:col-span-6 mt-8">
+                <div class="col-span-12 lg:col-span-9 mt-8">
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
                             Sales Report
                         </h2>
+                     {{-- <form action="{{route('dashboard.filter')}}" method="get">
                         <div class="sm:ml-auto mt-3 sm:mt-0 relative text-slate-500">
                             <i data-lucide="calendar" class="w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0"></i>
-                            <input type="text" class="datepicker form-control sm:w-56 box pl-10">
+                            <input type="text" name="date" class="datepicker form-control sm:w-56 box pl-10">
                         </div>
+                     </form> --}}
                     </div>
                     <div class="intro-y box p-5 mt-12 sm:mt-5">
                         <div class="flex flex-col md:flex-row md:items-center">
                             <div class="flex">
                                 <div>
-                                    <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">$15,000</div>
-                                    <div class="mt-0.5 text-slate-500">This Month</div>
+                                    <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">${{$thisMonth}}</div>
+                                    <div class="mt-0.5 text-slate-500">{{__('This Month')}}</div>
                                 </div>
                                 <div class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5"></div>
                                 <div>
-                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">$10,000</div>
-                                    <div class="mt-0.5 text-slate-500">Last Month</div>
+                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">${{$lastMonth}}</div>
+                                    <div class="mt-0.5 text-slate-500">{{__('Last Month')}}</div>
                                 </div>
                             </div>
-                            <div class="dropdown md:ml-auto mt-5 md:mt-0">
+                            {{-- <div class="dropdown md:ml-auto mt-5 md:mt-0">
                                 <button class="dropdown-toggle btn btn-outline-secondary font-normal" aria-expanded="false" data-tw-toggle="dropdown"> Filter by Category <i data-lucide="chevron-down" class="w-4 h-4 ml-2"></i> </button>
                                 <div class="dropdown-menu w-40">
                                     <ul class="dropdown-content overflow-y-auto h-32">
@@ -118,18 +135,19 @@
                                         <li><a href="" class="dropdown-item">Sport</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="report-chart">
                             <div class="h-[275px]">
-                                <canvas id="report-line-chart" class="mt-6 -mb-6"></canvas>
+                                {{-- <canvas id="report-line-chart" class="mt-6 -mb-6"></canvas> --}}
+                                <canvas id="myChart"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- END: Sales Report -->
                 <!-- BEGIN: Weekly Top Seller -->
-                <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
+                {{-- <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
                             Weekly Top Seller
@@ -157,7 +175,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- END: Weekly Top Seller -->
                 <!-- BEGIN: Sales Report -->
                 <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
@@ -760,11 +778,33 @@
             </div>
         </div>
     </div>
-{{-- @dd($row['result']); --}}
+{{-- @dd($result); --}}
 
 
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <?php echo json_encode($labels); ?>,
+            datasets: [{
+                label: 'Total sales',
+                data: <?php echo json_encode($data); ?>,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 
-
+</script>
 
 
 
