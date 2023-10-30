@@ -1010,6 +1010,32 @@
 
                 <li class="side-nav__devider my-6"></li>
 
+
+
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="clipboard"></i></div>
+                        <div class="side-menu__title">
+                            {{__('Site Content')}}
+                            <div class="side-menu__sub-icon ">  <i data-lucide="chevron-down"></i>  </div>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="{{route('slider.index')}}" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="image"></i> </div>
+                                <div class="side-menu__title"> Slider</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+
+                <li class="side-nav__devider my-6"></li>
+
                 <li>
                     <a href="javascript:;" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="settings"></i></div>

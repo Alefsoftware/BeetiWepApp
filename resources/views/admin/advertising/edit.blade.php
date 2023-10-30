@@ -73,6 +73,22 @@
                         <div class="error text-danger">{{ $message }}</div>
                         @enderror
 
+                        <label>{{__('Position')}}</label>
+                        <div class="mt-2">
+                            <select data-placeholder="{{__('position')}}" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="position">
+                                <option value="" >{{__('Select')}}</option>
+
+                               <option value="Top" @if($row->position == 'Top'  )selected @endif>{{__("Top")}}</option>
+                               <option value="Side" @if($row->position == 'Side'  )selected @endif>{{__("Side")}}</option>
+
+                            </select>
+
+                    </div>
+                        @error('position')
+                        <div class="error text-danger">{{ $message }}</div>
+                        @enderror
+
+
                         <div class="mt-3">
                             <label for="vertical-form-1" class="form-label">Expiry Date</label>
                             <input id="datepicker" type="text" class="form-control" name="expiry_date" value="{{\Carbon\Carbon::parse($row->expiry_date)->format('Y-m-d')}}">

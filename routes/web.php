@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController;
 
 
+
 use App\Http\Controllers\Vendor\VendorAuthController;
 
 
@@ -15,6 +16,7 @@ use App\Http\Controllers\Vendor\VendorAuthController;
 use App\Http\Controllers\Front\IndexController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Administration\SliderController;
 
 
 /*
@@ -172,6 +174,15 @@ Route::post('customer/edit-balance/{customer_id}', 'App\Http\Controllers\Adminis
   Route::get('/activity', 'App\Http\Controllers\Administration\Home@allActivities');
 // end activity
 
+
+// slider
+
+Route::resource('slider', SliderController::class);
+Route::post('slider/changeStatus/{id}', [SliderController::class, 'changeStatus'])->name('slider.changeStatus');
+
+
+// end slider
+
     Route::get('/testSession', function () {
         return session()->get('country');
       });
@@ -229,7 +240,7 @@ Route::post('/provider',[App\Http\Controllers\Auth\LoginController::class,'provi
 Route::get('password/change', [App\Http\Controllers\Auth\LoginController::class ,'showChangeForm'])->name('dashboard.password.change');
 Route::post('password/update', [App\Http\Controllers\Auth\LoginController::class,'update'])->name('dashboard.password.update');
 
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+Route::get('dashboard/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('dashboard.logout');
 
 // end login and logout
 

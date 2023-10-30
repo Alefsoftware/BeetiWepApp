@@ -9,7 +9,7 @@
         <div class="intro-y box">
             <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
                 <h2 class="font-medium text-base mr-auto">
-                    Add Advertising
+                    {{__('Add Advertising')}}
                 </h2>
 
                 <form  method="post" action="{{route('advertising.store')}}" enctype="multipart/form-data">
@@ -73,6 +73,23 @@
                         @error('provider_id')
                         <div class="error text-danger">{{ $message }}</div>
                         @enderror
+
+
+                        <div>
+                            <label>{{__('Position')}}</label>
+                            <div class="mt-2">
+                                <select data-placeholder="{{__('position')}}" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="position">
+                                    <option value="" disabled="true">{{__('Select')}}</option>
+
+                                   <option value="Top">{{__("Top")}}</option>
+                                   <option value="Side">{{__("Side")}}</option>
+
+                                </select>
+
+                        </div>
+                            @error('position')
+                            <div class="error text-danger">{{ $message }}</div>
+                            @enderror
 
                         <div class="mt-3">
                             <label for="vertical-form-1" class="form-label">Expiry Date</label>
