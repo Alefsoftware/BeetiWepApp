@@ -203,7 +203,7 @@
     </div>
 </footer>
 <!-- Preloader Start -->
-<div id="preloader-active">
+<!-- <div id="preloader-active">
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="preloader-inner position-relative">
             <div class="text-center">
@@ -211,7 +211,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Vendor JS-->
 <script src="{{asset('front/assets/js/vendor/modernizr-3.6.0.min.js')}}"></script>
 <script src="{{asset('front/assets/js/vendor/jquery-3.6.0.min.js')}}"></script>

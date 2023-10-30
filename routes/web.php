@@ -28,12 +28,12 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-URL::forceRootUrl("https://beetiwepapp-main.dev.alefsoftware.com/");
+// URL::forceRootUrl("https://beetiwepapp-main.dev.alefsoftware.com/");
 
-URL::forceScheme('https');
+// URL::forceScheme('https');
 
 
-Route::get('/', [IndexController::class, 'index'])->name('index');
+// Route::get('/', [IndexController::class, 'index'])->name('index');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -232,6 +232,33 @@ Route::post('password/update', [App\Http\Controllers\Auth\LoginController::class
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 // end login and logout
+
+
+
+
+
+
+
+// fornt
+
+
+Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/category/1', [IndexController::class, 'getCategory'])->name('category');
+Route::post('/wishlist',[IndexController::class, 'toggle'])->name('wishlist.toggle');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Auth::routes();
+Route::get('auth/google', [IndexController::class, 'googleLogin']);
+Route::get('auth/google/callback', [IndexController::class, 'googleCallback']);
+Route::get('auth/facebook', [IndexController::class, 'facebookLogin']);
+Route::get('auth/facebook/callback', [IndexController::class, 'facebookCallback']);
+
+
+
+// end front
+
+
 
 
 //   ajax requests
