@@ -1,5 +1,6 @@
 #!/bin/bash
 cd /var/www/html &&
+composer require laravel/socialite
 composer update && composer dump-autoload &&
 chmod 777 -R storage bootstrap/cache &&
 php artisan optimize:clear &&
