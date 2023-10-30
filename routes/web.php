@@ -229,7 +229,7 @@ Route::post('/provider',[App\Http\Controllers\Auth\LoginController::class,'provi
 Route::get('password/change', [App\Http\Controllers\Auth\LoginController::class ,'showChangeForm'])->name('dashboard.password.change');
 Route::post('password/update', [App\Http\Controllers\Auth\LoginController::class,'update'])->name('dashboard.password.update');
 
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+Route::get('dashboard/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('dashboard.logout');
 
 // end login and logout
 
