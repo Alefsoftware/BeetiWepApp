@@ -18,6 +18,7 @@ class CountryMiddleware
     */
    public function handle($request, Closure $next)
    {
+   if($request->session()->get('country') == null){
     $country= Countries::where('iso','EG')->first();
     if($country->is_active == 0){
         $country= Countries::where('iso','SA')->first();
@@ -25,6 +26,7 @@ class CountryMiddleware
     $request->session()->put('country', $country);
 
     $request->session()->save();
+}
     return $next($request);
    }
 }

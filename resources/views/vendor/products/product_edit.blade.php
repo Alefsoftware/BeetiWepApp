@@ -131,22 +131,7 @@
                         <div class="error">{{ $message }}</div>
                         @enderror
 
-                        <div class="mt-3">
-                        <label>Providers</label>
-                        <div class="mt-2">
-                            <select data-placeholder="Select Provider" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="provider_id">
-                                <option selected="true" value="{{$product->provider->id}}">{{$product->provider->name}}</option>
-                                @foreach($providers as $provider)
-                                @if($product->provider->id!=$provider->id)
-                                <option value="{{$provider->id}}" >{{$provider->name}}</option>
-                                @endif
-                               @endforeach
-                            </select>
 
-                    </div>
-                        @error('provider_id')
-                        <div class="error">{{ $message }}</div>
-                        @enderror
 
                     <div class="mt-3 mb-3">
                     <label for="vertical-form-2" class="form-label">Prepare Time</label>
@@ -158,24 +143,31 @@
 
                         <label class="mt-3">Price</label>
                         <table class="table table-bordered mt-3" id="dynamicTable">
-            <tr>
-                <th>Title</th>
-                <th>Title Ar</th>
-                <th>Price</th>
-                 <th>Action</th>
-            </tr>
+                            <tr>
+                                <th>Title</th>
+                                <th>Title Ar</th>
+                                <th>Price</th>
+                                <th>Offer Price <span class="text-xs">(Optional)</span></th>
+                                <th>Expire Offer Date <span class="text-xs">(Optional)</span></th>
+
+                                <th>Activate</th>
+                                <th>Action</th>
+                            </tr>
 
 
            @foreach($product->prices as $key=>$prices)
-            <tr>
-                <td><input type="text" name="prices[{{$key}}][title]" placeholder="Enter your Title" class="form-control" value="{{$prices->title}}" /></td>
-                <td><input type="text" name="prices[{{$key}}][title_ar]" placeholder="Enter your Title Ar" class="form-control"  value="{{$prices->title_ar}}" /></td>
-                <td><input type="text" name="prices[{{$key}}][price]" placeholder="Enter your Price" class="form-control"  value="{{$prices->price}}" /></td>
-                @if($key==0)<td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>@endif
-                @endforeach
+           <tr>
+            <td><input type="text" name="prices[{{$key}}][title]" placeholder="Enter your Title" class="form-control" value="{{$prices->title}}" /></td>
+            <td><input type="text" name="prices[{{$key}}][title_ar]" placeholder="Enter your Title Ar" class="form-control"  value="{{$prices->title_ar}}" /></td>
+            <td><input type="text" name="prices[{{$key}}][price]" placeholder="Enter your Price" class="form-control"  value="{{$prices->price}}" /></td>
+            <td><input type="text" name="prices[{{$key}}][offer_price]" placeholder="Enter offer Price" value="{{$prices->offer_price}}" class="form-control" /></td>
+            <td><input type="date" name="prices[{{$key}}][offer_end_date]" placeholder="expire date" value="{{$prices->offer_end_date}}" class="form-control" /></td>
+            <td><input class="show-code form-check-input mr-0 ml-3" type="checkbox" @if($prices->is_active==1) {{'checked'}}@endif value="1" name="prices[{{$key}}][is_active]"></td>
+            @if($key==0)<td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>@endif
+            @endforeach
 
 
-            </tr>
+        </tr>
 
                                                 @if(count($product->prices) <= 4)
 
@@ -185,6 +177,9 @@
                                                     <td><input type="text" name="prices[{{$i}}][title]" placeholder="Enter your Title" class="form-control" /></td>
                                                     <td><input type="text" name="prices[{{$i}}][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td>
                                                     <td><input type="text" name="prices[{{$i}}][price]" placeholder="Enter your Price" class="form-control" /></td>
+                                                    <td><input type="text" name="prices[{{$i}}][offer_price]" placeholder="Enter offer Price" class="form-control" /></td>
+                                                    <td><input type="date" name="prices[{{$i}}][offer_end_date]" placeholder="expire date" class="form-control" /></td>
+                                                    <td><input class="show-code form-check-input mr-0 ml-3" type="checkbox" value='1' name="prices[{{$i}}][is_active]"></td>
                                                     {{-- <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td> --}}
                                                 </tr>
 

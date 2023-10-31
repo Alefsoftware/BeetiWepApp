@@ -54,7 +54,7 @@
                         <label>Category</label>
                         <div class="mt-2">
                             <select data-placeholder="Select Category" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="category_id">
-                                <option selected="true" value="">Select Provider</option>
+                                <option selected="true" value="">Select Category</option>
                                 @foreach($categories as $category)
                                 <option value="{{$category->id}}" >{{$category->title}}</option>
                                @endforeach
@@ -77,42 +77,29 @@
 
                         <label class="mt-3">Price</label>
                         <table class="table table-bordered mt-3" id="dynamicTable">
-            <tr>
-                <th>Title</th>
-                <th>Title ar</th>
-                <th>Price</th>
-                <th>Action</th>
-            </tr>
-            <tr id='row0'>
-                <td><input type="text" name="prices[0][title]" placeholder="Enter your Title" class="form-control" /></td>
-                <td><input type="text" name="prices[0][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td>
-                <td><input type="text" name="prices[0][price]" placeholder="Enter your Price" class="form-control" /></td>
-                <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
-            </tr>
-            <tr id='row1'>
-                <td><input type="text" name="prices[1][title]" placeholder="Enter your Title" class="form-control" /></td>
-                <td><input type="text" name="prices[1][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td>
-                <td><input type="text" name="prices[1][price]" placeholder="Enter your Price" class="form-control" /></td>
-                {{-- <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td> --}}
-            </tr>
-            <tr id='row2'>
-                <td><input type="text" name="prices[2][title]" placeholder="Enter your Title" class="form-control" /></td>
-                <td><input type="text" name="prices[2][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td>
-                <td><input type="text" name="prices[2][price]" placeholder="Enter your Price" class="form-control" /></td>
-                {{-- <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td> --}}
-            </tr>
-            <tr id='row3'>
-                <td><input type="text" name="prices[3][title]" placeholder="Enter your Title" class="form-control" /></td>
-                <td><input type="text" name="prices[3][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td>
-                <td><input type="text" name="prices[3][price]" placeholder="Enter your Price" class="form-control" /></td>
-                {{-- <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td> --}}
-            </tr>
-            <tr id='row4'>
-                <td><input type="text" name="prices[4][title]" placeholder="Enter your Title" class="form-control" /></td>
-                <td><input type="text" name="prices[4][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td>
-                <td><input type="text" name="prices[4][price]" placeholder="Enter your Price" class="form-control" /></td>
-                {{-- <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td> --}}
-            </tr>
+                            <tr>
+                                <th>Title *</th>
+                                <th>Title ar *</th>
+                                <th>Price *</th>
+                                <th>Offer Price <span class="text-xs">(Optional)</span></th>
+                                <th>Expire Offer Date <span class="text-xs">(Optional)</span></th>
+                                <th>Activate</th>
+                                <th>Action</th>
+                            </tr>
+                            @for($i=0; $i<= 4; $i++)
+                            <tr id='row{{$i}}'>
+                                <td><input type="text" name="prices[{{$i}}][title]" placeholder="Enter your Title" class="form-control" /></td>
+                                <td><input type="text" name="prices[{{$i}}][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td>
+                                <td><input type="text" name="prices[{{$i}}][price]" placeholder="Enter your Price" class="form-control" /></td>
+                                <td><input type="text" name="prices[{{$i}}][offer_price]" placeholder="Enter offer Price" class="form-control" /></td>
+                                <td><input type="date" name="prices[{{$i}}][offer_end_date]" placeholder="expire date" class="form-control" /></td>
+                                <td><input class="show-code form-check-input mr-0 ml-3" type="checkbox" value='1' name="prices[{{$i}}][is_active]"></td>
+                                @if($i == 0)
+                                <td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>
+                                @endif
+                            </tr>
+
+                            @endfor
         </table>
 
                                        {{-- test --}}

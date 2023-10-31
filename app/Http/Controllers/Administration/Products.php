@@ -163,7 +163,10 @@ class Products extends Controller
                         $product_price = new ProductPrice();
                         $product_price->product_id = $row->id;
                         $product_price->price = $p['price'];
+                        $product_price->offer_price = $p['offer_price'];
+                        $product_price->offer_end_date = $p['offer_end_date'];
                         $product_price->title = $p['title'];
+                        $product_price->is_active = $p['is_active'];
                         $product_price->title_ar = $p['title_ar'];
                         $product_price->save();
                     }
@@ -288,7 +291,10 @@ if ($request -> has('main_image')) {
                     $product_price = new ProductPrice();
                     $product_price->product_id = $product->id;
                     $product_price->price = $p['price'];
+                    $product_price->offer_price = $p['offer_price'];
+                    $product_price->offer_end_date = $p['offer_end_date'];
                     $product_price->title = $p['title'];
+                    $product_price->is_active = $p['is_active'];
                     $product_price->title_ar = $p['title_ar'];
                     $product_price->save();
                 }
