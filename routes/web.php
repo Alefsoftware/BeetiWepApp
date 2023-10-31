@@ -252,6 +252,8 @@ Route::get('dashboard/logout', '\App\Http\Controllers\Auth\LoginController@logou
 
 // fornt
 
+Route::group(['middleware' => 'country'], function() {
+
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/category/1', [IndexController::class, 'getCategory'])->name('category');
@@ -264,7 +266,7 @@ Route::get('auth/google', [IndexController::class, 'googleLogin']);
 Route::get('auth/google/callback', [IndexController::class, 'googleCallback']);
 Route::get('auth/facebook', [IndexController::class, 'facebookLogin']);
 Route::get('auth/facebook/callback', [IndexController::class, 'facebookCallback']);
-
+});
 
 
 // end front
