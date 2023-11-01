@@ -25,7 +25,6 @@ class IndexController extends Controller
 
     public function index()
     {
-
         return $this->indexRepository->index();
     }
 
@@ -40,7 +39,7 @@ class IndexController extends Controller
     public function toggle(Request $request)
     {
         $user = auth()->user();
-        
+
         if ($user) {
             // User is logged in
              $itemId = $request->input('item_id');
@@ -65,7 +64,7 @@ class IndexController extends Controller
                    return response()->json(['message' => 'Item removed from wishlist']);
 
             }
-         
+
         } else {
 
             // User is not logged in, return an error or login prompt
@@ -83,7 +82,7 @@ class IndexController extends Controller
             if($finduser)
             {
                 Auth::login($finduser);
-           
+
             return redirect()->intended('/');
             }else{
               $newUser = User::Create([
@@ -111,7 +110,7 @@ class IndexController extends Controller
             if($finduser)
             {
                 Auth::login($finduser);
-           
+
             return redirect()->intended('/');
             }else{
               $newUser = User::Create([

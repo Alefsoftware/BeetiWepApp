@@ -132,7 +132,7 @@
                         </div>
                         <div class="text-slate-600 dark:text-slate-500 mt-5">
                             {{-- <div class="flex items-center"> <i data-lucide="link" class="w-4 h-4 mr-2"></i> Price: $37 </div> --}}
-                            <div class="flex items-center mt-2"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Status: @if($product->approved_by_admin == 1) {{__('Active')}} @else{{__("Inactive")}} @endif </div>
+                            <div class="flex items-center mt-2"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Approvement: @if($product->approved_by_admin == 1) {{__('Approved')}} @else{{__("Not Approved")}} @endif </div>
 
                             {{-- <div class="flex items-center mt-2"> <i data-lucide="layers" class="w-4 h-4 mr-2"></i>
                                 {{__('Approvment')}} :
@@ -162,8 +162,8 @@
                            <form id="status{{$product->id}}" method="post" action="{{route('product.updateStatus',$product->id)}}">
                            @csrf
                            <div class="form-check form-switch">
-                             <input class="form-check-input" name='status' @if($product->approved_by_admin == 1) checked @endif type="checkbox" id="productSwitch{{$product->id}}" name="productSwitch" value="1">
-                             {{-- <label class="form-check-label" for="toggleSwitch">{{__('OFF')}} / {{__('ON')}} </label> --}}
+                             <input class="form-check-input" name='is_active' @if($product->is_active == 1) checked @endif type="checkbox" id="productSwitch{{$product->id}}" name="productSwitch" value="1">
+                             <label class="form-check-label" for="toggleSwitch">{{__('Status')}}</label>
                            </div>
 
                          </form>

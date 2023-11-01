@@ -11,6 +11,7 @@ use Spatie\Activitylog\LogOptions;
 class Product extends BaseModel {
 //    use LogsActivity;
 
+
     protected $guarded = [
     ];
     protected $hidden = [
@@ -85,6 +86,22 @@ class Product extends BaseModel {
             }
         }
     }
+
+    public function getMinPriceAttribute()
+    {
+
+        if ($this) {
+            if($this->prices()->count() > 0){
+                return  ( $this->prices()->min('price'));
+            }else{
+                return 0;
+            }
+        }
+
+
+
+    }
+
 
     protected $appends = array('count_users_review'/*,'total_num_of_reviews'*/);
 

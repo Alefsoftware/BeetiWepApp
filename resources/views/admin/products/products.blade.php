@@ -106,7 +106,7 @@
                   </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="status-filter">{{__('Status')}}:</label>
+                    <label for="status-filter">{{__('Approvement')}}:</label>
                     <select name='approvement' class="form-select mr-3" id="status-filter">
                       <option value="">{{__('All')}}</option>
                       <option value="1">{{__("Approved")}}</option>
@@ -132,16 +132,16 @@
             <!-- BEGIN: Users Layout -->
             @foreach( $products as $product)
             <div class="intro-y col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
-                <div class="box">
+                <div class="box" style="width:278px">
                     <div class="p-5">
                         <div class="h-40 2xl:h-56 image-fit rounded-md overflow-hidden before:block before:absolute before:w-full before:h-full before:top-0 before:left-0 before:z-10 before:bg-gradient-to-t before:from-black before:to-black/10">
-                            <img alt="Midone - HTML Admin Template" class="rounded-md" src="{{@$product->main_image}}">
+                            <img alt="" class="rounded-md" src="{{@$product->main_image}}">
                             {{-- <span class="absolute top-0 bg-pending/80 text-white text-xs m-5 px-2 py-1 rounded z-10">Featured</span> --}}
                             <div class="absolute bottom-0 text-white px-5 pb-6 z-10"> <a href="" class="block font-medium text-base">{{$product->title}}</a> <span class="text-white/90 text-xs mt-3">{{$product->category->title?? '-'}}</span> </div>
                         </div>
                         <div class="text-slate-600 dark:text-slate-500 mt-5">
                             {{-- <div class="flex items-center"> <i data-lucide="link" class="w-4 h-4 mr-2"></i> Price: $37 </div> --}}
-                            <div class="flex items-center mt-2"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Status: @if($product->approved_by_admin == 1) {{__('Active')}} @else{{__("Inactive")}} @endif </div>
+                            <div class="flex items-center mt-2"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Status: @if($product->is_active == 1) {{__('Active')}} @else{{__("Inactive")}} @endif </div>
 
                             {{-- <div class="flex items-center mt-2"> <i data-lucide="layers" class="w-4 h-4 mr-2"></i>
                                 {{__('Approvment')}} :
@@ -170,9 +170,9 @@
                         <div class="flex items-center text-primary mr-auto">
                            <form id="status{{$product->id}}" method="post" action="{{route('product.updateStatus',$product->id)}}">
                            @csrf
-                           <div class="form-check form-switch">
-                             <input class="form-check-input" name='status' @if($product->approved_by_admin == 1) checked @endif type="checkbox" id="productSwitch{{$product->id}}" name="productSwitch" value="1">
-                             {{-- <label class="form-check-label" for="toggleSwitch">{{__('OFF')}} / {{__('ON')}} </label> --}}
+                           <div class="form-check form-switch" style="padding-right:10px; ">
+                             <input class="form-check-input" name='approvement' @if($product->approved_by_admin == 1) checked @endif type="checkbox" id="productSwitch{{$product->id}}" name="productSwitch" value="1">
+                             <label class="form-check-label" for="toggleSwitch">{{__('Approvement')}}</label>
                            </div>
 
                          </form>

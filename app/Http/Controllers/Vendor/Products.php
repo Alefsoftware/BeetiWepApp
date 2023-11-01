@@ -361,13 +361,13 @@ if ($request -> has('main_image')) {
         $sub_category = \App\Models\SubCategory::where('category_id',$category_id)->get();
         return response()->json($sub_category);
     }
-
+//  update is_active by vendor
     public function updateStatus($id){
         $row = Product::find($id);
-        if ($row->approved_by_admin == 0) {
-            $row->approved_by_admin = 1;
+        if ($row->is_active == 0) {
+            $row->is_active = 1;
         } else {
-            $row->approved_by_admin = 0;
+            $row->is_active = 0;
         }
         $row->save();
 

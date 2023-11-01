@@ -80,6 +80,24 @@
                         <div class="error">{{ $message }}</div>
                         @enderror
 
+
+                        <div class="mt-3">
+                            <label>{{__('Status')}}</label>
+                            <div class="mt-2">
+                                <select data-placeholder="{{__('Cahnage status')}}" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="is_active">
+                                    <option selected="true" value="">Change Status</option>
+
+                                    <option value="1" >{{__('Active')}}</option>
+                                    <option value="0" >{{__('Inactive')}}</option>
+
+                                </select>
+                             </div>
+                            @error('is_active')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
+
+
+
                     <div class="mt-3 mb-3">
                     <label for="vertical-form-2" class="form-label">Prepare Time</label>
                     <input id="vertical-form-2" type="text" class="form-control" name="prepare_time" placeholder="By Min Ex: 40">

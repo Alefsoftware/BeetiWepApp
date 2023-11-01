@@ -128,20 +128,9 @@ class Products extends Controller
                         'approved_by_admin'=>'1',
                         ]);
         $data = $request->except(['images','main_image','prices']);
-        // dd($data);
-        // if ($request -> has('main_image')) {
-        //     // dd('here');
-        //     $m_image = $this -> saveImages($request -> main_image, public_path('/storage/product_images'));
-        //     $data['main_image'] = $m_image;
-        // }
-        // dd($data);
-
-
-
         DB::beginTransaction();
 
         if ($row = \App\Models\Product::create($data)) {
-            // dd($request->images);
             // images
             if ($request->images) {
                         foreach($request->images as $i){
@@ -166,7 +155,7 @@ class Products extends Controller
                         $product_price->offer_price = $p['offer_price'];
                         $product_price->offer_end_date = $p['offer_end_date'];
                         $product_price->title = $p['title'];
-                        $product_price->is_active = $p['is_active'];
+                        $product_price->is_active = $p['is_active'] ?? 0;
                         $product_price->title_ar = $p['title_ar'];
                         $product_price->save();
                     }
@@ -260,9 +249,6 @@ if ($request -> has('main_image')) {
         if($product->update($data)){
 
 
-
-
-
         if ($request->images) {
 
             foreach($request->images as $i){
@@ -294,7 +280,7 @@ if ($request -> has('main_image')) {
                     $product_price->offer_price = $p['offer_price'];
                     $product_price->offer_end_date = $p['offer_end_date'];
                     $product_price->title = $p['title'];
-                    $product_price->is_active = $p['is_active'];
+                    $product_price->is_active = $p['is_active'] ?? 0;
                     $product_price->title_ar = $p['title_ar'];
                     $product_price->save();
                 }
@@ -361,7 +347,9 @@ if ($request -> has('main_image')) {
         return response()->json($sub_category);
     }
 
+    //  update approved_by_admin by admin
     public function updateStatus($id){
+
         $row = Product::find($id);
         if ($row->approved_by_admin == 0) {
             $row->approved_by_admin = 1;
