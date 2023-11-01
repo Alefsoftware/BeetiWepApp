@@ -50,7 +50,7 @@ class IndexRepository implements IndexRepositoryInterface
                         ->leftJoin('order_products', 'products.id', '=', 'order_products.product_id')->where('is_active', 1)->whereHas('provider', function ($query) {
                                 $query->where('country',session()->get('country')->id);
                             })
-                        ->groupBy('products.id')
+
                         ->orderByDesc(DB::raw('SUM(order_products.count)'))
                         ->limit(3)
                         ->get();
@@ -60,7 +60,7 @@ class IndexRepository implements IndexRepositoryInterface
                         ->leftJoin('products_reviews', 'products.id', '=', 'products_reviews.product_id')->where('is_active', 1)->whereHas('provider', function ($query) {
                                 $query->where('country',session()->get('country')->id);
                             })
-                        ->groupBy('products.id')
+
                         ->orderByDesc(DB::raw('SUM(products_reviews.rate)'))
                         ->limit(3)
                         ->get();
