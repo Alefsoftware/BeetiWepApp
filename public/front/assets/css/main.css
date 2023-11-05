@@ -3911,6 +3911,7 @@ table .product-thumbnail img {
 /*SHOP*/
 .product-cart-wrap {
   position: relative;
+  height:330px;
   background-color: #fff;
   border: 1px solid #ececec;
   border-radius: 15px;
@@ -3919,6 +3920,7 @@ table .product-thumbnail img {
   -moz-transition: .2s;
   -webkit-transition: .2s;
   -o-transition: .2s;
+
 }
 
 .product-cart-wrap:hover {
@@ -3937,6 +3939,7 @@ table .product-thumbnail img {
   overflow: hidden;
   max-height: 320px;
   padding: 25px 25px 0 25px;
+  height: 144px;
 }
 
 .product-cart-wrap .product-img-action-wrap .product-action-1 {
@@ -4353,6 +4356,7 @@ table .product-thumbnail img {
 .product-cart-wrap:hover .product-img-action-wrap .product-action-1 {
   opacity: 1;
   visibility: visible;
+  width:120px;
 }
 
 .product-cart-wrap:hover .product-img-zoom a img {

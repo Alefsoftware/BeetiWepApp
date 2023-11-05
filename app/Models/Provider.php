@@ -37,9 +37,9 @@ class Provider extends Authenticatable {
 //	}
      public function getProfileImgAttribute($value) {
         if ($value != null) {
-            return 	asset("/storage/profile_images/".$value);
+            return 	asset("/storage/profile_images/".$value) ?:  asset('default_user.png');
         }else{
-            return @$this->images[0]->image_name;
+            return @$this->images[0]->image_name ?: asset('default_user.png') ;
         }
 	 }
 
@@ -110,7 +110,7 @@ class Provider extends Authenticatable {
             })
             ->get();
         //dd($this->id);
-//        dd($rows->avg('rate'));
+    //   dd($rows->avg('rate'));
 //        $value = (float)$rows->avg('rate');
 
         if ($this) {

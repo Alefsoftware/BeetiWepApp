@@ -21,7 +21,7 @@ class VendorRepository implements VendorRepositoryInterface
         $providers = \App\Models\Provider::with(['statusObj','countryObj']);
 
 
-                $providers->where('country', '=', session()->get('country')->id);
+                $providers->where('country', '=', session()->get('country')->id)->where([['published','1'],['status','1']]);
 
                 if($request->title){
                     $providers = $providers->where(function ($query) use ($request) {
@@ -35,7 +35,6 @@ class VendorRepository implements VendorRepositoryInterface
                     $providers = $providers->where('gov', $request->gov);
                 }
                 if($request->zone){
-
                     $providers = $providers->where('zone', $request->zone);
                 }
 
@@ -44,7 +43,7 @@ class VendorRepository implements VendorRepositoryInterface
                 }
 
 
-               $providers = $providers->paginate(10);
+               $providers = $providers->paginate(12);
                 $providers->each(function ($row) {
                     $order_count = \App\Models\Order::where('provider_id',$row->id)->count();
                     $row->orders = $order_count;
@@ -55,6 +54,6 @@ class VendorRepository implements VendorRepositoryInterface
 
          $status = ProviderStatus::all();
          $all_gov =  \App\Models\Gov::where([["published",'1'],['country_id', session()->get('country')->id]])->get();
-         return view('front.vendors');
+         return view('front.vendors',compact('providers'));
     }
 }

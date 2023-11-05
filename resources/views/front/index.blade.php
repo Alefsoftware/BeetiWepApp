@@ -42,7 +42,7 @@
                 @foreach($categories as $category)
                 <div class="card-2 bg-9 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                     <figure class="img-hover-scale overflow-hidden">
-                        <a href="shop-grid-right.html"><img src="{{$category->logo}}" alt="" /></a>
+                        <a href="shop-grid-right.html"><img src="{{$category->logo}}" alt=""   onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';"/></a>
                     </figure>
                     <h6><a href="shop-grid-right.html">{{$category->title}}</a></h6>
                     <span>{{$category->products_count}} items</span>
@@ -60,7 +60,7 @@
             @if($row->position == 'Top')
             <div class="col-lg-4 col-md-6">
                 <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0">
-                    <img src="{{asset($row->image)}}" alt="" />
+                    <img src="{{asset($row->image)}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" />
                     <div class="banner-text">
                         <h4>
                            {!! $row->des_field !!}
@@ -101,7 +101,7 @@
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="shop-product-right.html">
-                                        <img class="default-img" src="{{@$product->images[0]->image_name}}" alt="" />
+                                        <img class="default-img" src="{{@$product->images[0]->image_name}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" />
                                         @if(count($product->images)>1)
                                         <img class="hover-img" src="{{@$product->images[1]->image_name}}" alt="">
                                         @endif
@@ -888,7 +888,7 @@
                     <div class="product-img-action-wrap">
                         <div class="product-img">
                             <a href="shop-product-right.html">
-                                <img src="{{asset('front/assets/imgs/banner/banner-5.png')}}" alt="" />
+                                <img src="{{asset('front/assets/imgs/banner/banner-5.png')}}" alt=""   onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" />
                             </a>
                         </div>
                     </div>
@@ -925,7 +925,7 @@
                     <div class="product-img-action-wrap">
                         <div class="product-img">
                             <a href="shop-product-right.html">
-                                <img src="{{asset('front/assets/imgs/banner/banner-6.png')}}" alt="" />
+                                <img src="{{asset('front/assets/imgs/banner/banner-6.png')}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" />
                             </a>
                         </div>
                     </div>
@@ -962,7 +962,7 @@
                     <div class="product-img-action-wrap">
                         <div class="product-img">
                             <a href="shop-product-right.html">
-                                <img src="{{asset('front/assets/imgs/banner/banner-7.png')}}" alt="" />
+                                <img src="{{asset('front/assets/imgs/banner/banner-7.png')}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" />
                             </a>
                         </div>
                     </div>
@@ -999,7 +999,7 @@
                     <div class="product-img-action-wrap">
                         <div class="product-img">
                             <a href="shop-product-right.html">
-                                <img src="{{asset('front/assets/imgs/banner/banner-8.png')}}" alt="" />
+                                <img src="{{asset('front/assets/imgs/banner/banner-8.png')}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" />
                             </a>
                         </div>
                     </div>
@@ -1045,7 +1045,7 @@
                     {{-- @dd($$row->prices[0]->MinPrice) --}}
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{$row->main_image}}" alt="" /></a>
+                            <a href="#"><img src="{{$row->main_image}}" alt="{{$row->title}}" onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
@@ -1071,7 +1071,7 @@
                 <div class="product-list-small animated animated">
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{asset('front/assets/imgs/shop/thumbnail-4.jpg')}}" alt="" /></a>
+                            <a href="shop-product-right.html"><img src="{{asset('front/assets/imgs/shop/thumbnail-4.jpg')}}" alt=""   onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';"/></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
@@ -1091,7 +1091,7 @@
                     </article>
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{asset('front/assets/imgs/shop/thumbnail-5.jpg')}}" alt="" /></a>
+                            <a href="shop-product-right.html"><img src="{{asset('front/assets/imgs/shop/thumbnail-5.jpg')}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
@@ -1111,7 +1111,7 @@
                     </article>
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{asset('front/assets/imgs/shop/thumbnail-6.jpg')}}" alt="" /></a>
+                            <a href="shop-product-right.html"><img src="{{asset('front/assets/imgs/shop/thumbnail-6.jpg')}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
@@ -1138,7 +1138,7 @@
                     {{-- @dd($$row->prices[0]->MinPrice) --}}
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{$row->main_image}}" alt="" /></a>
+                            <a href="shop-product-right.html"><img src="{{$row->main_image}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';"  /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
@@ -1166,7 +1166,7 @@
                     {{-- @dd($$row->prices[0]->MinPrice) --}}
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{$row->main_image}}" alt="" /></a>
+                            <a href="shop-product-right.html"><img src="{{$row->main_image}}" alt="" onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>

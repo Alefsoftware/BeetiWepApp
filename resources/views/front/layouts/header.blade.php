@@ -1,6 +1,6 @@
 @include('front.layouts.head')
 <body>
-<!-- Modal -->
+{{-- <!-- Modal -->
 <div class="modal fade custom-modal" id="onloadModal" tabindex="-1" aria-labelledby="onloadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-<!-- Quick view -->
+<!-- Quick view --> --}}
 <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

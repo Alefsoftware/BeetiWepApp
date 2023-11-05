@@ -9,6 +9,7 @@ use App\Interfaces\Admin\ProductiveFamilyRepositoryInterface;
 use App\Interfaces\Admin\ProductRepositoryInterface;
 use App\Interfaces\Front\IndexRepositoryInterface;
 use App\Interfaces\Front\VendorRepositoryInterface;
+use App\Interfaces\front\ShopRepositoryInterface;
 use App\Repositories\Admin\AdvertisingRepository;
 use App\Repositories\Admin\CategoryRepository;
 use App\Repositories\Admin\DashboardRepository;
@@ -17,6 +18,7 @@ use App\Repositories\Admin\ProductiveFamilyRepository;
 use App\Repositories\Admin\ProductRepository;
 use App\Repositories\Front\IndexRepository;
 use App\Repositories\Front\VendorRepository;
+use App\Repositories\Front\ShopRepository;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -35,6 +37,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IndexRepositoryInterface::class, IndexRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(VendorRepositoryInterface::class, VendorRepository::class);
+        $this->app->bind(ShopRepositoryInterface::class, ShopRepository::class);
+        // $this->app->bind(ShopRepositoryInterface::class,ShopRepository::class
+
     }
 
     /**

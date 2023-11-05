@@ -15,6 +15,7 @@ use App\Http\Controllers\Vendor\VendorAuthController;
 
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\VendorController;
+use App\Http\Controllers\Front\ShopController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Administration\SliderController;
@@ -260,9 +261,11 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/category/1', [IndexController::class, 'getCategory'])->name('category');
 Route::post('/wishlist',[IndexController::class, 'toggle'])->name('wishlist.toggle');
 Route::get('/allProviders',[VendorController::class, 'index'])->name('allvendors');
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/shop',[ShopController::class, 'index'])->name('shop');
+        //wishlist
+        Route::get('shop-wishlist', [WishlistController::class, 'index']);
+        Route::get('deleteWishlist/{id}', [WishlistController::class, 'delete']);
+        // end wishlist
 Auth::routes();
 Route::get('auth/google', [IndexController::class, 'googleLogin']);
 Route::get('auth/google/callback', [IndexController::class, 'googleCallback']);

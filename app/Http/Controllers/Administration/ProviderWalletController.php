@@ -75,7 +75,7 @@ class ProviderWalletController extends Administrator
         //       $row->wallet = round($total_transaction, 2);
         // $row->save();
 
-        $all = \App\Models\Order::with(["status", "payment", "provider"])->where("provider_id", $row->id)->whereIn("status_id",[4,8])->latest()->get();
+        $all = \App\Models\Order::with(["status", "payment", "provider"])->where("provider_id",$row->id)->whereIn("status_id",[4,8])->latest()->get();
 
         $allDeposits = \App\Models\ProviderDeposit::where("provider_id", $row->id)->sum("amount");
            // $provider_country = str_replace(array(':', '-', '/', '*', '+'), '',  $provider->country_code);
