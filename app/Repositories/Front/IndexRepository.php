@@ -56,24 +56,39 @@ class IndexRepository implements IndexRepositoryInterface
                     //     ->get();
 
                     $top_selling = Product::select('products.id', DB::raw('MAX(products.title) as title'))
-    ->leftJoin('order_products', 'products.id', '=', 'order_products.product_id')
+                    ->leftJoin('order_products', 'products.id', '=', 'order_products.product_id')
+                    ->where('is_active', 1)
+                    ->whereHas('provider', function ($query) {
+                        $query->where('country', session()->get('country')->id);
+                    })
+                    ->groupBy('products.id')
+                    ->orderByDesc(DB::raw('SUM(order_products.count)'))
+                    ->limit(3)
+                    ->get();
+
+                        // $top_rated = Product::select('products.*')->with('category','review','provider','prices')
+                        // ->leftJoin('products_reviews', 'products.id', '=', 'products_reviews.product_id')->where('is_active', 1)->whereHas('provider', function ($query) {
+                        //         $query->where('country',session()->get('country')->id);
+                        //     })
+                        // ->groupBy('products.id' ,'products_reviews.rate')
+                        // ->orderByDesc(DB::raw('SUM(products_reviews.rate)'))
+                        // ->limit(3)
+                        // ->get();
+
+                        $top_rated_ids = DB::table('products_reviews')
+    ->select('product_id', DB::raw('SUM(rate) as total_rate'))
+    ->groupBy('product_id')
+    ->orderByDesc('total_rate')
+    ->limit(3)
+    ->pluck('product_id');
+
+$top_rated = Product::with('category', 'review', 'provider', 'prices')
+    ->whereIn('id', $top_rated_ids)
     ->where('is_active', 1)
     ->whereHas('provider', function ($query) {
         $query->where('country', session()->get('country')->id);
     })
-    ->groupBy('products.id')
-    ->orderByDesc(DB::raw('SUM(order_products.count)'))
-    ->limit(3)
     ->get();
-
-                        $top_rated = Product::select('products.*')->with('category','review','provider','prices')
-                        ->leftJoin('products_reviews', 'products.id', '=', 'products_reviews.product_id')->where('is_active', 1)->whereHas('provider', function ($query) {
-                                $query->where('country',session()->get('country')->id);
-                            })
-                        ->groupBy('products.id' ,'products_reviews.rate')
-                        ->orderByDesc(DB::raw('SUM(products_reviews.rate)'))
-                        ->limit(3)
-                        ->get();
 
                         // $top_selling=[];
                         // $top_rated=[];
