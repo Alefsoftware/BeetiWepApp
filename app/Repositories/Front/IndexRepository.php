@@ -46,15 +46,25 @@ class IndexRepository implements IndexRepositoryInterface
                      })->orderBy('id','DESC')->limit(3)->get();
 
 
-                    $top_selling = Product::select('products.*')
-                        ->leftJoin('order_products', 'products.id', '=', 'order_products.product_id')->where('is_active', 1)->whereHas('provider', function ($query) {
-                                $query->where('country',session()->get('country')->id);
-                            })
-                        ->groupBy('products.id','order_products.product_id')
-                        ->orderByDesc(DB::raw('SUM(order_products.count)'))
-                        ->limit(3)
-                        ->get();
+                    // $top_selling = Product::select('products.*')
+                    //     ->leftJoin('order_products', 'products.id', '=', 'order_products.product_id')->where('is_active', 1)->whereHas('provider', function ($query) {
+                    //             $query->where('country',session()->get('country')->id);
+                    //         })
+                    //     ->groupBy('products.id')
+                    //     ->orderByDesc(DB::raw('SUM(order_products.count)'))
+                    //     ->limit(3)
+                    //     ->get();
 
+                    $top_selling = Product::select('products.id', DB::raw('MAX(products.title) as title'))
+    ->leftJoin('order_products', 'products.id', '=', 'order_products.product_id')
+    ->where('is_active', 1)
+    ->whereHas('provider', function ($query) {
+        $query->where('country', session()->get('country')->id);
+    })
+    ->groupBy('products.id')
+    ->orderByDesc(DB::raw('SUM(order_products.count)'))
+    ->limit(3)
+    ->get();
 
                         $top_rated = Product::select('products.*')->with('category','review','provider','prices')
                         ->leftJoin('products_reviews', 'products.id', '=', 'products_reviews.product_id')->where('is_active', 1)->whereHas('provider', function ($query) {
