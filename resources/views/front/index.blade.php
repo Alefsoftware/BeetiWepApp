@@ -42,9 +42,9 @@
                 @foreach($categories as $category)
                 <div class="card-2 bg-9 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                     <figure class="img-hover-scale overflow-hidden">
-                        <a href="shop-grid-right.html"><img src="{{$category->logo}}" alt=""   onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';"/></a>
+                        <a href="#"><img src="{{$category->logo}}" alt=""   onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';"/></a>
                     </figure>
-                    <h6><a href="shop-grid-right.html">{{$category->title}}</a></h6>
+                    <h6><a href="#">{{$category->title}}</a></h6>
                     <span>{{$category->products_count}} items</span>
                 </div>
                 @endforeach
@@ -118,9 +118,9 @@
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
-                                    <a href="shop-grid-right.html">{{@$product->category->title}}</a>
+                                    <a href="#">{{@$product->category->title}}</a>
                                 </div>
-                                <h2><a href="shop-product-right.html">{{$product->title}}</a></h2>
+                                <h2><a href="{{route('product.details',$product->slug)}}">{{$product->title}}</a></h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
                                         <div class="product-rating" style="width: 90%"></div>
@@ -128,7 +128,7 @@
                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                 </div>
                                 <div>
-                                    <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                                    <span class="font-small text-muted">By <a href="#">NestFood</a></span>
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
@@ -175,9 +175,9 @@
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
-                                    <a href="shop-grid-right.html">{{$item->title}}</a>
+                                    <a href="{{route('product.details',$p->slug)}}">{{$item->title}}</a>
                                 </div>
-                                <h2><a href="shop-product-right.html">{{$p->title}}</a></h2>
+                                <h2><a href="{{route('product.details',$p->slug)}}">{{$p->title}}</a></h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
 
@@ -484,7 +484,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Canada Dry Ginger Ale – 2 L Bottle</a></h2>
                                         <div class="product-rate d-inline-block">
