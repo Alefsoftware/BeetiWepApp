@@ -262,6 +262,7 @@ Route::get('/category/1', [IndexController::class, 'getCategory'])->name('catego
 Route::post('/wishlist',[IndexController::class, 'toggle'])->name('wishlist.toggle');
 Route::get('/allProviders',[VendorController::class, 'index'])->name('allvendors');
 Route::get('/shop',[ShopController::class, 'index'])->name('shop');
+Route::get('/product/{slug}',[ShopController::class, 'productDetails'])->name('product.details');
         //wishlist
         Route::get('shop-wishlist', [WishlistController::class, 'index']);
         Route::get('deleteWishlist/{id}', [WishlistController::class, 'delete']);

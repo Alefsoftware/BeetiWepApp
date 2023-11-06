@@ -72,4 +72,18 @@ class ShopRepository implements ShopRepositoryInterface
        return view('front.shop')->with(["totalcount"=>$totalcount,"products"=>$products,'pendings'=>$pending_product,'providers'=>$providers]);
 
     }
+
+    public function productDetails($slug){
+        $product = Product::where('slug', $slug)->first();
+        if($product){
+        $relatedProducts = Product::where('category_id', $product->category_id)
+        ->where('id', '!=', $product->id) // Exclude the current product
+        ->get();
+        }else{
+            return redirect()->back();
+        }
+
+        // dd($product);
+        return view('front.product_details',compact('product','relatedProducts'));
+    }
 }

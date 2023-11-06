@@ -100,7 +100,7 @@
                         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
-                                    <a href="shop-product-right.html">
+                                    <a href="{{route('product.details',$product->slug)}}">
                                         <img class="default-img" src="{{@$product->images[0]->image_name}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" />
                                         @if(count($product->images)>1)
                                         <img class="hover-img" src="{{@$product->images[1]->image_name}}" alt="">
@@ -157,7 +157,7 @@
                         <div class="product-cart-wrap mb-30">
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
-                                    <a href="shop-product-right.html">
+                                    <a href="{{route('product.details',$p->slug)}}">
                                     <img class="default-img" src="{{@$p->images[0]->image_name}}" alt="" />
                                         @if(count($p->images)>1)
                                         <img class="hover-img" src="{{@$product->images[1]->image_name}}" alt="">
@@ -255,7 +255,7 @@
                                 <div class="product-cart-wrap">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html">
+                                            <a href="{{route('product.details',$row->slug)}}">
                                                 <img class="default-img" src="{{$row->product->images[0]->image_name}}" alt="" />
                                                 {{-- <img class="hover-img" src="{{asset('front/assets/imgs/shop/product-1-2.jpg')}}" alt="" /> --}}
                                             </a>
@@ -277,7 +277,7 @@
                                         <div class="product-category">
                                             <a href="shop-grid-right.html">{{@$row->product->category->title}} </a>
                                         </div>
-                                        <h2><a href="shop-product-right.html">{{$row->product->title}} - {{$row->title}}</a></h2>
+                                        <h2><a href="{{route('product.details',$row->product->slug)}}">{{$row->product->title}} - {{$row->title}}</a></h2>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
 
@@ -1042,6 +1042,7 @@
                 <h4 class="section-title style-1 mb-30 animated animated">Top Selling</h4>
                 <div class="product-list-small animated animated">
                     @foreach($top_selling as $row)
+
                     {{-- @dd($$row->prices[0]->MinPrice) --}}
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
@@ -1049,7 +1050,7 @@
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="shop-product-right.html">{{$row->title}}</a>
+                                <a href="{{route('product.details',$row->slug)}}">{{$row->title}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -1138,11 +1139,11 @@
                     {{-- @dd($$row->prices[0]->MinPrice) --}}
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{$row->main_image}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';"  /></a>
+                            <a href="{{route('product.details',$row->slug)}}"><img src="{{$row->main_image}}" alt=""  onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';"  /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="shop-product-right.html">{{$row->title}}</a>
+                                <a href="{{route('product.details',$row->slug)}}">{{$row->title}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -1166,11 +1167,11 @@
                     {{-- @dd($$row->prices[0]->MinPrice) --}}
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{$row->main_image}}" alt="" onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" /></a>
+                            <a href="{{route('product.details',$row->slug)}}"><img src="{{$row->main_image}}" alt="" onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="shop-product-right.html">{{$row->title}}</a>
+                                <a href="{{route('product.details',$row->slug)}}">{{$row->title}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -1191,7 +1192,7 @@
     </div>
 </section>
 <!--End 4 columns-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 
 <script>
    $(document).ready(function () {

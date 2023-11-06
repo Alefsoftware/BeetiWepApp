@@ -6,4 +6,5 @@ use Request;
 interface ShopRepositoryInterface
 {
     public function index(Request $request);
+    public function productDetails($slug);
 }

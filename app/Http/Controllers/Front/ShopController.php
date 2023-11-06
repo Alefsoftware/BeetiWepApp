@@ -18,5 +18,9 @@ class ShopController extends Controller
     {
         return $this->shopRepository->index($request);
     }
+    public function productDetails($slug)
+    {
+        return $this->shopRepository->productDetails($slug);
+    }
 
 }
