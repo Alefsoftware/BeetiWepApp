@@ -55,16 +55,17 @@ class IndexRepository implements IndexRepositoryInterface
                     //     ->limit(3)
                     //     ->get();
 
-                    $top_selling = Product::select('products.id','products.slug', DB::raw('MAX(products.title) as title'))
+                    $top_selling = Product::select('products.id','products.slug','products.title')
                     ->leftJoin('order_products', 'products.id', '=', 'order_products.product_id')
                     ->where('is_active', 1)
                     ->whereHas('provider', function ($query) {
                         $query->where('country', session()->get('country')->id);
                     })
-                    ->groupBy('products.id','products.slug')
+                    ->groupBy('products.id','products.slug','products.title')
                     ->orderByDesc(DB::raw('SUM(order_products.count)'))
                     ->limit(3)
                     ->get();
+
 
                         // $top_rated = Product::select('products.*')->with('category','review','provider','prices')
                         // ->leftJoin('products_reviews', 'products.id', '=', 'products_reviews.product_id')->where('is_active', 1)->whereHas('provider', function ($query) {

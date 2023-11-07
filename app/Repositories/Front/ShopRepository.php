@@ -10,6 +10,7 @@ use App\Models\ProviderAd;
 use App\Models\ProviderStatus;
 use Carbon\Carbon;
 use DB;
+use Session;
 use Request;
 
 
@@ -26,7 +27,6 @@ class ShopRepository implements ShopRepositoryInterface
 
                 if($request->title){
                     $products = $products->where(function ($query) use ($request) {
-
                         $query->where('title', 'like', '%' . $request->title . '%');
                         $query->orWhere('title_ar', 'like', '%' . $request->title . '%');
                     });
@@ -35,12 +35,15 @@ class ShopRepository implements ShopRepositoryInterface
                 if($request->provider){
                      $products->where('provider_id',$request->provider);
                 }
-
-                if($request->approvement != NULL){
-
-                     $products->where('approved_by_admin','=',$request->approvement);
+                if($request->category){
+                     $products->where('category_id',$request->category);
                 }
 
+                if((($request->min) != null) && (($request->max) != null)  ){
+                    $products->whereHas('prices',function($q) use($request){
+                        $q->whereBetween('price',[$request->min , $request->max]);
+                    });
+                 }
 
                 $products->whereHas('provider', function ($q) {
                     $q->where([['country', '=', session()->get('country')->id],['status',1],['published','1']]);
@@ -53,12 +56,19 @@ class ShopRepository implements ShopRepositoryInterface
 		    });
 
          $totalcount = \App\Models\Product::with(['images','category']);
-         if($request->title){
+             if($request->title){
                     $totalcount = $totalcount->where(function ($query) use ($request) {
                         $query->where('title', 'like', '%' . $request->title . '%');
                         $query->orWhere('title_ar', 'like', '%' . $request->title . '%');
                     });
                 }
+
+
+                 $categories = Category::whereHas('countries', function ($query) {
+                    $query->where('country_id', Session::get('country')->id);
+                })->get();
+
+
          $totalcount=$totalcount->count();
         //  $pending_product =$products->where('is_active','0');
         $pending_product =Product::where('approved_by_admin','0')->whereHas('provider', function ($q) {
@@ -69,14 +79,17 @@ class ShopRepository implements ShopRepositoryInterface
 
         //    dd($pending_product->total());
         //  dd($products);
-       return view('front.shop')->with(["totalcount"=>$totalcount,"products"=>$products,'pendings'=>$pending_product,'providers'=>$providers]);
+       return view('front.shop')->with(["totalcount"=>$totalcount,"products"=>$products,'pendings'=>$pending_product,'providers'=>$providers,'categories'=>$categories]);
 
     }
 
     public function productDetails($slug){
         $product = Product::where('slug', $slug)->first();
         if($product){
-        $relatedProducts = Product::where('category_id', $product->category_id)
+        $relatedProducts = Product::where([['category_id', $product->category_id],['is_active','1'],['approved_by_admin','1']])
+        ->whereHas('provider', function ($q) {
+            $q->where('country', '=', session()->get('country')->id);
+            })
         ->where('id', '!=', $product->id) // Exclude the current product
         ->get();
         }else{

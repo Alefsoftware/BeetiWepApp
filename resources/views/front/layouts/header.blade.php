@@ -1,5 +1,6 @@
 @include('front.layouts.head')
 <body>
+
 {{-- <!-- Modal -->
 <div class="modal fade custom-modal" id="onloadModal" tabindex="-1" aria-labelledby="onloadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -43,6 +44,7 @@
     </div>
 </div>
 <!-- Quick view --> --}}
+
 <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -208,21 +210,14 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="#">
-                            <select class="select-active">
-                                <option>All Categories</option>
-                                <option>Milks and Dairies</option>
-                                <option>Wines & Alcohol</option>
-                                <option>Clothing & Beauty</option>
-                                <option>Pet Foods & Toy</option>
-                                <option>Fast food</option>
-                                <option>Baking material</option>
-                                <option>Vegetables</option>
-                                <option>Fresh Seafood</option>
-                                <option>Noodles & Rice</option>
-                                <option>Ice cream</option>
+                        <form action="{{route('shop')}}" method="get">
+                            <select class="select-active" name="category">
+                                <option value="">{{__('All')}}</option>
+                                @foreach($categories as $row)
+                                <option value="{{$row->id}}">{{$row->title}}</option>
+                            @endforeach
                             </select>
-                            <input type="text" placeholder="Search for items..." />
+                            <input type="text" name='title' placeholder="Search for items..." />
                         </form>
                     </div>
                     <div class="header-action-right">
@@ -416,22 +411,22 @@
                             <ul>
                                 <li class="hot-deals"><img src="{{asset('front/assets/imgs/theme/icons/icon-hot.svg')}}" alt="hot deals" /><a href="shop-grid-right.html">Deals</a></li>
                                 <li>
-                                    <a class="active" href="index.html">Home <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
+                                    <a class="active" href="{{url('/')}}">Home </a>
+                                    {{-- <ul class="sub-menu">
                                         <li><a href="index.html">Home 1</a></li>
                                         <li><a href="index-2.html">Home 2</a></li>
                                         <li><a href="index-3.html">Home 3</a></li>
                                         <li><a href="index-4.html">Home 4</a></li>
                                         <li><a href="index-5.html">Home 5</a></li>
                                         <li><a href="index-6.html">Home 6</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
-                                    <a href="page-about.html">About</a>
+                                    <a href="#">About</a>
                                 </li>
                                 <li>
-                                    <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
+                                    <a href="{{url('/shop')}}">Shop </a>
+                                    {{-- <ul class="sub-menu">
                                         <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
                                         <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
                                         <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
@@ -462,18 +457,18 @@
                                                 <li><a href="shop-invoice-6.html">Shop Invoice 6</a></li>
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
-                                    <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
+                                    <a href="{{url('/allProviders')}}">Vendors </a>
+                                    {{-- <ul class="sub-menu">
                                         <li><a href="vendors-grid.html">Vendors Grid</a></li>
                                         <li><a href="vendors-list.html">Vendors List</a></li>
                                         <li><a href="vendor-details-1.html">Vendor Details 01</a></li>
                                         <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
                                         <li><a href="vendor-dashboard.html">Vendor Dashboard</a></li>
                                         <li><a href="vendor-guide.html">Vendor Guide</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li class="position-static">
                                     <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>

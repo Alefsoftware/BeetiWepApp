@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Countries;
+use App\Models\Category;
 use Illuminate\Support\Facades\View;
 use Session;
 class AppServiceProvider extends ServiceProvider
@@ -24,9 +25,11 @@ class AppServiceProvider extends ServiceProvider
         // $countries = Countries::where('is_active',1)->get();
         $countries = Countries::all();
         $country   = Countries::first();
+        $categories = Category::all();
         // Session::put('country', $country->id);
         View::share([
             'countries' =>  $countries,
+            'categories' =>  $categories,
         ]);
         // \Illuminate\Support\Facades\URL::forceScheme('https');
     }

@@ -7,21 +7,21 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> Vendors List
+                    <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <span></span> Vendors
                 </div>
             </div>
         </div>
         <div class="page-content pt-50">
             <div class="container">
                 <div class="archive-header-2 text-center">
-                    <h1 class="display-2 mb-50">Vendors List</h1>
+                    <h1 class="display-2 mb-50">Vendors</h1>
                     <div class="row">
                         <div class="col-lg-5 mx-auto">
                             <div class="sidebar-widget-2 widget_search mb-50">
                                 <div class="search-form">
-                                    <form action="#">
-                                        <input type="text" placeholder="Search vendors (by name or ID)..." />
+                                    <form action="">
+                                        <input type="text" name="title" placeholder="Search vendors (by name)..." />
                                         <button type="submit"><i class="fi-rs-search"></i></button>
                                     </form>
                                 </div>
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-50">
+                {{-- <div class="row mb-50">
                     <div class="col-12 col-lg-8 mx-auto">
                         <div class="shop-product-fillter">
                             <div class="totall-product">
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row vendor-grid">
                     @foreach ( $providers as $row )
 
@@ -99,7 +99,7 @@
                                         <div class="product-category">
                                             <span class="text-muted">Since {{$row->created_at->format('Y')}}</span>
                                         </div>
-                                        <h4 class="mb-5"><a href="vendor-details-1.html">{{$row->name}}</a></h4>
+                                        <h4 class="mb-5"><a href="{{route('shop',['provider'=>$row->id])}}">{{$row->name}}</a></h4>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width:{{(($row->rate)/5)*100}}%"></div>
@@ -108,7 +108,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-10">
-                                        <span class="font-small total-product">{{count($row->products)}} products</span>
+                                        <span class="font-small total-product">{{count($row->activeProducts)}} products</span>
                                     </div>
                                 </div>
                                 {{-- <div class="vendor-info mb-30">
@@ -117,7 +117,7 @@
                                         <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Call Us:</strong><span>{{$row->mobile}}</span></li>
                                     </ul>
                                 </div> --}}
-                                <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                                <a href="{{route('shop',['provider'=>$row->id])}}" class="btn btn-xs">{{__('Visit Store')}} <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
                     </div>

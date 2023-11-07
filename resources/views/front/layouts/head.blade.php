@@ -18,7 +18,13 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('front/assets/css/plugins/animate.min.css')}}" />
     <link rel="stylesheet" href="{{asset('front/assets/css/main.css?v=5.6')}}" />
-
+    {{-- for price slide range --}}
+    {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
+                            {{-- <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"  media="screen"> --}}
+                            {{-- <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> --}}
+{{-- end price slide range --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
 </head>

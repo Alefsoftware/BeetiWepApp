@@ -123,6 +123,12 @@ class Provider extends Authenticatable {
         }
     }
 
+    public function activeProducts()
+    {
+        return $this->hasMany('App\Models\Product',"provider_id")
+            ->where([['is_active','1'],['approved_by_admin','1']]);
+    }
+
 
 // public function  getCountryAttribute($value)
 // {

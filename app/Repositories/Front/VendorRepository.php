@@ -31,16 +31,16 @@ class VendorRepository implements VendorRepositoryInterface
                 }
 
 
-                if($request->gov){
-                    $providers = $providers->where('gov', $request->gov);
-                }
-                if($request->zone){
-                    $providers = $providers->where('zone', $request->zone);
-                }
+                // if($request->gov){
+                //     $providers = $providers->where('gov', $request->gov);
+                // }
+                // if($request->zone){
+                //     $providers = $providers->where('zone', $request->zone);
+                // }
 
-                if($request->status){
-                    $providers = $providers->where('status', $request->status);
-                }
+                // if($request->status){
+                //     $providers = $providers->where('status', $request->status);
+                // }
 
 
                $providers = $providers->paginate(12);
