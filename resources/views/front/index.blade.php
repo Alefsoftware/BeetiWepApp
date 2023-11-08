@@ -1,6 +1,17 @@
 @extends('front.layouts.main')
 
 @section('content')
+{{-- message --}}
+
+<div class="col-md-2 mt-2" >
+    <div class="alert alert-success-soft show flex items-center mb-2"  id='alert' style='z-index: 1000; '>
+        <ul>
+            <li id='message'></li>
+        </ul>
+    </div>
+</div>
+
+{{-- end message --}}
     <section class="home-slider position-relative mb-30">
     <div class="container">
         <div class="home-slide-cover mt-30">
@@ -136,7 +147,7 @@
                                         <span class="old-price">$32.8</span>
                                     </div>
                                     <div class="add-cart">
-                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                        <button class="add add-to-cart" href="#" data-product="{{ $product->id }}"><i class="fi-rs-shopping-cart mr-5"></i>Add </button>
                                     </div>
                                 </div>
                             </div>
@@ -1192,6 +1203,42 @@
     </div>
 </section>
 <!--End 4 columns-->
+
+
+<script>
+    $(document).ready(function() {
+        $('.add-to-cart').on('click', function() {
+
+            var product_id = $(this).data('product');
+            var price_id = $(this).data('product');
+            var element = $('#message');
+
+// Write HTML content using jQuery
+element.html('<h1>Hello, World!</h1><p>This is a paragraph.</p>');
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                type: 'POST',
+                data: {
+                    item_id: product_id,
+                    count: 1, // You can customize this as needed
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    alert(response.message); // Show a success message
+                //   element.text(response.message);
+                },
+                error: function(response) {
+                    if (response.status === 403) {
+                        alert(response.responseJSON.error); // Show an error message
+                    }
+                }
+            });
+        });
+    });
+</script>
+
 
 
 <script>

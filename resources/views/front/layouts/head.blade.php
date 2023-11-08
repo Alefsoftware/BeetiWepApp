@@ -13,6 +13,7 @@
     <meta property="og:image" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('front/assets/imgs/theme/favicon.svg')}}" />
     <!-- Template CSS -->
