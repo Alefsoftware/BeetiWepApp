@@ -139,7 +139,7 @@
                                 <h2><a href="{{route('product.details',$product->slug)}}">{{$product->title}}</a></h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: {{($row->AvgRate/5)*100}}%"></div>
+                                        <div class="product-rating" style="width: {{($product->AvgRate/5)*100}}%"></div>
                                     </div>
                                     <span class="font-small ml-5 text-muted"> ({{$row->AvgRate ??'0'}})</span>
                                 </div>
