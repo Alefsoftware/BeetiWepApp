@@ -24,6 +24,12 @@ class CartController extends Controller
     public function update(Request $request){
         return $this->cartRepository->update($request);
     }
+    public function delete($id){
+        return $this->cartRepository->delete($id);
+    }
+    public function clear($user_id){
+        return $this->cartRepository->delete($user_id);
+    }
 
 
 }

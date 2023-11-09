@@ -38,6 +38,7 @@ class IndexController extends Controller
 
     public function toggle(Request $request)
     {
+
         $user = auth()->user();
 
         if ($user) {

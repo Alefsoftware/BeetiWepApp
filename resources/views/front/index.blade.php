@@ -1,17 +1,21 @@
 @extends('front.layouts.main')
 
 @section('content')
-{{-- message --}}
+<!-- Add this to your HTML file -->
+<div class="modal " id="cartAddModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-warning-soft">
+            {{-- <div class="modal-header">
+                <h5 class="modal-title">Success</h5>
 
-<div class="col-md-2 mt-2" >
-    <div class="alert alert-success-soft show flex items-center mb-2"  id='alert' style='z-index: 1000; '>
-        <ul>
-            <li id='message'></li>
-        </ul>
+            </div> --}}
+            <div class="modal-body">
+                <p id="cartAddMessage">Item successfully added !</p>
+            </div>
+        </div>
     </div>
 </div>
 
-{{-- end message --}}
     <section class="home-slider position-relative mb-30">
     <div class="container">
         <div class="home-slide-cover mt-30">
@@ -119,7 +123,8 @@
                                     </a>
                                 </div>
                                 <div class="product-action-1">
-                                    <a aria-label="Add To Wishlist" id="wishlist-toggle{{$product->id}}" data-name="{{$product->id}}"    class="action-btn btn-save{{$product->id}}"><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a>
+                                    {{-- <a aria-label="Add To Wishlist" id="wishlist-toggle{{$product->id}}" data-name="{{$product->id}}"    class="action-btn btn-save{{$product->id}}"><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a> --}}
+                                    <a data-product="{{$product->id}}" class="action-btn btn-save{{$product->id}} addWishlist "><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare"         id="compaire{{$product->id}}"        data-name="{{$product->id}}"     class="action-btn"    href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     <a aria-label="Quick view"      lass="action-btn"     data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                 </div>
@@ -134,20 +139,20 @@
                                 <h2><a href="{{route('product.details',$product->slug)}}">{{$product->title}}</a></h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
+                                        <div class="product-rating" style="width: {{($row->AvgRate/5)*100}}%"></div>
                                     </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    <span class="font-small ml-5 text-muted"> ({{$row->AvgRate ??'0'}})</span>
                                 </div>
                                 <div>
-                                    <span class="font-small text-muted">By <a href="#">NestFood</a></span>
+                                    <span class="font-small text-muted">By <a href="#">{{@$row->provider->name}}</a></span>
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
-                                        <span>$28.85</span>
-                                        <span class="old-price">$32.8</span>
+                                        <span>${{$product->MinPrice}}</span>
+                                        {{-- <span class="old-price">$32.8</span> --}}
                                     </div>
                                     <div class="add-cart">
-                                        <button class="add add-to-cart" href="#" data-product="{{ $product->id }}"><i class="fi-rs-shopping-cart mr-5"></i>Add </button>
+                                        <a class="add addcart" href="#" data-product="{{ $product->id }}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                     </div>
                                 </div>
                             </div>
@@ -202,11 +207,11 @@
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
-                                        <span>$28.85</span>
-                                        <span class="old-price">$32.8</span>
+                                        <span>${{$p->MinPrice}}</span>
+                                        {{-- <span class="old-price">$32.8</span>    --}}
                                     </div>
                                     <div class="add-cart">
-                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                       <a class="add addcart" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                     </div>
                                 </div>
                             </div>
@@ -924,7 +929,7 @@
                                     <span class="old-price">$33.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                   <a class="add addcart" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -961,7 +966,7 @@
                                     <span class="old-price">$26.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                   <a class="add addcart" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -998,7 +1003,7 @@
                                     <span class="old-price">$13.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                   <a class="add addcart" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -1035,7 +1040,7 @@
                                     <span class="old-price">$16.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                   <a class="add addcart" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -1207,14 +1212,12 @@
 
 <script>
     $(document).ready(function() {
-        $('.add-to-cart').on('click', function() {
 
+        $('.addcart').on('click', function(e) {
+            e.preventDefault();
             var product_id = $(this).data('product');
             var price_id = $(this).data('product');
-            var element = $('#message');
 
-// Write HTML content using jQuery
-element.html('<h1>Hello, World!</h1><p>This is a paragraph.</p>');
             $.ajax({
                 url: "{{ route('cart.add') }}",
                 type: 'POST',
@@ -1226,8 +1229,13 @@ element.html('<h1>Hello, World!</h1><p>This is a paragraph.</p>');
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    alert(response.message); // Show a success message
+                    // alert(response.message); // Show a success message
                 //   element.text(response.message);
+                showCartAddModal(response.message);
+                // alert( response.cartCount); // Show a success message
+                $('#cartCount').text(response.cartCount);
+                // response.cartCount
+                // $('#cartalert').show();
                 },
                 error: function(response) {
                     if (response.status === 403) {
@@ -1237,48 +1245,74 @@ element.html('<h1>Hello, World!</h1><p>This is a paragraph.</p>');
             });
         });
     });
+
+
+    function showCartAddModal(message) {
+    // Update the modal content with the success message
+    $('#cartAddMessage').html(message);
+
+    // Show the modal
+    $('#cartAddModal').modal('show');
+}
+
+
 </script>
 
 
 
+
 <script>
-   $(document).ready(function () {
-    for (let i = 0; i < {{count($products)}}; i++) {
+    $(document).ready(function() {
 
-    $("#wishlist-toggle"+i).click(function (e) {
-        e.preventDefault();
-        var itemId = $('#wishlist-toggle'+i).data('name');
-        toggleWishlist(itemId);
+        $('.addWishlist').on('click', function(e) {
+            e.preventDefault();
+
+            var product_id = $(this).data('product');
 
 
-    });
-}
-function toggleWishlist(itemId) {
-        $.ajax({
-            headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-            url: '/wishlist',
-            method: 'POST',
-            data: {
-                item_id: itemId
-            },
-            success: function(response) {
-                if (response.error) {
-                    // Handle the error, e.g., display an error message
-                    console.log(response.error);
-                    alert(response.error);
-                } else {
-                    // Display the success message or perform any necessary actions
-                    console.log(response.message);
-                    alert(response.message);
+            $.ajax({
+                url: "{{ route('wishlist.toggle') }}",
+                type: 'POST',
+                data: {
+                    item_id: product_id,
 
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // alert(response.message); // Show a success message
+                //   element.text(response.message);
+               showCartAddModal(response.message);
+                // alert( response.cartCount); // Show a success message
+                // $('#cartCount').text(response.cartCount);
+                // response.cartCount
+                // $('#cartalert').show();
+                },
+                error: function(response) {
+                    if (response.status === 403) {
+                        alert(response.responseJSON.error); // Show an error message
+                    }
                 }
-            }
+            });
         });
-    }
-});
+    });
 
 
-    </script>
+    function showCartAddModal(message) {
+    // Update the modal content with the success message
+    $('#cartAddMessage').html(message);
+
+    // Show the modal
+    $('#cartAddModal').modal('show');
+}
+
+
+</script>
+
+
+
+
+
+
 @endsection

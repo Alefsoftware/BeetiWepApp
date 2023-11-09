@@ -33,7 +33,7 @@
                             </th>
                             <th scope="col" colspan="2">Product</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Stock Status</th>
+                            {{-- <th scope="col">Stock Status</th> --}}
                             <th scope="col">Action</th>
                             <th scope="col" class="end">Remove</th>
                         </tr>
@@ -73,9 +73,9 @@
                             <td class="action text-center" data-title="Remove">
                                 <a href="{{url('deleteWishlist/'.$product->id)}}" class="text-body"><i class="fi-rs-trash"></i></a>
                             </td>
-                        </tr>    
+                        </tr>
                         @endforeach
-                     
+
                     </tbody>
                 </table>
             </div>

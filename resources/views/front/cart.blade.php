@@ -17,19 +17,30 @@
                     <h1 class="heading-2 mb-10">Your Cart</h1>
                     <div class="d-flex justify-content-between">
                         <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
-                        <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear Cart</a></h6>
+                        {{-- <form action="{{url('/delete-cart-clear',auth()->user()->id)}}" method="post">
+                            @csrf
+
+                        <h6 class="text-body"><button  class="text-muted" style="display: contents"><i class="fi-rs-trash mr-5"></i>Clear Cart</button></h6>
+                        </form> --}}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="table-responsive shopping-summery">
+                        @if (\Session::has('message'))
+                        <div class="alert alert-success text-center">
+                            <ul>
+                                <li>{!! \Session::get('message') !!}</li>
+                            </ul>
+                        </div>
+                    @endif
                         <table class="table table-wishlist">
                             <thead>
                                 <tr class="main-heading">
                                     <th class="custome-checkbox start pl-30">
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="">
-                                        <label class="form-check-label" for="exampleCheckbox11"></label>
+                                        {{-- <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value=""> --}}
+                                        <label>#</label>
                                     </th>
                                     <th scope="col" colspan="2">Product</th>
                                     <th scope="col">Unit Price</th>
@@ -39,14 +50,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $sum_sub_total=0;
+                                @endphp
+
+
                                 <form id='formUpdate' action="{{route('cart.update')}}" method="post">
                                     @csrf
                                     @method('PUT')
                                 @foreach($rows as $key=> $row)
-                                <tr class="pt-30">
+                                @php
+                                    $sum_sub_total += $row->productPrice->price * $row->count;
+                                @endphp
+                                <tr class="pt-30 ml-5">
                                     <td class="custome-checkbox pl-30">
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
-                                        <label class="form-check-label" for="exampleCheckbox1"></label>
+                                        {{-- <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value=""> --}}
+                                        <label>{{$key+1}}</label>
                                     </td>
                                     <td class="image product-thumbnail pt-40"><img src="{{@$row->product->image}}" alt="{{@$row->product->title}}" onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';"></td>
                                     <td class="product-des product-name">
@@ -79,7 +98,14 @@
                                     <td class="price" data-title="Price">
                                         <h4 class="text-brand">${{$row->productPrice->price * $row->count}} </h4>
                                     </td>
-                                    <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i class="fi-rs-trash"></i></a></td>
+                                    <td class="action text-center" data-title="Remove">
+                                        <form action="{{route('cart.delete',$row->id)}}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <input type="hidden" name="id" value="{{$row->id}}">
+                                        <button href="#" class="text-body" style="display: contents;"><i class="fi-rs-trash"></i></a>
+                                        </form>
+                                    </td>
                                 </tr>
                            @endforeach
                         </form>
@@ -88,10 +114,10 @@
                     </div>
                     <div class="divider-2 mb-30"></div>
                     <div class="cart-action d-flex justify-content-between">
-                        <a class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
+                        <a href="{{url('/')}}" class="btn"><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
                         <a class="btn  mr-10 mb-sm-15" onclick="document.getElementById('formUpdate').submit(); return false;"><i class="fi-rs-refresh mr-10"></i>Update Cart</a>
                     </div>
-                    <div class="row mt-50">
+                    {{-- <div class="row mt-50">
                         <div class="col-lg-7">
                             <div class="calculate-shiping p-40 border-radius-15 border">
                                 <h4 class="mb-10">Calculate Shipping</h4>
@@ -373,22 +399,22 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-4">
                     <div class="border p-md-4 cart-totals ml-30">
                         <div class="table-responsive">
                             <table class="table no-border">
                                 <tbody>
-                                    <tr>
+                                    {{-- <tr>
                                         <td class="cart_total_label">
                                             <h6 class="text-muted">Subtotal</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">$12.31</h4>
+                                            <h4 class="text-brand text-end">${{$sum_sub_total ?? 0}}</h4>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <td scope="col" colspan="2">
                                             <div class="divider-2 mt-10 mb-10"></div>
                                         </td>
@@ -407,13 +433,13 @@
                                         <td scope="col" colspan="2">
                                             <div class="divider-2 mt-10 mb-10"></div>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                         <td class="cart_total_label">
                                             <h6 class="text-muted">Total</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">$12.31</h4>
+                                            <h4 class="text-brand text-end">${{$sum_sub_total}}</h4>
                                         </td>
                                     </tr>
                                 </tbody>

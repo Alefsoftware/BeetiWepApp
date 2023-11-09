@@ -48,7 +48,9 @@ class CartRepository implements CartRepositoryInterface
                     'price_id'=> $min_price->id,
                 ]);
 
-            return response()->json(['message' => 'Item Added Successfully']);
+                $cartCount = Cart::where('client_id',$user->id)->sum('count');
+
+            return response()->json(['message' => 'Item Added Successfully','cartCount'=>$cartCount]);
             }else{
                 return response()->json(['error' => 'This Item is already added to your cart'],403);
             }
@@ -66,6 +68,20 @@ class CartRepository implements CartRepositoryInterface
                 }
                 session() -> flash('Success', __('Updated Successfully'));
                 return redirect()->back();
+            }
+
+
+            public function delete($id){
+                $user = auth()->user()->id;
+                Cart::where('id',$id)->where('client_id',$user)->delete();
+                return redirect()->back()->with('message', 'Successfully Remove Item From Cart');
+            }
+            public function clear($user_id){
+                dd('here');
+                dd($user_id,auth()->user()->id);
+                $user = auth()->user()->id;
+                Cart::where('client_id',$user)->delete();
+                return redirect()->back()->with('message', 'Successfully Remove Items From Cart');
             }
 
 }

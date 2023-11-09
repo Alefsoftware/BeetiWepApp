@@ -101,7 +101,9 @@ class Product extends BaseModel {
 
 
     }
-
+    public function favorit(){
+        return  $this->hasMany('App\Models\Favorit','product_id');
+  }
 
     protected $appends = array('count_users_review'/*,'total_num_of_reviews'*/);
 

@@ -17,6 +17,7 @@ use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\VendorController;
 use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Front\CartController;
+use App\Http\Controllers\Front\WishlistController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Administration\SliderController;
@@ -264,7 +265,10 @@ Route::post('/wishlist',[IndexController::class, 'toggle'])->name('wishlist.togg
 Route::get('/allProviders',[VendorController::class, 'index'])->name('allvendors');
 Route::get('/shop',[ShopController::class, 'index'])->name('shop');
 Route::get('/product/{slug}',[ShopController::class, 'productDetails'])->name('product.details');
-        //wishlist
+
+Route::group(['middleware' => 'auth:web'], function() {
+
+    //wishlist
         Route::get('shop-wishlist', [WishlistController::class, 'index']);
         Route::get('deleteWishlist/{id}', [WishlistController::class, 'delete']);
         // end wishlist
@@ -273,8 +277,11 @@ Route::get('/product/{slug}',[ShopController::class, 'productDetails'])->name('p
         Route::get('cart', [CartController::class, 'index']);
         Route::post('/add-to-cart',  [CartController::class,'store'])->name('cart.add');
         Route::put('/update-cart',  [CartController::class,'update'])->name('cart.update');
+        Route::delete('/delete-cart/{id}',  [CartController::class,'delete'])->name('cart.delete');
+        Route::post('/delete-cart-clear/{user_id}',  [CartController::class,'clear'])->name('cart.delete.clear');
 
         // end cart
+});
 Auth::routes();
 Route::get('auth/google', [IndexController::class, 'googleLogin']);
 Route::get('auth/google/callback', [IndexController::class, 'googleCallback']);

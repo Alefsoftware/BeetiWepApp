@@ -1,5 +1,12 @@
 @include('front.layouts.head')
 <body>
+  @php
+        if(auth()->user() ){
+        $cart = App\Models\Cart::where('client_id',auth()->user()->id)->get();
+        $wishlist = App\Models\Favorit::where('client_id',auth()->user()->id)->get();
+        }
+  @endphp
+  {{-- @dd($cart->sum('count')) --}}
 
 {{-- <!-- Modal -->
 <div class="modal fade custom-modal" id="onloadModal" tabindex="-1" aria-labelledby="onloadModalLabel" aria-hidden="true">
@@ -44,6 +51,10 @@
     </div>
 </div>
 <!-- Quick view --> --}}
+
+
+
+
 
 <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -242,6 +253,7 @@
                                     </select>
                                 </form>
                             </div>
+                            @auth
                             <div class="header-action-icon-2">
                                 <a href="shop-compare.html">
                                     <img class="svgInject" alt="Nest" src="{{asset('front/assets/imgs/theme/icons/icon-compare.svg')}}" />
@@ -250,18 +262,18 @@
                                 <a href="shop-compare.html"><span class="lable ml-0">Compare</span></a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
+                                <a href="{{url('shop-wishlist')}}">
                                     <img class="svgInject" alt="Nest" src="{{asset('front/assets/imgs/theme/icons/icon-heart.svg')}}" />
-                                    <span class="pro-count blue">6</span>
+                                    <span class="pro-count blue">{{count($wishlist)}}</span>
                                 </a>
-                                <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
+                                <a href="{{url('shop-wishlist')}}"><span class="lable">Wishlist</span></a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
+                                <a class="mini-cart-icon" href="{{url('cart')}}">
                                     <img alt="Nest" src="{{asset('front/assets/imgs/theme/icons/icon-cart.svg')}}" />
-                                    <span class="pro-count blue">2</span>
+                                    <span class="pro-count blue" id='cartCount'>{{$cart->sum('count')}}</span>
                                 </a>
-                                <a href="shop-cart.html"><span class="lable">Cart</span></a>
+                                <a href="{{url('cart')}}"><span class="lable">Cart</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         <li>
@@ -328,6 +340,7 @@
                                     </ul>
                                 </div>
                             </div>
+                            @endauth
                         </div>
                     </div>
                 </div>
