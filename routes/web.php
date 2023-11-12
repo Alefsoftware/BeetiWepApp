@@ -18,6 +18,7 @@ use App\Http\Controllers\Front\VendorController;
 use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\WishlistController;
+use App\Http\Controllers\Front\ProfileController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Administration\SliderController;
@@ -277,10 +278,15 @@ Route::group(['middleware' => 'auth:web'], function() {
         Route::get('cart', [CartController::class, 'index']);
         Route::post('/add-to-cart',  [CartController::class,'store'])->name('cart.add');
         Route::put('/update-cart',  [CartController::class,'update'])->name('cart.update');
-        Route::delete('/delete-cart/{id}',  [CartController::class,'delete'])->name('cart.delete');
+        Route::get('/delete-cart/{id}',  [CartController::class,'delete'])->name('cart.delete');
         Route::post('/delete-cart-clear/{user_id}',  [CartController::class,'clear'])->name('cart.delete.clear');
 
         // end cart
+
+        // profile
+         Route::get('/Account',  [ProfileController::class,'index'])->name('account.index');
+        Route::post('/update-profile',  [ProfileController::class,'updateProfile'])->name('account.update');
+        // endprofile
 });
 Auth::routes();
 Route::get('auth/google', [IndexController::class, 'googleLogin']);

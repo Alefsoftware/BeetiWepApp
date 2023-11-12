@@ -98,12 +98,13 @@
                                     <td class="price" data-title="Price">
                                         <h4 class="text-brand">${{$row->productPrice->price * $row->count}} </h4>
                                     </td>
+
                                     <td class="action text-center" data-title="Remove">
-                                        <form action="{{route('cart.delete',$row->id)}}" method="post">
+                                        <form id="delform"  action="{{route('cart.delete',$row->id)}}" method="get">
                                             @csrf
-                                            @method('delete')
+
                                             <input type="hidden" name="id" value="{{$row->id}}">
-                                        <button href="#" class="text-body" style="display: contents;"><i class="fi-rs-trash"></i></a>
+                                        <a href="#" onclick="document.getElementById('delform').submit(); return false;" class="text-body" style="display: contents;"><i class="fi-rs-trash"></i></a>
                                         </form>
                                     </td>
                                 </tr>
