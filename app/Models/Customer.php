@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Request;
 
-class Customer extends BaseModel
+class Customer extends Authenticatable
 {
 
     protected $guarded = [

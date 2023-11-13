@@ -10,7 +10,10 @@
             </div>
         </div>
     </div>
+    @include('admin.includes.messages')
     <div class="page-content pt-150 pb-150">
+
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 m-auto">
@@ -34,7 +37,7 @@
                                         <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="page-login.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                        <a class="nav-link" href="{{route('logout')}}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
                                     </li>
                                 </ul>
                             </div>
@@ -48,8 +51,8 @@
                                         </div>
                                         <div class="card-body">
                                             <p>
-                                                From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>,<br />
-                                                manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a>
+                                                From your account dashboard. you can easily check &amp; view your recent orders,<br />
+                                                manage your shipping and billing addresses and edit your password and account details
                                             </p>
                                         </div>
                                     </div>
@@ -153,8 +156,9 @@
                                             <h5>Account Details</h5>
                                         </div>
                                         <div class="card-body">
-                                            <p>Already have an account? <a href="page-login.html">Log in instead!</a></p>
-                                            <form method="post" name="enq">
+                                            {{-- <p>Already have an account? <a href="page-login.html">Log in instead!</a></p> --}}
+                                            <form method="post" action="{{route('account.update')}}">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="form-group col-md-6">
                                                         <label>Name <span class="required">*</span></label>
@@ -174,15 +178,15 @@
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Current Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="password" type="password" />
+                                                        <input  class="form-control" name="current_password" type="password" />
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>New Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="npassword" type="password" />
+                                                        <input  class="form-control" name="new_password" type="password" />
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Confirm Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="cpassword" type="password" />
+                                                        <input  class="form-control" name="new_password_confirmation" type="password" />
                                                     </div>
                                                     <div class="col-md-12">
                                                         <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>

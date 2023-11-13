@@ -19,6 +19,7 @@ use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\WishlistController;
 use App\Http\Controllers\Front\ProfileController;
+use App\Http\Controllers\Front\OrderController as siteOrderController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Administration\SliderController;
@@ -256,7 +257,7 @@ Route::get('dashboard/logout', '\App\Http\Controllers\Auth\LoginController@logou
 
 
 // fornt
-
+Auth::routes();
 Route::group(['middleware' => 'country'], function() {
 
 
@@ -270,7 +271,7 @@ Route::get('/product/{slug}',[ShopController::class, 'productDetails'])->name('p
 Route::group(['middleware' => 'auth:web'], function() {
 
     //wishlist
-        Route::get('shop-wishlist', [WishlistController::class, 'index']);
+        Route::get('shop-wishlist', [WishlistController::class, 'index'])->name('wishlist.show');
         Route::get('deleteWishlist/{id}', [WishlistController::class, 'delete']);
         // end wishlist
 
@@ -286,9 +287,17 @@ Route::group(['middleware' => 'auth:web'], function() {
         // profile
          Route::get('/Account',  [ProfileController::class,'index'])->name('account.index');
         Route::post('/update-profile',  [ProfileController::class,'updateProfile'])->name('account.update');
+
         // endprofile
+
+        // place order
+
+        Route::get('/Order',  [siteOrderController::class,'index'])->name('order.index');
+
+        // end place order
+        Route::get('/Logout',  [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
 });
-Auth::routes();
+
 Route::get('auth/google', [IndexController::class, 'googleLogin']);
 Route::get('auth/google/callback', [IndexController::class, 'googleCallback']);
 Route::get('auth/facebook', [IndexController::class, 'facebookLogin']);

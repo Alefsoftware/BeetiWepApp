@@ -151,9 +151,9 @@ if( Auth::guard('vendor')->check()){
             Auth::guard('vendor')->logout();
             return redirect('/provider');
         }
-        // else{
-        //     Auth::guard('user')->logout();
-        // }
+        else{
+            Auth::guard('web')->logout();
+        }
         return redirect('/');
       }
 }

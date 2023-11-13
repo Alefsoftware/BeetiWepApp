@@ -1,6 +1,8 @@
 @include('front.layouts.head')
 <body>
   @php
+
+
         if(auth()->user() ){
         $cart = App\Models\Cart::where('client_id',auth()->user()->id)->get();
         $wishlist = App\Models\Favorit::where('client_id',auth()->user()->id)->get();
@@ -313,14 +315,14 @@
                                 </div>
                             </div>
                             <div class="header-action-icon-2">
-                                <a href="page-account.html">
+                                <a href="{{route('account.index')}}">
                                     <img class="svgInject" alt="Nest" src="{{asset('front/assets/imgs/theme/icons/icon-user.svg')}}" />
                                 </a>
-                                <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                <a href="{{route('account.index')}}"><span class="lable ml-0">Account</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                     <ul>
                                         <li>
-                                            <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My Account</a>
+                                            <a href="{{route('account.index')}}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
                                         </li>
                                         <li>
                                             <a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
@@ -329,13 +331,13 @@
                                             <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
                                         </li>
                                         <li>
-                                            <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
+                                            <a href="{{route('wishlist.show')}}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
                                         </li>
                                         <li>
                                             <a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                                         </li>
                                         <li>
-                                            <a href="page-login.html"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                            <a href="{{route('logout')}}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
                                         </li>
                                     </ul>
                                 </div>

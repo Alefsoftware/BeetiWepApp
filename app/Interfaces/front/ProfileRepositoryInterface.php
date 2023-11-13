@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Interfaces\front;
-use Request;
+use Illuminate\Http\Request;
 
 interface ProfileRepositoryInterface
 {

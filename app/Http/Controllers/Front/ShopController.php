@@ -23,4 +23,6 @@ class ShopController extends Controller
         return $this->shopRepository->productDetails($slug);
     }
 
+
+
 }
