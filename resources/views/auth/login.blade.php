@@ -22,9 +22,9 @@
                                     <div class="padding_eight_all bg-white">
                                         <div class="heading_s1">
                                             <h1 class="mb-5">{{__('Login')}}</h1>
-                                            <p class="mb-30">{{__("Don't have an account?")}} <a href="{{url('login')}}">{{__('Create here')}}</a></p>
+                                            <p class="mb-30">{{__("Don't have an account?")}} <a href="{{url('register')}}">{{__('Create here')}}</a></p>
                                         </div>
-                                        <form method="POST" action="{{ route('login') }}">
+                                        <form method="POST" action="{{ route('client.login') }}">
                                                 @csrf
                                          <div class="form-group">
                                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Username or Email *" >

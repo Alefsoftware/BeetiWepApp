@@ -1,6 +1,6 @@
 @extends('front.layouts.main')
 @section('content')
-
+@include('admin.includes.messages')
 <main class="main">
     <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -62,7 +62,8 @@
                 </div>
                 <div class="row">
                     <h4 class="mb-30">Billing Details</h4>
-                    <form method="post">
+                    <form method="post" action='{{route("order.add")}}'>
+                        @csrf
                         {{-- <div class="row">
                             <div class="form-group col-lg-6">
                                 <input type="text" required="" name="fname" placeholder="First name *">
@@ -71,15 +72,27 @@
                                 <input type="text" required="" name="lname" placeholder="Last name *">
                             </div>
                         </div> --}}
+
                         <div class="row">
-                            <div class="form-group col-lg-6">
-                                <input type="text" name="address" required="" placeholder="Address *">
+                            @if(auth()->user()->address)
+                            <div class="form-group col-lg-12">
+                                <div class="custom_select">
+                                    <select class="form-control select" name='address_id'>
+                                        <option value="">Select Address...</option>
+                                        @foreach(auth()->user()->address as $address)
+                                        <option value="{{$address->id}}">{{$address->street}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
+                            @endif
+                            {{-- @dd(auth()->user()->address) --}}
                             <div class="form-group col-lg-6">
                                 <input type="text" name="new_address_street"  placeholder="Address">
                             </div>
                         </div>
-                        <div class="row shipping_calculator">
+
+                        {{-- <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
                                     <select class="form-control select-active">
@@ -334,27 +347,27 @@
                             <div class="form-group col-lg-6">
                                 <input required="" type="text" name="city" placeholder="City / Town *">
                             </div>
-                        </div>
-                        <div class="row">
+                        </div> --}}
+                        {{-- <div class="row">
                             <div class="form-group col-lg-6">
                                 <input required="" type="text" name="zipcode" placeholder="Postcode / ZIP *">
                             </div>
                             <div class="form-group col-lg-6">
                                 <input required="" type="text" name="phone" placeholder="Phone *">
                             </div>
-                        </div>
-                        <div class="row">
+                        </div> --}}
+                        {{-- <div class="row">
                             <div class="form-group col-lg-6">
                                 <input required="" type="text" name="cname" placeholder="Company Name">
                             </div>
                             <div class="form-group col-lg-6">
                                 <input required="" type="text" name="email" placeholder="Email address *">
                             </div>
-                        </div>
-                        <div class="form-group mb-30">
-                            <textarea rows="5" placeholder="Additional information"></textarea>
-                        </div>
-                        <div class="form-group">
+                        </div> --}}
+                        {{-- <div class="form-group mb-30">
+                            <textarea rows="5" name placeholder="Additional information"></textarea>
+                        </div> --}}
+                        {{-- <div class="form-group">
                             <div class="checkbox">
                                 <div class="custome-checkbox">
                                     <input class="form-check-input" type="checkbox" name="checkbox" id="createaccount">
@@ -665,8 +678,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </div> --}}
+                    {{-- </form> --}}
                 </div>
             </div>
             <div class="col-lg-5">
@@ -709,7 +722,7 @@
                     <div class="payment_option">
                         @foreach($payment_methods as $method)
                         <div class="custome-radio">
-                            <input class="form-check-input" required="" type="radio" name="payment_method" id="exampleRadios3" checked="">
+                            <input class="form-check-input" required="" type="radio" value="{{$method->id}}" name="payment_method" id="exampleRadios3" checked="">
                             <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">{{$method->title}}</label>
                         </div>
                       @endforeach
@@ -720,7 +733,7 @@
                         <img class="mr-15" src="assets/imgs/theme/icons/payment-master.svg" alt="">
                         <img src="assets/imgs/theme/icons/payment-zapper.svg" alt="">
                     </div>
-                    <a href="#" class="btn btn-fill-out btn-block mt-30">Place an Order<i class="fi-rs-sign-out ml-15"></i></a>
+                    <button class="btn btn-fill-out btn-block mt-30">Place an Order<i class="fi-rs-sign-out ml-15"></i></button>
                 </div>
             </div>
         </div>

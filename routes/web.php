@@ -267,7 +267,7 @@ Route::post('/wishlist',[IndexController::class, 'toggle'])->name('wishlist.togg
 Route::get('/allProviders',[VendorController::class, 'index'])->name('allvendors');
 Route::get('/shop',[ShopController::class, 'index'])->name('shop');
 Route::get('/product/{slug}',[ShopController::class, 'productDetails'])->name('product.details');
-
+Route::post('client-login',[App\Http\Controllers\Auth\LoginController::class,'clientLogin'])->name('client.login');
 Route::group(['middleware' => 'auth:web'], function() {
 
     //wishlist
@@ -293,6 +293,7 @@ Route::group(['middleware' => 'auth:web'], function() {
         // place order
 
         Route::get('/Order',  [siteOrderController::class,'index'])->name('order.index');
+        Route::post('/add-order',  [siteOrderController::class,'addOrder'])->name('order.add');
 
         // end place order
         Route::get('/Logout',  [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');

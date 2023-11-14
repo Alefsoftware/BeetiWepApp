@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use App\Models\Customer;
 class LoginController extends Controller
 {
     /*
@@ -43,7 +44,26 @@ class LoginController extends Controller
         $this->middleware('guest:vendor')->except('logout','showChangeForm','update');
     }
 
+    public function clientLogin(Request $request)
+    {
 
+        $request->validate([
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+$user = Customer::where('email',$request->email)->first();
+
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::guard('web')->attempt($credentials)){
+
+            return redirect()->intended('/Account');
+        }else{
+            session() -> flash('Error', trans('Invalid credintials'));
+        }
+
+        return back()->withInput($request->only('email', 'remember'));
+    }
 
     public function showAdminLoginForm()
     {
@@ -78,6 +98,7 @@ class LoginController extends Controller
 
         return back()->withInput($request->only('email', 'remember'));
     }
+
 
     public function providerLogin(Request $request)
     {
