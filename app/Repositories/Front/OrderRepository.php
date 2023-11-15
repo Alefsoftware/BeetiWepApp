@@ -28,12 +28,22 @@ class OrderRepository implements OrderRepositoryInterface
         $data = $request->except('new_address_street');
         // dd($data);
         $data['client_id'] = auth()->user()->id;
-        $cart = Cart::where('client_id',auth()->user()->id)->orderBy('id','desc')->with('product')->get();
-        // dd($cart[0]->product->provider_id);
+        $cart = Cart::where('client_id',auth()->user()->id)->orderBy('id','desc')->with(['product','productPrice'])->get();
+
+        // $sumOfPrices = Cart::where('client_id', auth()->user()->id)
+        //     ->orderBy('id', 'desc')
+        //     ->with(['product', 'productPrice'])
+        //     ->get()
+        //     ->sum(function ($cartItem) {
+        //            return $cartItem->productPrice->price;
+        //     });
+            $data['total_amount']= $cart[0]->sum_cart['sum'];
+
+// dd($cart[0]->sum_cart);
         try {
             DB::beginTransaction();
         $data['provider_id'] = $cart[0]->product->provider_id;
-// make transaction here if exsit new_address_street fill table addresses and take id to store in orders table
+        // make transaction here if exsit new_address_street fill table addresses and take id to store in orders table
 
                 if($request->new_address_street != null){
 

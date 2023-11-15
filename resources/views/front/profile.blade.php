@@ -71,7 +71,7 @@
                                                             <th>Date</th>
                                                             <th>Status</th>
                                                             <th>Total</th>
-                                                            <th>Actions</th>
+                                                            {{-- <th>Actions</th> --}}
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -80,8 +80,8 @@
                                                             <td>#{{$key+1}}</td>
                                                             <td>{{$row->created_at}}</td>
                                                             <td>{{@$row->status->title}}</td>
-                                                            <td>${{$row->total_amount}} for {{count($row->orderProducts)}} item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
+                                                            <td>${{$row->total_amount}} for {{$row->orderProducts->sum('count')}} item</td>
+                                                            {{-- <td><a href="#" class="btn-small d-block">View</a></td> --}}
                                                         </tr>
                                                  @endforeach
                                                     </tbody>

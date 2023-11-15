@@ -1,6 +1,19 @@
 @extends('front.layouts.main')
 @section('content')
-{{-- @dd($product->provider->rate) --}}
+<!-- Add this to your HTML file -->
+<div class="modal " id="cartAddModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-warning-soft">
+            {{-- <div class="modal-header">
+                <h5 class="modal-title">Success</h5>
+
+            </div> --}}
+            <div class="modal-body" style="background-color: #c1bbb1">
+                <p id="cartAddMessage" class="text-white"></p>
+            </div>
+        </div>
+    </div>
+</div>
 <main class="main">
     <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -64,7 +77,7 @@
                                     <strong class="mr-10">Size / Weight: </strong>
                                     <ul class="list-filter size-filter font-small">
                                         @foreach($product->prices as $row)
-                                        <li><a href="#" class="size-link" data-price='{{$row->price}}'>{{$row->title}}</a></li>
+                                        <li><a href="#" id='ProductPriceId' data-priceid={{$row->id}} class="size-link" data-price='{{$row->price}}'>{{$row->title}}</a></li>
                                         {{-- <li class="active"><a href="#">60g</a></li> --}}
                                         @endforeach
                                     </ul>
@@ -74,11 +87,11 @@
                                 <div class="detail-extralink mb-50">
                                     <div class="detail-qty border radius">
                                         <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <input type="text" name="quantity" class="qty-val" value="1" min="1">
+                                        <input type="text" id='itemcount' name="count"  class="qty-val" value="1" min="1">
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                     <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                        <button type="submit" class="button button-add-to-cart addcart" data-product="{{ $product->id }}"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     </div>
@@ -395,6 +408,67 @@
         </div>
     </div>
 </main>
+
+
+
+<script>
+    $(document).ready(function() {
+
+        $('.addcart').on('click', function(e) {
+            e.preventDefault();
+            var product_id = $(this).data('product');
+            // var price_id = $(this).data('product');
+            var price_id = $('#ProductPriceId').data('priceid');
+            var itemcount = $('#itemcount').val();
+
+
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                type: 'POST',
+                data: {
+                    item_id: product_id,
+                    count: itemcount, // You can customize this as needed
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // alert(response.message); // Show a success message
+                //   element.text(response.message);
+                showCartAddModal(response.message);
+                // alert( response.cartCount); // Show a success message
+                $('#cartCount').text(response.cartCount);
+                // response.cartCount
+                // $('#cartalert').show();
+                },
+                error: function(response) {
+                    if (response.status === 403) {
+                        // alert(response.responseJSON.error); // Show an error message
+                        showCartAddModal(response.responseJSON.error);
+
+                    }
+                }
+            });
+        });
+    });
+
+
+    function showCartAddModal(message) {
+    // Update the modal content with the success message
+    $('#cartAddMessage').html(message);
+
+    // Show the modal
+    $('#cartAddModal').modal('show');
+}
+//     function showCartAddModalError(error) {
+//     // Update the modal content with the success message
+//     $('#cartAddMessageError').html(error);
+
+//     // Show the modal
+//     $('#cartAddModalError').modal('show');
+// }
+
+</script>
 
 
 <script>

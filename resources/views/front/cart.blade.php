@@ -100,12 +100,12 @@
                                     </td>
 
                                     <td class="action text-center" data-title="Remove">
-                                        <form id="delform"  action="{{route('cart.delete',$row->id)}}" method="get">
-                                            @csrf
+                                        {{-- <form id="delform{{$key}}"  action="{{route('cart.delete',$row->id)}}" method="get">
+                                            @csrf --}}
 
-                                            <input type="hidden" name="id" value="{{$row->id}}">
-                                        <a href="#" onclick="document.getElementById('delform').submit(); return false;" class="text-body" style="display: contents;"><i class="fi-rs-trash"></i></a>
-                                        </form>
+                                            {{-- <input type="hidden" name="id" value="{{$row->id}}"> --}}
+                                        <a href="{{route('cart.delete',$row->id)}}"  class="text-body" style="display: contents;"><i class="fi-rs-trash"></i></a>
+                                        {{-- </form> --}}
                                     </td>
                                 </tr>
                            @endforeach

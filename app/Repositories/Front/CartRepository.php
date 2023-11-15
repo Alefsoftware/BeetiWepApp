@@ -32,27 +32,31 @@ class CartRepository implements CartRepositoryInterface
 
     public function store($request){
         $user = Auth::user();
-
-
         if ($user) {
             $itemId = $request->input('item_id');
              // Check if the item exists in the wishlist
             $exists = Cart::where('client_id',$user->id)->where('product_id',$itemId)->exists();
+
             if(!$exists) {
+                $cart =Cart::where('client_id',$user->id)->with('product')->first();
                 $product = Product::where('id',$itemId)->first();
+
+                if(($cart != null) &&($cart->product->provider_id !=$product->provider_id)){
+                    return response()->json(['error' => 'This Item Releted to Other Provider , please clear your cart or buy from same provider'],403);
+                }
                 $min_price = $product->prices->where('price', $product->prices->min('price'))->first();
                 Cart::create([
                     'client_id' => $user->id,
                     'product_id'=> $itemId,
                     'count'=> $request->count ?: 1,
-                    'price_id'=> $min_price->id,
+                    'price_id'=>  $request->price_id ?: $min_price->id,
                 ]);
 
                 $cartCount = Cart::where('client_id',$user->id)->sum('count');
 
-            return response()->json(['message' => 'Item Added Successfully','cartCount'=>$cartCount]);
+            return response()->json(['message' => ' <i class="fi fi-rs-check"></i>  Item Added Successfully','cartCount'=>$cartCount]);
             }else{
-                return response()->json(['error' => 'This Item is already added to your cart'],403);
+                return response()->json(['error' => '<i class="fi fi-rs-error"></i> This Item is already added to your cart'],403);
             }
             }else{
                 return response()->json(['error' => 'Login First'],403);
@@ -72,7 +76,9 @@ class CartRepository implements CartRepositoryInterface
 
 
             public function delete($id){
+
                 $user = auth()->user()->id;
+
                 Cart::where('id',$id)->where('client_id',$user)->delete();
                 return redirect()->back()->with('message', 'Successfully Remove Item From Cart');
             }

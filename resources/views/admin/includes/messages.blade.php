@@ -55,6 +55,23 @@
 @endif
 
 
+{{-- <div class="modal modal-success " id="cartAddModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-warning-soft">
+
+            <div class="modal-body">
+                <p id="cartAddMessage">Item successfully added !</p>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+
+
+
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">                                                                                  </script>
 <script>
