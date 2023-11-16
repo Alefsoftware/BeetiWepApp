@@ -93,10 +93,10 @@
                                     <div class="product-extra-link2">
                                         <button type="submit" class="button button-add-to-cart addcart" data-product="{{ $product->id }}"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
                                         <a aria-label="Add To Wishlist"  data-product="{{$row->id}}" class="action-btn hover-up{{$row->id}} addWishlist "><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                        {{-- <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> --}}
                                     </div>
                                 </div>
-                                <div class="font-xs">
+                                {{-- <div class="font-xs">
                                     <ul class="mr-50 float-start">
                                         <li class="mb-5">Type: <span class="text-brand">Organic</span></li>
                                         <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2022</span></li>
@@ -107,7 +107,7 @@
                                         <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
                                         <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- Detail Info -->
                         </div>
