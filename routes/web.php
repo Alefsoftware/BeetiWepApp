@@ -276,7 +276,7 @@ Route::group(['middleware' => 'auth:web'], function() {
         // end wishlist
 
         // cart
-        Route::get('cart', [CartController::class, 'index']);
+        Route::get('cart', [CartController::class, 'index'])->name('cart.show');
         Route::post('/add-to-cart',  [CartController::class,'store'])->name('cart.add');
         Route::put('/update-cart',  [CartController::class,'update'])->name('cart.update');
         Route::get('/delete-cart/{id}',  [CartController::class,'delete'])->name('cart.delete');
@@ -291,11 +291,11 @@ Route::group(['middleware' => 'auth:web'], function() {
         // endprofile
 
         // place order
-
         Route::get('/Order',  [siteOrderController::class,'index'])->name('order.index');
         Route::post('/add-order',  [siteOrderController::class,'addOrder'])->name('order.add');
-
+        Route::get('/order/{id}',  [siteOrderController::class,'orderDetails'])->name('order.details');
         // end place order
+
         Route::get('/Logout',  [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
 });
 

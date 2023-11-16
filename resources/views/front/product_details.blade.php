@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="product-extra-link2">
                                         <button type="submit" class="button button-add-to-cart addcart" data-product="{{ $product->id }}"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Add To Wishlist"  data-product="{{$row->id}}" class="action-btn hover-up{{$row->id}} addWishlist "><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     </div>
                                 </div>
@@ -378,10 +378,11 @@
                                                     {{-- <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg" alt="" /> --}}
                                                 </a>
                                             </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                            <div class="product-action-1" style="width:45px;">
+                                                {{-- <a aria-label="Add To Wishlist" id="wishlist-toggle{{$product->id}}" data-name="{{$product->id}}"    class="action-btn btn-save{{$product->id}}"><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a> --}}
+                                                <a aria-label="Add To Wishlist" data-product="{{$row->id}}" class="action-btn btn-save{{$row->id}} addWishlist "><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a>
+                                                {{-- <a aria-label="Compare"         id="compaire{{$product->id}}"        data-name="{{$product->id}}"     class="action-btn"    href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> --}}
+                                                {{-- <a aria-label="Quick view"      lass="action-btn"     data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                             </div>
                                             {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                                 <span class="hot">Hot</span>
@@ -411,7 +412,7 @@
 
 
 
-<script>
+{{-- <script>
     $(document).ready(function() {
 
         $('.addcart').on('click', function(e) {
@@ -468,7 +469,7 @@
 //     $('#cartAddModalError').modal('show');
 // }
 
-</script>
+</script> --}}
 
 
 <script>

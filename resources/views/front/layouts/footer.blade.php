@@ -213,6 +213,119 @@
     </div>
 </div> -->
 <!-- Vendor JS-->
+
+
+
+<script>
+    $(document).ready(function() {
+
+        $('.addcart').on('click', function(e) {
+            e.preventDefault();
+            var product_id = $(this).data('product');
+            var price_id = $(this).data('product');
+
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                type: 'POST',
+                data: {
+                    item_id: product_id,
+                    count: 1, // You can customize this as needed
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // alert(response.message); // Show a success message
+                //   element.text(response.message);
+                showCartAddModal(response.message);
+                // alert( response.cartCount); // Show a success message
+                $('#cartCount').text(response.cartCount);
+                // response.cartCount
+                // $('#cartalert').show();
+                },
+                error: function(response) {
+                    if (response.status === 403) {
+                        showCartAddModal(response.responseJSON.error);
+                    }
+                }
+            });
+        });
+    });
+
+
+    function showCartAddModal(message) {
+    // Update the modal content with the success message
+    $('#cartAddMessage').html(message);
+
+    // Show the modal
+    $('#cartAddModal').modal('show');
+}
+
+
+</script>
+
+
+
+
+<script>
+    $(document).ready(function() {
+
+        $('.addWishlist').on('click', function(e) {
+            e.preventDefault();
+
+            var product_id = $(this).data('product');
+
+
+            $.ajax({
+                url: "{{ route('wishlist.toggle') }}",
+                type: 'POST',
+                data: {
+                    item_id: product_id,
+
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // alert(response.message); // Show a success message
+                //   element.text(response.message);
+               showCartAddModal(response.message);
+                // alert( response.cartCount); // Show a success message
+                $('#wishlistCount').text(response.wishlistCount);
+                // response.cartCount
+                // $('#cartalert').show();
+                },
+                error: function(response) {
+                    if (response.status === 403) {
+                        alert(response.responseJSON.error); // Show an error message
+                    }
+                }
+            });
+        });
+    });
+
+
+    function showCartAddModal(message) {
+    // Update the modal content with the success message
+    $('#cartAddMessage').html(message);
+
+    // Show the modal
+    $('#cartAddModal').modal('show');
+
+    setTimeout(function() {
+        $('#cartAddModal').modal('hide');
+                }, 3000);
+}
+
+
+</script>
+
+
+
+
+
+
+
 <script src="{{asset('front/assets/js/vendor/modernizr-3.6.0.min.js')}}"></script>
 <script src="{{asset('front/assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('front/assets/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>

@@ -38,6 +38,7 @@ class OrderRepository implements OrderRepositoryInterface
         //            return $cartItem->productPrice->price;
         //     });
             $data['total_amount']= $cart[0]->sum_cart['sum'];
+            $data['tracking_number'] = substr(base64_encode(sha1(mt_rand())), 0, 10);
 
 // dd($cart[0]->sum_cart);
         try {
@@ -81,6 +82,13 @@ class OrderRepository implements OrderRepositoryInterface
                         return redirect()->back();
                     }
 
+
+                    }
+
+
+                    public function orderDetails($id){
+                        $order=Order::with('orderProducts')->findOrFail($id);
+                        return view('front.order_details', compact('order'));
 
                     }
 

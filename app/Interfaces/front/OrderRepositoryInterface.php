@@ -7,4 +7,5 @@ interface OrderRepositoryInterface
 {
     public function index();
     public function addOrder(Request $request);
+    public function orderDetails($id);
 }

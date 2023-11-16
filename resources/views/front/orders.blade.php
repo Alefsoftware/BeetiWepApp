@@ -16,7 +16,7 @@
             <div class="col-lg-8 mb-40">
                 <h1 class="heading-2 mb-10">Checkout</h1>
                 <div class="d-flex justify-content-between">
-                    <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
+                    <h6 class="text-body">There are <span class="text-brand">{{$cart[0]->sum_cart['count'] ?? 0}}</span> products in your cart</h6>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     </div> --}}
                 </div>
                 <div class="row">
-                    <h4 class="mb-30">Billing Details</h4>
+                    <h4 class="mb-30">Shipping Address</h4>
                     <form method="post" action='{{route("order.add")}}'>
                         @csrf
                         {{-- <div class="row">
@@ -87,6 +87,9 @@
                             </div>
                             @endif
                             {{-- @dd(auth()->user()->address) --}}
+                            <div class='hr'>
+                                <span class='hr-title'> Or Add New Address</span>
+                            </div>
                             <div class="form-group col-lg-6">
                                 <input type="text" name="new_address_street"  placeholder="Address">
                             </div>

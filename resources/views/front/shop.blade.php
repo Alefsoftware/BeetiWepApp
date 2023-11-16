@@ -74,15 +74,16 @@
                         <div class="product-cart-wrap mb-30">
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
-                                    <a href="shop-product-right.html">
+                                    <a href="{{route('product.details',$row->slug)}}">
                                         <img class="default-img" src="{{$row->main_image}}" alt="" onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" />
-                                        <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg" alt="" />
+                                        {{-- <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg" alt="" /> --}}
                                     </a>
                                 </div>
-                                <div class="product-action-1">
-                                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                <div class="product-action-1" style="width:45px;">
+                                    {{-- <a aria-label="Add To Wishlist" id="wishlist-toggle{{$product->id}}" data-name="{{$product->id}}"    class="action-btn btn-save{{$product->id}}"><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a> --}}
+                                    <a aria-label="Add To Wishlist" data-product="{{$row->id}}" class="action-btn btn-save{{$row->id}} addWishlist "><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a>
+                                    {{-- <a aria-label="Compare"         id="compaire{{$product->id}}"        data-name="{{$product->id}}"     class="action-btn"    href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> --}}
+                                    {{-- <a aria-label="Quick view"      lass="action-btn"     data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                 </div>
                                 {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="hot">Hot</span>
@@ -90,9 +91,9 @@
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
-                                    <a href="shop-grid-right.html">{{$row->category->title}}</a>
+                                    <a href="{{route('shop',['category'=>@$row->category_id])}}">{{@$row->category->title}}</a>
                                 </div>
-                                <h2><a href="shop-product-right.html">{{$row->title}}</a></h2>
+                                <h2><a href="{{route('product.details',$row->slug)}}">{{$row->title}}</a></h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
                                         <div class="product-rating" style="width:  @if($row->review->count('rate')==0){{0}}@else{{(number_format($row->review->sum('rate')/$row->review->count('rate'),1)/5)*100}}@endif%"></div>
@@ -100,16 +101,16 @@
                                     <span class="font-small ml-5 text-muted"> ({{$row->AvgRate}})</span>
                                 </div>
                                 <div>
-                                    <span class="font-small text-muted">By <a href="vendor-details-1.html">{{@$row->provider->name}}</a></span>
+                                    <span class="font-small text-muted">By <a href="{{route('shop',['provider'=>$row->provider_id])}}">{{@$row->provider->name}}</a></span>
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
                                         <span>${{$row->MinPrice}}</span>
                                         {{-- <span class="old-price">$32.8</span> --}}
                                     </div>
-                                    <div class="add-cart">
+                                    {{-- <div class="add-cart">
                                         <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -226,7 +227,7 @@
                 </form>
                 </div>
                 <!-- Product sidebar Widget -->
-                <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
+                {{-- <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
                     <h5 class="section-title style-1 mb-30">New products</h5>
                     <div class="single-post clearfix">
                         <div class="image">
@@ -275,7 +276,7 @@
                             Juice
                         </h4>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

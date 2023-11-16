@@ -55,14 +55,16 @@ class IndexController extends Controller
                     'client_id' => $user->id,
                     'product_id'=> $itemId
                 ]);
-                 return response()->json(['message' => 'Item add to  wishlist']);
+                $wishlistCount = Favorit::where('client_id',$user->id)->count();
+                 return response()->json(['message' => 'Item add to  wishlist','wishlistCount'=>$wishlistCount]);
 
             }else{
                 Favorit::where([
                     'client_id' => $user->id,
                     'product_id'=> $itemId
                 ])->delete();
-                   return response()->json(['message' => 'Item removed from wishlist']);
+                $wishlistCount = Favorit::where('client_id',$user->id)->count();
+                   return response()->json(['message' => 'Item removed from wishlist','wishlistCount'=>$wishlistCount]);
 
             }
 

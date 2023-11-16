@@ -22,4 +22,8 @@ class OrderController extends Controller
     {
         return $this->orderRepository->addOrder($request);
     }
+    public function orderDetails($id)
+    {
+        return $this->orderRepository->orderDetails($id);
+    }
 }

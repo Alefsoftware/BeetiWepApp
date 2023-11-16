@@ -16,7 +16,7 @@
                 <div class="col-lg-8 mb-40">
                     <h1 class="heading-2 mb-10">Your Cart</h1>
                     <div class="d-flex justify-content-between">
-                        <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
+                        <h6 class="text-body">There are <span class="text-brand">{{$cart[0]->sum_cart['count'] ?? 0}}</span> products in your cart</h6>
                         {{-- <form action="{{url('/delete-cart-clear',auth()->user()->id)}}" method="post">
                             @csrf
 

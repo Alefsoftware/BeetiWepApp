@@ -1,20 +1,7 @@
 @extends('front.layouts.main')
 
 @section('content')
-<!-- Add this to your HTML file -->
-<div class="modal " id="cartAddModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content bg-warning-soft">
-            {{-- <div class="modal-header">
-                <h5 class="modal-title">Success</h5>
 
-            </div> --}}
-            <div class="modal-body">
-                <p id="cartAddMessage">Item successfully added !</p>
-            </div>
-        </div>
-    </div>
-</div>
 
     <section class="home-slider position-relative mb-30">
     <div class="container">
@@ -122,15 +109,15 @@
                                         @endif
                                     </a>
                                 </div>
-                                <div class="product-action-1">
+                                <div class="product-action-1" style="width:45px;">
                                     {{-- <a aria-label="Add To Wishlist" id="wishlist-toggle{{$product->id}}" data-name="{{$product->id}}"    class="action-btn btn-save{{$product->id}}"><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a> --}}
-                                    <a data-product="{{$product->id}}" class="action-btn btn-save{{$product->id}} addWishlist "><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare"         id="compaire{{$product->id}}"        data-name="{{$product->id}}"     class="action-btn"    href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                    <a aria-label="Quick view"      lass="action-btn"     data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                    <a aria-label="Add To Wishlist" data-product="{{$product->id}}" class="action-btn btn-save{{$product->id}} addWishlist "><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a>
+                                    {{-- <a aria-label="Compare"         id="compaire{{$product->id}}"        data-name="{{$product->id}}"     class="action-btn"    href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> --}}
+                                    {{-- <a aria-label="Quick view"      lass="action-btn"     data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                 </div>
-                                <div class="product-badges product-badges-position product-badges-mrg">
+                                {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="hot">Hot</span>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
@@ -144,16 +131,16 @@
                                     <span class="font-small ml-5 text-muted"> ({{$row->AvgRate ??'0'}})</span>
                                 </div>
                                 <div>
-                                    <span class="font-small text-muted">By <a href="#">{{@$row->provider->name}}</a></span>
+                                    <span class="font-small text-muted">By <a href="{{route('shop',['provider'=>$product->provider_id])}}">{{@$product->provider->name}}</a></span>
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
                                         <span>${{$product->MinPrice}}</span>
                                         {{-- <span class="old-price">$32.8</span> --}}
                                     </div>
-                                    <div class="add-cart">
+                                    {{-- <div class="add-cart">
                                         <a class="add addcart" href="#" data-product="{{ $product->id }}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -180,14 +167,15 @@
                                         @endif
                                     </a>
                                 </div>
-                                <div class="product-action-1">
-                                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                <div class="product-action-1" style="width:45px;">
+                                    {{-- <a aria-label="Add To Wishlist" id="wishlist-toggle{{$product->id}}" data-name="{{$product->id}}"    class="action-btn btn-save{{$product->id}}"><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a> --}}
+                                    <a aria-label="Add To Wishlist" data-product="{{$product->id}}" class="action-btn btn-save{{$product->id}} addWishlist "><i class="fi fi-sr-heart"></i><i class="fi-rs-heart"></i></a>
+                                    {{-- <a aria-label="Compare"         id="compaire{{$product->id}}"        data-name="{{$product->id}}"     class="action-btn"    href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> --}}
+                                    {{-- <a aria-label="Quick view"      lass="action-btn"     data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                 </div>
-                                <div class="product-badges product-badges-position product-badges-mrg">
+                                {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="hot">Hot</span>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
@@ -203,16 +191,16 @@
                                     <span class="font-small ml-5 text-muted"> (@if($p->review->count('rate')==0){{0}}@else{{number_format($p->review->sum('rate')/$p->review->count('rate'),1)}}@endif)</span>
                                 </div>
                                 <div>
-                                    <span class="font-small text-muted">By <a href="vendor-details-1.html">{{@$p->provider->name}}</a></span>
+                                    <span class="font-small text-muted">By <a href="{{route('shop',['provider'=>$p->provider_id])}}">{{@$p->provider->name}}</a></span>
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
                                         <span>${{$p->MinPrice}}</span>
                                         {{-- <span class="old-price">$32.8</span>    --}}
                                     </div>
-                                    <div class="add-cart">
+                                    {{-- <div class="add-cart">
                                        <a class="add addcart" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -889,7 +877,7 @@
     </div>
 </section>
 <!--End Best Sales-->
-<section class="section-padding pb-5">
+{{-- <section class="section-padding pb-5">
     <div class="container">
         <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
             <h3 class="">Deals Of The Day</h3>
@@ -1049,7 +1037,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!--End Deals-->
 <section class="section-padding mb-30">
     <div class="container">
@@ -1210,105 +1198,6 @@
 <!--End 4 columns-->
 
 
-<script>
-    $(document).ready(function() {
-
-        $('.addcart').on('click', function(e) {
-            e.preventDefault();
-            var product_id = $(this).data('product');
-            var price_id = $(this).data('product');
-
-            $.ajax({
-                url: "{{ route('cart.add') }}",
-                type: 'POST',
-                data: {
-                    item_id: product_id,
-                    count: 1, // You can customize this as needed
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    // alert(response.message); // Show a success message
-                //   element.text(response.message);
-                showCartAddModal(response.message);
-                // alert( response.cartCount); // Show a success message
-                $('#cartCount').text(response.cartCount);
-                // response.cartCount
-                // $('#cartalert').show();
-                },
-                error: function(response) {
-                    if (response.status === 403) {
-                        alert(response.responseJSON.error); // Show an error message
-                    }
-                }
-            });
-        });
-    });
-
-
-    function showCartAddModal(message) {
-    // Update the modal content with the success message
-    $('#cartAddMessage').html(message);
-
-    // Show the modal
-    $('#cartAddModal').modal('show');
-}
-
-
-</script>
-
-
-
-
-<script>
-    $(document).ready(function() {
-
-        $('.addWishlist').on('click', function(e) {
-            e.preventDefault();
-
-            var product_id = $(this).data('product');
-
-
-            $.ajax({
-                url: "{{ route('wishlist.toggle') }}",
-                type: 'POST',
-                data: {
-                    item_id: product_id,
-
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    // alert(response.message); // Show a success message
-                //   element.text(response.message);
-               showCartAddModal(response.message);
-                // alert( response.cartCount); // Show a success message
-                // $('#cartCount').text(response.cartCount);
-                // response.cartCount
-                // $('#cartalert').show();
-                },
-                error: function(response) {
-                    if (response.status === 403) {
-                        alert(response.responseJSON.error); // Show an error message
-                    }
-                }
-            });
-        });
-    });
-
-
-    function showCartAddModal(message) {
-    // Update the modal content with the success message
-    $('#cartAddMessage').html(message);
-
-    // Show the modal
-    $('#cartAddModal').modal('show');
-}
-
-
-</script>
 
 
 
