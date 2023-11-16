@@ -59,7 +59,7 @@ class CartRepository implements CartRepositoryInterface
                 return response()->json(['error' => '<i class="fi fi-rs-error"></i> This Item is already added to your cart'],403);
             }
             }else{
-                return response()->json(['error' => 'Login First'],403);
+                return response()->json(['message' => 'Please login first']);
             }
         }
 
