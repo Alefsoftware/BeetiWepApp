@@ -159,10 +159,15 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="header-info">
                         <ul>
-                            <li><a href="page-about.htlm">About Us</a></li>
-                            <li><a href="page-account.html">My Account</a></li>
-                            <li><a href="shop-wishlist.html">Wishlist</a></li>
-                            <li><a href="shop-order.html">Order Tracking</a></li>
+                            {{-- <li><a href="page-about.htlm">About Us</a></li> --}}
+                            @guest
+                            <li><a href="{{url('login')}}">{{__('Register/Login')}}</a></li>
+                            @endguest
+                            @auth
+                                <li><a href="{{route('account.index')}}">Welcom {{auth()->user()->name}}</a></li>
+                            @endauth
+                            {{-- <li><a href="shop-wishlist.html">Wishlist</a></li>
+                            <li><a href="shop-order.html">Order Tracking</a></li> --}}
                         </ul>
                     </div>
                 </div>

@@ -44,7 +44,7 @@
                                                         </span>
                                                     @enderror
                                             </div>
-                                            <div class="login_footer form-group">
+                                            {{-- <div class="login_footer form-group">
                                                 <div class="chek-form">
                                                     <input type="text" required="" name="s" placeholder="Security code *" />
                                                 </div>
@@ -59,9 +59,9 @@
                                                     <b class="text-best"><?php echo$resultArray[3];?></b>
                                                 </span>
                                             </div>
-                                            <input type="hidden" value="{{$FourDigitRandomNumber}}">
+                                            <input type="hidden" value="{{$FourDigitRandomNumber}}"> --}}
 
-                                            <div class="login_footer form-group mb-50">
+                                            {{-- <div class="login_footer form-group mb-50">
                                                 <div class="chek-form">
                                                     <div class="custome-checkbox">
                                                         <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />
@@ -69,12 +69,16 @@
                                                     </div>
                                                 </div>
                                                 <a class="text-muted" href="#">Forgot password?</a>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>
                                             </div>
-                                            <a href="{{url('auth/google')}}">google</a>
-                                            <a href="{{url('auth/facebook')}}">facebook</a>
+                                            <hr>
+                                            <div class="mobile-social-icon">
+                                                <h6 class="mb-5">Or Login With</h6>
+
+                                            <a href="{{url('auth/facebook')}}" > <img src="{{asset('front/assets/imgs/theme/icons/icon-facebook-white.svg')}}" alt="Facebook" style="max-width: 100%;     background-color: rebeccapurple;"> </a>
+                                            <a href="{{url('auth/google')}}" ><img src="{{asset('front/assets/imgs/theme/icons/logo-google.svg')}}" alt="Facebook" style="max-width: 100%;"></a>
 
                                         </form>
                                     </div>

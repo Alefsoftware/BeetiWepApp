@@ -79,6 +79,7 @@
                                         @foreach($product->prices as $row)
                                         <li><a href="#" id='ProductPriceId' data-priceid={{$row->id}} class="size-link" data-price='{{$row->price}}'>{{$row->title}}</a></li>
                                         {{-- <li class="active"><a href="#">60g</a></li> --}}
+                                        <input type="hidden" name="ProductPriceId" value="{{$row->id}}">
                                         @endforeach
                                     </ul>
                                 </div>

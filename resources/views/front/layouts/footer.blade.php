@@ -218,18 +218,27 @@
 
 <script>
     $(document).ready(function() {
+        var price_id=0;
+        $('.size-link').click(function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+         price_id = $(this).attr('data-priceid');
 
+    });
         $('.addcart').on('click', function(e) {
             e.preventDefault();
             var product_id = $(this).data('product');
-            var price_id = $(this).data('product');
+            // var price_id = $(this).data('product');
+            // var price_id = $('#ProductPriceId').data('priceid');
+            // var price_id = $('input[name="ProductPriceId"]').val();
+            var itemcount = $('#itemcount').val();
 
             $.ajax({
                 url: "{{ route('cart.add') }}",
                 type: 'POST',
                 data: {
                     item_id: product_id,
-                    count: 1, // You can customize this as needed
+                    price_id: price_id,
+                    count: itemcount, // You can customize this as needed
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -244,6 +253,11 @@
                 // $('#cartalert').show();
                 },
                 error: function(response) {
+                    if (response.status === 401) {
+                            // Redirect to a specific link when a CSRF token mismatch occurs
+                            window.location.href = '/login';
+                    }
+
                     if (response.status === 403) {
                         showCartAddModal(response.responseJSON.error);
                     }
@@ -253,13 +267,7 @@
     });
 
 
-    function showCartAddModal(message) {
-    // Update the modal content with the success message
-    $('#cartAddMessage').html(message);
 
-    // Show the modal
-    $('#cartAddModal').modal('show');
-}
 
 
 </script>
@@ -296,8 +304,13 @@
                 // $('#cartalert').show();
                 },
                 error: function(response) {
+                    if (response.status === 401) {
+                            // Redirect to a specific link when a CSRF token mismatch occurs
+                            window.location.href = '/login';
+                    }
                     if (response.status === 403) {
-                        alert(response.responseJSON.error); // Show an error message
+                        // alert(response.responseJSON.error); // Show an error message
+                        showCartAddModal(response.responseJSON.error);
                     }
                 }
             });

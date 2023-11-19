@@ -4,7 +4,7 @@
          <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> Pages <span></span> My Account
                 </div>
             </div>
@@ -89,10 +89,15 @@
                                                 <a class="text-muted" href="#">Forgot password?</a>
                                             </div> --}}
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>
+                                                <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Sign Up</button>
                                             </div>
-                                            <a href="{{url('auth/google')}}">google</a>
-                                            <a href="{{url('auth/facebook')}}">facebook</a>
+                                            <hr>
+                                            <div class="mobile-social-icon">
+                                                <h6 class="mb-5">Or Login With</h6>
+
+                                            <a href="{{url('auth/facebook')}}" > <img src="{{asset('front/assets/imgs/theme/icons/icon-facebook-white.svg')}}" alt="Facebook" style="max-width: 100%;     background-color: rebeccapurple;"> </a>
+                                            <a href="{{url('auth/google')}}" ><img src="{{asset('front/assets/imgs/theme/icons/logo-google.svg')}}" alt="Facebook" style="max-width: 100%;"></a>
+
 
                                         </form>
                                     </div>

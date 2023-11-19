@@ -34,17 +34,19 @@ class CartRepository implements CartRepositoryInterface
         $user = Auth::user();
         if ($user) {
             $itemId = $request->input('item_id');
+            $product = Product::where('id',$itemId)->first();
+            $min_price = $product->prices->where('price', $product->prices->min('price'))->first();
              // Check if the item exists in the wishlist
-            $exists = Cart::where('client_id',$user->id)->where('product_id',$itemId)->exists();
+            $exists = Cart::where('client_id',$user->id)->where('product_id',$itemId)->whereIn('price_id',[$request->price_id,$min_price->id])->exists();
 
             if(!$exists) {
                 $cart =Cart::where('client_id',$user->id)->with('product')->first();
-                $product = Product::where('id',$itemId)->first();
+                // $product = Product::where('id',$itemId)->first();
 
                 if(($cart != null) &&($cart->product->provider_id !=$product->provider_id)){
                     return response()->json(['error' => 'This Item Releted to Other Provider , please clear your cart or buy from same provider'],403);
                 }
-                $min_price = $product->prices->where('price', $product->prices->min('price'))->first();
+
                 Cart::create([
                     'client_id' => $user->id,
                     'product_id'=> $itemId,
@@ -54,12 +56,13 @@ class CartRepository implements CartRepositoryInterface
 
                 $cartCount = Cart::where('client_id',$user->id)->sum('count');
 
+
             return response()->json(['message' => ' <i class="fi fi-rs-check"></i>  Item Added Successfully','cartCount'=>$cartCount]);
             }else{
                 return response()->json(['error' => '<i class="fi fi-rs-error"></i> This Item is already added to your cart'],403);
             }
             }else{
-                return response()->json(['message' => 'Please login first']);
+                return response()->json(['error' => 'Please login first']);
             }
         }
 

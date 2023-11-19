@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\Front\IndexRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Contact;
 use App\Models\Favorit;
 use Redirect;
 use Laravel\Socialite\Facades\socialite;
@@ -71,7 +72,7 @@ class IndexController extends Controller
         } else {
 
             // User is not logged in, return an error or login prompt
-            return response()->json(['message' => 'Please login first']);
+            return response()->json(['message' => 'Please login first'],401);
         }
     }
 
@@ -127,8 +128,21 @@ class IndexController extends Controller
               return reditrect()->intended('/');
             }
         }catch(Exception $e){
-            dd($e->getMessage());
+           return $e->getMessage();
         }
     }
+
+public function getBlogs(){
+    return view('front.blogs');
+}
+public function getContact(){
+    return view('front.contact');
+}
+public function sendMessage(Request $request){
+    Contact::create($request->all());
+    session()->flash('SiteSuccess', 'Sent successfully');
+    return redirect()->back();
+}
+
 }
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 
 
 
+
 use App\Http\Controllers\Vendor\VendorAuthController;
 
 
@@ -23,6 +24,7 @@ use App\Http\Controllers\Front\OrderController as siteOrderController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Administration\SliderController;
+use App\Http\Controllers\Administration\BlogController;
 
 
 /*
@@ -188,6 +190,13 @@ Route::post('slider/changeStatus/{id}', [SliderController::class, 'changeStatus'
 
 
 // end slider
+// blog
+
+Route::resource('blog', BlogController::class);
+Route::post('blog/changeStatus/{id}', [BlogController::class, 'changeStatus'])->name('blog.changeStatus');
+
+
+// end blog
 
     Route::get('/testSession', function () {
         return session()->get('country');
@@ -295,6 +304,13 @@ Route::group(['middleware' => 'auth:web'], function() {
         Route::post('/add-order',  [siteOrderController::class,'addOrder'])->name('order.add');
         Route::get('/order/{id}',  [siteOrderController::class,'orderDetails'])->name('order.details');
         // end place order
+
+        // blog
+        Route::get('/blogs',  [IndexController::class,'getBlogs'])->name('blogs');
+        Route::get('/contact-us',  [IndexController::class,'getContact'])->name('contact');
+        Route::post('/send-message',  [IndexController::class,'sendMessage'])->name('sendMessage');
+
+        // end blog
 
         Route::get('/Logout',  [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
 });

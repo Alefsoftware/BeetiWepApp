@@ -184,13 +184,13 @@
                         {{-- <div data-role="page"> --}}
 
 
-                        <div data-role="main" class="ui-content">
+                        <div data-role="main" class="">
 
                             <div data-role="rangeslider">
-                                <label for="price-min">Price:</label>
-                                <input type="range" name="min" id="price-min" value="{{ old('min') }}" min="0" max="1000">
-                                <label for="price-max">Price:</label>
-                                <input type="range" name="max" id="price-max" value="{{ old('max') }}" min="0" max="1000">
+                                <label for="price-min">Min Price:</label>
+                                <input type="number" name="min" id="price-min" value="{{ old('min') }}" min="0" max="1000">
+                                <label for="price-max">Max Price:</label>
+                                <input type="number" name="max" id="price-max" value="{{ old('max') }}" min="0" max="1000">
                             </div>
 
 
