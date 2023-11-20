@@ -584,21 +584,8 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="blog-category-grid.html">Blog <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
-                                        <li><a href="blog-category-list.html">Blog Category List</a></li>
-                                        <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                        <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
-                                        <li>
-                                            <a href="#">Single Post <i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu level-menu-modify">
-                                                <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                                <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                                <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                    <a href="{{route('blogs')}}">Blog <i class="fi-rs-angle-down"></i></a>
+
                                 </li>
                                 <li>
                                     <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
@@ -617,7 +604,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="page-contact.html">Contact</a>
+                                    <a href="{{url('contact-us')}}">Contact</a>
                                 </li>
                             </ul>
                         </nav>
