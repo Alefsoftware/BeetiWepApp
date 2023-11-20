@@ -24,6 +24,10 @@
                             {{-- <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"  media="screen"> --}}
                             {{-- <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> --}}
 {{-- end price slide range --}}
+{{-- share link --}}
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=632980d20b5e930012a9c6da&product=inline-share-buttons" async="async"></script>
+
+{{-- end share link --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 

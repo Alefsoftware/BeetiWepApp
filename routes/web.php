@@ -24,6 +24,7 @@ use App\Http\Controllers\Front\OrderController as siteOrderController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Administration\SliderController;
+use App\Http\Controllers\Administration\Subscribers;
 use App\Http\Controllers\Administration\BlogController;
 
 
@@ -198,6 +199,11 @@ Route::post('blog/changeStatus/{id}', [BlogController::class, 'changeStatus'])->
 
 // end blog
 
+// subscribers
+Route::resource('subscribers', Subscribers::class);
+
+//end subscribers
+
     Route::get('/testSession', function () {
         return session()->get('country');
       });
@@ -305,15 +311,23 @@ Route::group(['middleware' => 'auth:web'], function() {
         Route::get('/order/{id}',  [siteOrderController::class,'orderDetails'])->name('order.details');
         // end place order
 
-        // blog
-        Route::get('/blogs',  [IndexController::class,'getBlogs'])->name('blogs');
-        Route::get('/contact-us',  [IndexController::class,'getContact'])->name('contact');
-        Route::post('/send-message',  [IndexController::class,'sendMessage'])->name('sendMessage');
 
-        // end blog
 
         Route::get('/Logout',  [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
 });
+
+
+
+  // blog
+  Route::get('/blogs',  [IndexController::class,'getBlogs'])->name('blogs');
+  Route::get('/blogs/{slug}',  [IndexController::class,'blogDetails'])->name('blog.details');
+  Route::get('/contact-us',  [IndexController::class,'getContact'])->name('contact');
+  Route::post('/send-message',  [IndexController::class,'sendMessage'])->name('sendMessage');
+  Route::post('/subscribe',  [IndexController::class,'storeSubscriber'])->name('storeSubscriber');
+
+  // end blog
+
+
 
 Route::get('auth/google', [IndexController::class, 'googleLogin']);
 Route::get('auth/google/callback', [IndexController::class, 'googleCallback']);

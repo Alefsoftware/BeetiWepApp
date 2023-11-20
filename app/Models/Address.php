@@ -8,10 +8,8 @@ use Request;
 
 class Address extends BaseModel {
 
-    protected $guarded = [
-    ];
-    protected $hidden = ['phone'
-    ];
+    protected $guarded = [];
+
     public $table = "addresses";
 
 

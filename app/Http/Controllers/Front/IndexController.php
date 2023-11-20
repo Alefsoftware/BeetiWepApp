@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Contact;
 use App\Models\Favorit;
+use App\Models\Blog;
+use App\Models\Subscriber;
 use Redirect;
 use Laravel\Socialite\Facades\socialite;
 use App\Models\User;
@@ -133,13 +135,31 @@ class IndexController extends Controller
     }
 
 public function getBlogs(){
-    return view('front.blogs');
+  $rows=  Blog::where('published','1')->paginate('10');
+    return view('front.blogs',compact('rows'));
 }
+
+public function blogDetails($slug){
+    $blog=  Blog::where('slug',$slug)->orderBy('id','desc')->first();
+    $related_blogs=Blog::where('slug','!=',$slug)->orderBy('id','desc')->limit('10')->get();
+    return view('front.blog-details',compact('blog','related_blogs'));
+}
+
 public function getContact(){
     return view('front.contact');
 }
 public function sendMessage(Request $request){
     Contact::create($request->all());
+    session()->flash('SiteSuccess', 'Sent successfully');
+    return redirect()->back();
+}
+public function storeSubscriber(Request $request){
+    $request->validate([
+        'email' => 'required|email|unique:subscribers,email',
+    ], [
+        'email.unique' => 'This email is already subscribed.',
+    ]);
+    Subscriber::create($request->all());
     session()->flash('SiteSuccess', 'Sent successfully');
     return redirect()->back();
 }

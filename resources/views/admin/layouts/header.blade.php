@@ -1033,6 +1033,12 @@
                                 <div class="side-menu__title"> Blogs</div>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{route('subscribers.index')}}" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="image"></i> </div>
+                                <div class="side-menu__title"> Subscribers</div>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

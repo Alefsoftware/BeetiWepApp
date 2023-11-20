@@ -91,8 +91,27 @@
                                 <span class='hr-title'> Or Add New Address</span>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="text" name="new_address_street"  placeholder="Address">
+                                <input type="text" name="new_address_street"  placeholder="Street">
                             </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" name="building_number"  placeholder="building number">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" name="floor_number"  placeholder="floor number">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" name="flat_number"  placeholder="flat number">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" name="area"  placeholder="area">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" name="building_type"  placeholder="building type">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" name="phone"  placeholder="phone">
+                            </div>
+
                         </div>
 
                         {{-- <div class="row shipping_calculator">

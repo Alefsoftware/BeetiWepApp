@@ -25,7 +25,7 @@ class OrderRepository implements OrderRepositoryInterface
             'address_id' => 'required_if:new_address_street,null',
             'new_address_street' => 'required_if:address_id,null',
         ]);
-        $data = $request->except('new_address_street');
+        $data = $request->except(['new_address_street','building_number','floor_number','flat_number','area','building_type','phone','email']);
         // dd($data);
         $data['client_id'] = auth()->user()->id;
         $cart = Cart::where('client_id',auth()->user()->id)->orderBy('id','desc')->with(['product','productPrice'])->get();
@@ -51,6 +51,12 @@ class OrderRepository implements OrderRepositoryInterface
                 $address= Address::create([
                         'client_id'=>auth()->user()->id,
                         'street'=>$request->input('new_address_street'),
+                        'building_number'=>$request->input('building_number'),
+                        'floor_number'=>$request->input('floor_number'),
+                        'flat_number'=>$request->input('flat_number'),
+                        'area'=>$request->input('area'),
+                        'building_type'=>$request->input('building_type'),
+                        'phone'=>$request->input('phone'),
                     ]);
                     $data['address_id']=$address->id;
                 }

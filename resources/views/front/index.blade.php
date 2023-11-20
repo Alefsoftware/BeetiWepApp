@@ -1,7 +1,7 @@
 @extends('front.layouts.main')
 
 @section('content')
-
+@include('admin.includes.messages')
 
     <section class="home-slider position-relative mb-30">
     <div class="container">

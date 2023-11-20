@@ -31,7 +31,7 @@ public function getDesFieldAttribute()
     if(app()->getLocale()=='ar'){
         return $this->{'des'.app()->getLocale()};
     }else{
-        return $this->content;
+        return $this->des;
     }
 
 }
@@ -44,5 +44,29 @@ public function getSummaryFieldAttribute()
     }
 
 }
+
+public function setSlugAttribute($value)
+    {
+        $baseSlug = str_slug($value); // Generate slug from the given value
+
+        // Check if the generated slug is unique, if not, append a number to make it unique
+        $slug = $baseSlug;
+        $counter = 1;
+        while ($this->slugExists($slug)) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        $this->attributes['slug'] = $slug;
+    }
+
+    // Check if a slug already exists in the database
+    private function slugExists($slug)
+    {
+        return static::where('slug', $slug)
+            ->where('id', '!=', $this->id) // Exclude the current record
+            ->exists();
+    }
+
 
 }
