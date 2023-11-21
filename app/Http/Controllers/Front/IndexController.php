@@ -7,6 +7,7 @@ use App\Interfaces\Front\IndexRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Contact;
+use App\Models\Config;
 use App\Models\Favorit;
 use App\Models\Blog;
 use App\Models\Subscriber;
@@ -146,7 +147,16 @@ public function blogDetails($slug){
 }
 
 public function getContact(){
-    return view('front.contact');
+    $configs = Config::all();
+    $data=[];
+    foreach($configs as $row){
+        $data += [$row->field_name =>$row->value_field
+
+    ];
+
+    }
+// dd($data);
+    return view('front.contact',compact('data'));
 }
 public function sendMessage(Request $request){
     Contact::create($request->all());
@@ -163,6 +173,7 @@ public function storeSubscriber(Request $request){
     session()->flash('SiteSuccess', 'Sent successfully');
     return redirect()->back();
 }
+
 
 }
 

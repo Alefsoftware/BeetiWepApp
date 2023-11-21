@@ -56,7 +56,7 @@
                                 </div>
                             </td>
                             <td class="price" data-title="Price">
-                                <h3 class="text-brand">{{@$product->prices[0]->price}}</h3>
+                                <h3 class="text-brand">{{session()->get('country')->currency->iso3??EGP}}  {{@$product->prices[0]->price}}</h3>
                             </td>
                             @if($product->is_active==1)
                             <td class="text-center detail-info" data-title="Stock">

@@ -173,13 +173,13 @@
                 </div>
                 <div class="col-xl-6 col-lg-4">
                     <div class="text-center">
-                        <div id="news-flash" class="d-inline-block">
+                        {{-- <div id="news-flash" class="d-inline-block">
                             <ul>
                                 <li>100% Secure delivery without contacting the courier</li>
                                 <li>Supper Value Deals - Save more with coupons</li>
                                 <li>Trendy 25silver jewelry, save up 35% off today</li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4">
@@ -239,20 +239,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a class="language-dropdown-active" href="#">USD <i class="fi-rs-angle-small-down"></i></a>
-                                <ul class="language-dropdown">
-                                    <li>
-                                        <a href="#"><img src="{{asset('front/assets/imgs/theme/flag-fr.png')}}" alt="" />INR</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="{{asset('front/assets/imgs/theme/flag-dt.png')}}" alt="" />MBP</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><img src="{{asset('front/assets/imgs/theme/flag-ru.png')}}" alt="" />EU</a>
-                                    </li>
-                                </ul>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -263,7 +250,7 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="index.html"><img src="{{asset('front/assets/imgs/theme/logo.svg')}}" alt="logo" /></a>
+                    <a href="{{url('/')}}"><img src="{{asset('front/assets/imgs/theme/logo.svg')}}" alt="logo" /></a>
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
@@ -279,26 +266,7 @@
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
-                            <div class="search-location">
-                                <form action="#">
-                                    <select class="select-active">
-                                        <option>Your Location</option>
-                                        <option>Alabama</option>
-                                        <option>Alaska</option>
-                                        <option>Arizona</option>
-                                        <option>Delaware</option>
-                                        <option>Florida</option>
-                                        <option>Georgia</option>
-                                        <option>Hawaii</option>
-                                        <option>Indiana</option>
-                                        <option>Maryland</option>
-                                        <option>Nevada</option>
-                                        <option>New Jersey</option>
-                                        <option>New Mexico</option>
-                                        <option>New York</option>
-                                    </select>
-                                </form>
-                            </div>
+
                             @auth
                             {{-- <div class="header-action-icon-2">
                                 <a href="shop-compare.html">
@@ -373,7 +341,7 @@
                                             <a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                                         </li> --}}
                                         <li>
-                                            <a href="{{route('logout')}}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                            <a href="{{route('site.logout')}}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -400,10 +368,12 @@
                         <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                             <div class="d-flex categori-dropdown-inner">
                                 <ul>
+                                    @foreach($categories->take(count($categories)/2)  as  $row)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/category-1.svg')}}" alt="" />Milks and Dairies</a>
+                                        <a href="{{route('shop',['category'=>$row->id])}}"> <img src="{{$row->image}}" alt="{{$row->title}}" onerror="this.onerror=null;this.src='{{asset('front/assets/imgs/theme/icons/category-1.svg')}}';" />{{$row->title}}</a>
                                     </li>
-                                    <li>
+                                    @endforeach
+                                    {{-- <li>
                                         <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/category-2.svg')}}" alt="" />Clothing & beauty</a>
                                     </li>
                                     <li>
@@ -414,53 +384,25 @@
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/category-5.svg')}}" alt="" />Fresh Fruit</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
+
                                 <ul class="end">
+                                    @foreach($categories->slice(count($categories)/2) as $row)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/category-6.svg')}}" alt="" />Wines & Drinks</a>
+                                        <a href="{{route('shop',['category'=>$row->id])}}"> <img src="{{$row->image}}" alt="{{$row->title}}" onerror="this.onerror=null;this.src='{{asset('front/assets/imgs/theme/icons/category-1.svg')}}';" />{{$row->title}}</a>
                                     </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/category-7.svg')}}" alt="" />Fresh Seafood</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/category-8.svg')}}" alt="" />Fast food</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/category-9.svg')}}" alt="" />Vegetables</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/category-10.svg')}}" alt="" />Bread and Juice</a>
-                                    </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
-                            <div class="more_slide_open" style="display: none">
-                                <div class="d-flex categori-dropdown-inner">
-                                    <ul>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/icon-1.svg')}}" alt="" />Milks and Dairies</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/icon-2.svg')}}" alt="" />Clothing & beauty</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="end">
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/icon-3.svg')}}" alt="" />Wines & Drinks</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{asset('front/assets/imgs/theme/icons/icon-4.svg')}}" alt="" />Fresh Seafood</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span></div>
+
                         </div>
                     </div>
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                         <nav>
                             <ul>
-                                <li class="hot-deals"><img src="{{asset('front/assets/imgs/theme/icons/icon-hot.svg')}}" alt="hot deals" /><a href="shop-grid-right.html">Deals</a></li>
+                                {{-- <li class="hot-deals"><img src="{{asset('front/assets/imgs/theme/icons/icon-hot.svg')}}" alt="hot deals" /><a href="shop-grid-right.html">Deals</a></li> --}}
                                 <li>
                                     <a class="active" href="{{url('/')}}">Home </a>
                                     {{-- <ul class="sub-menu">
@@ -472,9 +414,9 @@
                                         <li><a href="index-6.html">Home 6</a></li>
                                     </ul> --}}
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="#">About</a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="{{url('/shop')}}">Shop </a>
                                     {{-- <ul class="sub-menu">
@@ -521,7 +463,7 @@
                                         <li><a href="vendor-guide.html">Vendor Guide</a></li>
                                     </ul> --}}
                                 </li>
-                                <li class="position-static">
+                                {{-- <li class="position-static">
                                     <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
                                     <ul class="mega-menu">
                                         <li class="sub-mega-menu sub-mega-menu-width-22">
@@ -582,12 +524,12 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> --}}
                                 <li>
-                                    <a href="{{route('blogs')}}">Blog <i class="fi-rs-angle-down"></i></a>
+                                    <a href="{{route('blogs')}}">Blogs</a>
 
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="page-about.html">About Us</a></li>
@@ -602,7 +544,7 @@
                                         <li><a href="page-terms.html">Terms of Service</a></li>
                                         <li><a href="page-404.html">404 Page</a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="{{url('contact-us')}}">Contact</a>
                                 </li>

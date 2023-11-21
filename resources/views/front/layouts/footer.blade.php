@@ -104,10 +104,12 @@
                             <p class="font-lg text-heading">Awesome grocery store website template</p>
                         </div>
                         <ul class="contact-infor">
-                            <li><img src="{{asset('front/imgs/theme/icons/icon-location.svg')}}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                            <li><img src="{{asset('front/assets/imgs/theme/icons/icon-contact.svg')}}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            <li><img src="{{asset('front/assets/imgs/theme/icons/icon-email-2.svg')}}" alt="" /><strong>Email:</strong><span>sale@Nest.com</span></li>
-                            <li><img src="{{asset('front/assets/imgs/theme/icons/icon-clock.svg')}}" alt="" /><strong>Hours:</strong><span>10:00 - 18:00, Mon - Sat</span></li>
+                            <li><img src="{{asset('front/imgs/theme/icons/icon-location.svg')}}" alt="" /><strong>Address: </strong> <span>{{$data['Address 1']}}</span></li>
+                            <li><img src="{{asset('front/imgs/theme/icons/icon-location.svg')}}" alt="" /><strong>Address: </strong> <span>{{$data['Address 2']}}</span></li>
+                            <li><img src="{{asset('front/assets/imgs/theme/icons/icon-contact.svg')}}" alt="" /><strong>Call Us:</strong><span>{{$data['Phone 1']}} -- {{$data['Phone 2']}} </span></li>
+                            <li><img src="{{asset('front/assets/imgs/theme/icons/icon-email-2.svg')}}" alt="" /><strong>Email:</strong><span>{{$data['Email 1']}}</span></li>
+                            <li><img src="{{asset('front/assets/imgs/theme/icons/icon-email-2.svg')}}" alt="" /><strong>Email:</strong><span>{{$data['Email 2']}}</span></li>
+                            {{-- <li><img src="{{asset('front/assets/imgs/theme/icons/icon-clock.svg')}}" alt="" /><strong>Hours:</strong><span>10:00 - 18:00, Mon - Sat</span></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -126,16 +128,20 @@
             <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
                 <h4 class="widget-title">Account</h4>
                 <ul class="footer-list mb-sm-5 mb-md-0">
-                    <li><a href="#">Sign In</a></li>
-                    <li><a href="#">View Cart</a></li>
-                    <li><a href="#">My Wishlist</a></li>
-                    <li><a href="#">Track My Order</a></li>
-                    <li><a href="#">Help Ticket</a></li>
-                    <li><a href="#">Shipping Details</a></li>
-                    <li><a href="#">Compare products</a></li>
+                    @guest
+                    <li><a href="{{url('login')}}">Sign In</a></li>
+                    @endguest
+                    @auth
+                    <li><a href="{{route('account.index')}}">{{__('My Account')}}</a></li>
+                    <li><a href="{{url('cart')}}">View Cart</a></li>
+                    <li><a href="{{url('shop-wishlist')}}">My Wishlist</a></li>
+                    @endauth
+
+
+
                 </ul>
             </div>
-            <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
+            {{-- <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
                 <h4 class="widget-title">Corporate</h4>
                 <ul class="footer-list mb-sm-5 mb-md-0">
                     <li><a href="#">Become a Vendor</a></li>
@@ -146,17 +152,14 @@
                     <li><a href="#">Accessibility</a></li>
                     <li><a href="#">Promotions</a></li>
                 </ul>
-            </div>
+            </div> --}}
             <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
                 <h4 class="widget-title">Popular</h4>
                 <ul class="footer-list mb-sm-5 mb-md-0">
-                    <li><a href="#">Milk & Flavoured Milk</a></li>
-                    <li><a href="#">Butter and Margarine</a></li>
-                    <li><a href="#">Eggs Substitutes</a></li>
-                    <li><a href="#">Marmalades</a></li>
-                    <li><a href="#">Sour Cream and Dips</a></li>
-                    <li><a href="#">Tea & Kombucha</a></li>
-                    <li><a href="#">Cheese</a></li>
+                    @foreach ( $categories->take('8') as $row )
+
+                    <li><a href="{{route('shop',['category'=>$row->id])}}">{{$row->title}}</a></li>
+                  @endforeach
                 </ul>
             </div>
             <div class="footer-link-widget widget-install-app col wow animate__animated animate__fadeInUp" data-wow-delay=".5s">

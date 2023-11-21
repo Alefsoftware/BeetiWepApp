@@ -8,20 +8,24 @@
         <div class="home-slide-cover mt-30">
             <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
                 @foreach($sliders as $slider)
-                <a href="{{$slider->link}}">
+
                 <div class="single-hero-slider single-animation-wrap" style="background-image: url({{$slider->image}})">
+                    <a href="{{$slider->link}}">
                     <div class="slider-content">
-                        <h1 style="max-width:700px;" class="display-2 mb-40">
+                         <h1 style="max-width:700px;" class="display-2 mb-40">
                            {{$slider->title_en}}
                         </h1>
+
                         <p class="mb-65">{{$slider->description_en}}</p>
-                        <form class="form-subcriber d-flex">
-                            <input type="email" placeholder="Your emaill address" />
+                    </a>
+                        <form class="form-subcriber d-flex" action="{{route('storeSubscriber')}}" method="post">
+                            @csrf
+                            <input type="email"  name="email" placeholder="Your emaill address" />
                             <button class="btn" type="submit">Subscribe</button>
                         </form>
                     </div>
                 </div>
-                 </a>
+
                 @endforeach
 
             </div>
@@ -135,7 +139,7 @@
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
-                                        <span>${{$product->MinPrice}}</span>
+                                        <span>{{session::get('country')->currency->iso3??Egp}}{{$product->MinPrice}}</span>
                                         {{-- <span class="old-price">$32.8</span> --}}
                                     </div>
                                     {{-- <div class="add-cart">
@@ -195,7 +199,7 @@
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
-                                        <span>${{$p->MinPrice}}</span>
+                                        <span>{{session::get('country')->currency->iso3??EGP}}{{$p->MinPrice}}</span>
                                         {{-- <span class="old-price">$32.8</span>    --}}
                                     </div>
                                     {{-- <div class="add-cart">
@@ -291,7 +295,7 @@
                                             <span class="font-small ml-5 text-muted"> (@if($row->product->review->count('rate')==0){{0}}@else{{number_format($row->product->review->sum('rate')/$row->product->review->count('rate'),1)}}@endif)</span>
                                         </div>
                                         <div class="product-price mt-10">
-                                            <span>${{$row->offer_price}} </span>
+                                            <span>{{session::get('country')->currency->iso3??EGP}}{{$row->offer_price}} </span>
                                             <span class="old-price">${{$row->price}}</span>
                                         </div>
                                         <div class="sold mt-15 mb-15">
@@ -465,7 +469,7 @@
                         </div>
                     </div>
                     <!--End tab-pane-->
-                    <div class="tab-pane fade" id="tab-two-1" role="tabpanel" aria-labelledby="tab-two-1">
+                    {{-- <div class="tab-pane fade" id="tab-two-1" role="tabpanel" aria-labelledby="tab-two-1">
                         <div class="carausel-4-columns-cover arrow-center position-relative">
                             <div class="slider-arrow slider-arrow-2 carausel-4-columns-arrow" id="carausel-4-columns-2-arrows"></div>
                             <div class="carausel-4-columns carausel-arrow-center" id="carausel-4-columns-2">
@@ -868,7 +872,7 @@
                                 <!--End product Wrap-->
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <!--End tab-content-->
             </div>
@@ -1042,7 +1046,7 @@
 <section class="section-padding mb-30">
     <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
+            <div class="col-xl-4 col-lg-4 col-md-6 mb-sm-5 mb-md-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
                 <h4 class="section-title style-1 mb-30 animated animated">Top Selling</h4>
                 <div class="product-list-small animated animated">
                     @foreach($top_selling as $row)
@@ -1050,7 +1054,7 @@
                     {{-- @dd($$row->prices[0]->MinPrice) --}}
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="#"><img src="{{$row->main_image}}" alt="{{$row->title}}" onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" /></a>
+                            <a href="{{route('product.details',$row->slug)}}"><img src="{{$row->main_image}}" alt="{{$row->title}}" onerror="this.onerror=null;this.src='{{ asset('default_product.png') }}';" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
@@ -1071,7 +1075,7 @@
                 @endforeach
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 mb-md-0 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
+            {{-- <div class="col-xl-3 col-lg-4 col-md-6 mb-md-0 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                 <h4 class="section-title style-1 mb-30 animated animated">Trending Products</h4>
                 <div class="product-list-small animated animated">
                     <article class="row align-items-center hover-up">
@@ -1135,8 +1139,8 @@
                         </div>
                     </article>
                 </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-lg-block wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+            </div> --}}
+            <div class="col-xl-4 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-lg-block wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
                 <h4 class="section-title style-1 mb-30 animated animated">{{__('Recently added')}}</h4>
                 <div class="product-list-small animated animated">
                     @foreach($recently_added as $row)
@@ -1156,7 +1160,7 @@
                                 <span class="font-small ml-5 text-muted"> ({{$row->AvgRate}})</span>
                             </div>
                             <div class="product-price">
-                                <span>${{$row->MinPrice}}</span>
+                                <span>{{session::get('country')->currency->iso3??EGP}}{{$row->MinPrice}}</span>
                                 {{-- <span class="old-price">$33.8</span> --}}
                             </div>
                         </div>
@@ -1164,7 +1168,7 @@
                 @endforeach
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-xl-block wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
+            <div class="col-xl-4 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-xl-block wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
                 <h4 class="section-title style-1 mb-30 animated animated">Top Rated</h4>
                 <div class="product-list-small animated animated">
                     @foreach($top_rated as $row)
@@ -1184,7 +1188,7 @@
                                 <span class="font-small ml-5 text-muted"> ({{$row->AvgRate}})</span>
                             </div>
                             <div class="product-price">
-                                <span>${{$row->MinPrice}}</span>
+                                <span>{{session::get('country')->currency->iso3??EGP}}{{$row->MinPrice}}</span>
                                 {{-- <span class="old-price">$33.8</span> --}}
                             </div>
                         </div>

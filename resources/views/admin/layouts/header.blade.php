@@ -1039,6 +1039,12 @@
                                 <div class="side-menu__title"> Subscribers</div>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{route('config.get')}}" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="image"></i> </div>
+                                <div class="side-menu__title"> Site Config</div>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

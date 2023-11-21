@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Administration\SliderController;
 use App\Http\Controllers\Administration\Subscribers;
 use App\Http\Controllers\Administration\BlogController;
+use App\Http\Controllers\Administration\ConfigController;
 
 
 /*
@@ -203,6 +204,10 @@ Route::post('blog/changeStatus/{id}', [BlogController::class, 'changeStatus'])->
 Route::resource('subscribers', Subscribers::class);
 
 //end subscribers
+// site config
+Route::get('site-config',[ConfigController::class,'getSiteConfig'])->name('config.get');
+Route::put('site-config/update', [ConfigController::class, 'update'])->name('config.update');
+// end site config
 
     Route::get('/testSession', function () {
         return session()->get('country');
@@ -313,7 +318,7 @@ Route::group(['middleware' => 'auth:web'], function() {
 
 
 
-        Route::get('/Logout',  [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
+        Route::get('/Logout',  [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('site.logout');
 });
 
 

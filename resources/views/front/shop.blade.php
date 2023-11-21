@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
-                                        <span>${{$row->MinPrice}}</span>
+                                        <span>{{session::get('country')->currency->iso3??EGP}}{{$row->MinPrice}}</span>
                                         {{-- <span class="old-price">$32.8</span> --}}
                                     </div>
                                     {{-- <div class="add-cart">

@@ -20,6 +20,7 @@ class CountryMiddleware
    {
    if($request->session()->get('country') == null){
     $country= Countries::where('iso','EG')->first();
+    // $generalcurrency=$country->currency->iso3;
     if($country->is_active == 0){
         $country= Countries::where('iso','SA')->first();
     }

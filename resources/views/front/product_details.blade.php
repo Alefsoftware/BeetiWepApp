@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="clearfix product-price-cover">
                                     <div class="product-price primary-color float-left">
-                                        <span class="current-price text-brand" id='price_val'>${{$product->MinPrice}}</span>
+                                        <span class="current-price text-brand" id='price_val'>{{session()->get('country')->currency->iso3??EGP}}  {{$product->MinPrice}}</span>
                                         {{-- <span>
                                             <span class="save-price font-md color3 ml-15">26% Off</span>
                                             <span class="old-price font-md ml-15">$52</span>
@@ -395,7 +395,7 @@
                                                 <span> </span>
                                             </div>
                                             <div class="product-price">
-                                                <span>${{$row->MinPrice}} </span>
+                                                <span>{{session()->get('country')->currency->iso3??EGP}}  {{$row->MinPrice}} </span>
                                                 {{-- <span class="old-price">$245.8</span> --}}
                                             </div>
                                         </div>

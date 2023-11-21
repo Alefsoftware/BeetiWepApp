@@ -37,7 +37,7 @@
                                         <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('logout')}}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                        <a class="nav-link" href="{{route('site.logout')}}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
                                     </li>
                                 </ul>
                             </div>
@@ -80,7 +80,7 @@
                                                             <td>#{{$key+1}}</td>
                                                             <td>{{$row->created_at}}</td>
                                                             <td>{{@$row->status->title}}</td>
-                                                            <td>${{$row->total_amount}} for {{$row->orderProducts->sum('count')}} item</td>
+                                                            <td>{{session()->get('country')->currency->iso3??EGP}}  {{$row->total_amount}} for {{$row->orderProducts->sum('count')}} item</td>
                                                             <td><a href="{{route('order.details',$row->id)}}" class="btn-small d-block">View</a></td>
                                                         </tr>
                                                  @endforeach

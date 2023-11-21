@@ -54,7 +54,7 @@ class BlogController extends Controller
         }
 
       if(Blog::create($data)){
-        dd('here');
+
         session() -> flash('success', __('Successfully'));
       }else{
         session() -> flash('Error', 'Error in create');

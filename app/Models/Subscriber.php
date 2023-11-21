@@ -8,10 +8,12 @@ use App\Models\Admin;
 use App\Libs\Misc;
 use Request;
 
+
 class Subscriber extends BaseModel {
 
     protected $guarded = [
     ];
     protected $hidden = [
     ];
+
 }

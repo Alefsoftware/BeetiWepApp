@@ -84,14 +84,14 @@
                                                     {{-- <small>SKU: FWM15VKT</small> --}}
                                                 </div>
                                             </td>
-                                            <td class="text-center">${{$item->amount}}</td>
+                                            <td class="text-center">{{session()->get('country')->currency->iso3??EGP}}  {{$item->amount}}</td>
                                             <td class="text-center">{{$item->count}}</td>
-                                            <td class="text-right">${{$item->total_amount}}</td>
+                                            <td class="text-right">{{session()->get('country')->currency->iso3??EGP}}  {{$item->total_amount}}</td>
                                         </tr>
                                    @endforeach
                                         <tr>
                                             <td colspan="3" class="text-end f-w-600">SubTotal</td>
-                                            <td class="text-right">${{$order->total_amount}}</td>
+                                            <td class="text-right">{{session()->get('country')->currency->iso3??EGP}}  {{$order->total_amount}}</td>
                                         </tr>
                                         {{-- <tr>
                                             <td colspan="3" class="text-end f-w-600">Tax</td>

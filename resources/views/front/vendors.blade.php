@@ -16,7 +16,7 @@
             <div class="container">
                 <div class="archive-header-2 text-center">
                     <h1 class="display-2 mb-50">Vendors</h1>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-lg-5 mx-auto">
                             <div class="sidebar-widget-2 widget_search mb-50">
                                 <div class="search-form">
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 {{-- <div class="row mb-50">
                     <div class="col-12 col-lg-8 mx-auto">
@@ -85,7 +85,7 @@
                         <div class="vendor-wrap mb-40">
                             <div class="vendor-img-action-wrap">
                                 <div class="vendor-img">
-                                    <a href="vendor-details-1.html">
+                                    <a href="{{route('shop',['provider'=>$row->id])}}">
                                         <img class="default-img" src="{{$row->profile_img}}" alt="" onerror="this.onerror=null;this.src='{{ asset('default_user.png') }}';" />
                                     </a>
                                 </div>

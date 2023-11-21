@@ -79,7 +79,7 @@
                                         </div>
                                     </td>
                                     <td class="price" data-title="Price">
-                                        <h4 class="text-body">${{$row->productPrice->price}} </h4>
+                                        <h4 class="text-body">{{session()->get('country')->currency->iso3??EGP}}  {{$row->productPrice->price}} </h4>
                                     </td>
                                     <td class="text-center detail-info" data-title="Stock">
                                         <div class="detail-extralink mr-15 col-md-3">
@@ -96,7 +96,7 @@
                                         </div>
                                     </td>
                                     <td class="price" data-title="Price">
-                                        <h4 class="text-brand">${{$row->productPrice->price * $row->count}} </h4>
+                                        <h4 class="text-brand">{{session()->get('country')->currency->iso3??EGP}}  {{$row->productPrice->price * $row->count}} </h4>
                                     </td>
 
                                     <td class="action text-center" data-title="Remove">

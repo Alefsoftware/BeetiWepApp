@@ -731,7 +731,7 @@
                                         <h6 class="text-muted pl-20 pr-20">x {{$row->count}}</h6>
                                     </td>
                                     <td>
-                                        <h4 class="text-brand">${{$row->productPrice->price * $row->count}}</h4>
+                                        <h4 class="text-brand">{{session()->get('country')->currency->iso3??EGP}}  {{$row->productPrice->price * $row->count}}</h4>
                                     </td>
                                 </tr>
                              @endforeach
