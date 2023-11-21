@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
-                                        <span>{{session::get('country')->currency->iso3??Egp}}{{$product->MinPrice}}</span>
+                                        <span>{{session::get('country')->currency->iso3??Egp}}   {{$product->MinPrice}}</span>
                                         {{-- <span class="old-price">$32.8</span> --}}
                                     </div>
                                     {{-- <div class="add-cart">
@@ -199,7 +199,7 @@
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
-                                        <span>{{session::get('country')->currency->iso3??EGP}}{{$p->MinPrice}}</span>
+                                        <span>{{session::get('country')->currency->iso3??Egp}}   {{$p->MinPrice}}</span>
                                         {{-- <span class="old-price">$32.8</span>    --}}
                                     </div>
                                     {{-- <div class="add-cart">
@@ -295,7 +295,7 @@
                                             <span class="font-small ml-5 text-muted"> (@if($row->product->review->count('rate')==0){{0}}@else{{number_format($row->product->review->sum('rate')/$row->product->review->count('rate'),1)}}@endif)</span>
                                         </div>
                                         <div class="product-price mt-10">
-                                            <span>{{session::get('country')->currency->iso3??EGP}}{{$row->offer_price}} </span>
+                                            <span>{{session::get('country')->currency->iso3??Egp}}   {{$row->offer_price}} </span>
                                             <span class="old-price">${{$row->price}}</span>
                                         </div>
                                         <div class="sold mt-15 mb-15">
@@ -1160,7 +1160,7 @@
                                 <span class="font-small ml-5 text-muted"> ({{$row->AvgRate}})</span>
                             </div>
                             <div class="product-price">
-                                <span>{{session::get('country')->currency->iso3??EGP}}{{$row->MinPrice}}</span>
+                                <span>{{session::get('country')->currency->iso3??Egp}}   {{$row->MinPrice}}</span>
                                 {{-- <span class="old-price">$33.8</span> --}}
                             </div>
                         </div>
@@ -1188,7 +1188,7 @@
                                 <span class="font-small ml-5 text-muted"> ({{$row->AvgRate}})</span>
                             </div>
                             <div class="product-price">
-                                <span>{{session::get('country')->currency->iso3??EGP}}{{$row->MinPrice}}</span>
+                                <span>{{session::get('country')->currency->iso3??Egp}}   {{$row->MinPrice}}</span>
                                 {{-- <span class="old-price">$33.8</span> --}}
                             </div>
                         </div>
