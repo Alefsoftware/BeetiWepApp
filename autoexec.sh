@@ -6,3 +6,4 @@ php artisan optimize:clear &&
 php artisan optimize &&
 php artisan storage:link &&
 php artisan migrate --force --seed
+php artisan key:generate
