@@ -161,7 +161,7 @@
                         <ul>
                             {{-- <li><a href="page-about.htlm">About Us</a></li> --}}
                             @guest
-                            <li><a href="{{url('login')}}">{{__('Register/Login')}}</a></li>
+                            <li><a href="{{url('login')}}">{{__('Register/Login')}} MiNAAAAAAA</a></li>
                             @endguest
                             @auth
                                 <li><a href="{{route('account.index')}}">Welcom {{auth()->user()->name}}</a></li>
